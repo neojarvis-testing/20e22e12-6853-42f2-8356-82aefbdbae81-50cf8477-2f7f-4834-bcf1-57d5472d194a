@@ -60,7 +60,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.DELETE,"/api/feedback/{id}").hasAnyRole("USER")
         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html").permitAll()
-        .anyRequest().authenticated())
+        .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);    
         return http.build();
