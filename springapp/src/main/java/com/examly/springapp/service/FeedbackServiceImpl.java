@@ -11,7 +11,7 @@ import com.examly.springapp.repository.FeedbackRepo;
 import com.examly.springapp.repository.UserRepo;
 
 @Service
-public class FeedbackServiceImpl {
+public class FeedbackServiceImpl implements FeedbackService{
 
     @Autowired
     FeedbackRepo feedbackRepo;
