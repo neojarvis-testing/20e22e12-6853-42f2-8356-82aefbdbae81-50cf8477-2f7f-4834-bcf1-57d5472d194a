@@ -24,44 +24,31 @@ public class VehicleServiceController {
     VehicleServiceImpl vehicleServiceImpl;
     @PostMapping("/api/services")
     public ResponseEntity<VehicleMaintenance> addService(@RequestBody VehicleMaintenance vehicleMaintenance){
-        vehicleMaintenance=vehicleServiceImpl.addService(vehicleMaintenance);
-        return ResponseEntity.status(201).body(vehicleMaintenance);
+        return ResponseEntity.status(201).body(vehicleServiceImpl.addService(vehicleMaintenance));
     }
     
     @PutMapping("/api/services/{id}")
     public ResponseEntity<VehicleMaintenance> updateService(@PathVariable Long id,@RequestBody VehicleMaintenance vehicleMaintenance){
-        vehicleMaintenance=vehicleServiceImpl.updateService(id,vehicleMaintenance);
-        return ResponseEntity.status(200).body(vehicleMaintenance);
+        return ResponseEntity.status(200).body(vehicleServiceImpl.updateService(id, vehicleMaintenance));
     }
 
     @DeleteMapping("/api/services/{id}")
     public ResponseEntity<String>  deleteService(@PathVariable Long id){
-        boolean res=vehicleServiceImpl.deleteService(id);
-        if(res){
-            return ResponseEntity.status(201).body("User Deleted Successfully");
-        }else{
-            return ResponseEntity.status(404).body("Id not found");
-        }
+        return ResponseEntity.status(200).body(vehicleServiceImpl.deleteService(id));
     }
 
     @GetMapping("/api/services")
     public ResponseEntity<List<VehicleMaintenance>> getAllServices(){
-        List<VehicleMaintenance> list=vehicleServiceImpl.getAllServices();
-        return ResponseEntity.status(201).body(list);
+        return ResponseEntity.status(201).body(vehicleServiceImpl.getAllServices());
     }
 
     @GetMapping("/api/services/{id}")
     public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id){
-        Optional<VehicleMaintenance> vehicleMaintenance=vehicleServiceImpl.getServiceById(id);
-        return ResponseEntity.status(200).body(vehicleMaintenance.get());
+        return ResponseEntity.status(200).body(vehicleServiceImpl.getServiceById(id).get());
     }
 
     @GetMapping("/api/services/serviceName")
     public ResponseEntity<List<VehicleMaintenance>>  findByServiceName(@RequestParam("serviceName") String serviceName){
-        List<VehicleMaintenance>list=vehicleServiceImpl.findByServiceName(serviceName);
-        if(list.isEmpty()){
-            return ResponseEntity.status(404).body(null);
-        }
-        return ResponseEntity.status(200).body(list);
+        return ResponseEntity.status(200).body(vehicleServiceImpl.findByServiceName(serviceName));
     }
 }

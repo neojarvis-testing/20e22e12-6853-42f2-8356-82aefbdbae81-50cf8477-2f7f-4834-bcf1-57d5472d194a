@@ -28,13 +28,12 @@ public class VehicleServiceImpl implements VehicleService{
         return vehicleServiceRepo.save(vehicleMaintenance);
     }
 
-    public boolean deleteService(Long serviceId) {
-        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(serviceId).orElse(null);
-        if(vehicleMaintenance==null){
-            return false;
-        }
-        vehicleServiceRepo.deleteById(serviceId);
-        return true;  
+    public String deleteService(Long serviceId) {
+       if(vehicleServiceRepo.existsById(serviceId)){
+          vehicleServiceRepo.deleteById(serviceId);
+          return "Vehicle Service ID Deleted successfully";
+       }
+       return "Vehicle Service with ID "+serviceId+" not found";
     }
 
     public List<VehicleMaintenance> getAllServices() {
