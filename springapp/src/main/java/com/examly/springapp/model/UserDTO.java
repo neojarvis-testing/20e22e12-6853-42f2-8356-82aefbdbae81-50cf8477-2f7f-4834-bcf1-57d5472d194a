@@ -50,14 +50,4 @@ public class UserDTO {
         this.userRole = userRole;
     }
 
-
-
-
-   
-
-       
-    
- 
-
-
 }
