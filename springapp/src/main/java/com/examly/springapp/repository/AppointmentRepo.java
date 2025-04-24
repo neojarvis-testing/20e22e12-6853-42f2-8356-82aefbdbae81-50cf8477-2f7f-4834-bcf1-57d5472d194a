@@ -1,5 +1,9 @@
 package com.examly.springapp.repository;
 
-public interface AppointmentRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AppointmentRepo extends JpaRepository<AppointmentRepo,Long>{
 
 }
