@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserController {
 
@@ -19,7 +21,10 @@ public class UserController {
         this.userService=uServiceImpl;
     }
     @PostMapping("/api/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
+    public ResponseEntity<User> registerUser(@Valid @RequestBody User user){
         return ResponseEntity.status(201).body(userService.registerUser(user));
     }
+    
+
+
 }
