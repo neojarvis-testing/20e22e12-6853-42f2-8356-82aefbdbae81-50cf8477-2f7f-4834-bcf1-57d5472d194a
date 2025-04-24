@@ -9,11 +9,11 @@ import jakarta.persistence.Id;
 public class VehicleMaintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long serviceId;
+    private Long serviceId;
     private String serviceName;
     private int servicePrice;
     private String typeOfVehicle;
-    public long getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
     public void setServiceId(long serviceId) {
@@ -39,7 +39,7 @@ public class VehicleMaintenance {
     }
     public VehicleMaintenance() {
     }
-    public VehicleMaintenance(long serviceId, String serviceName, int servicePrice, String typeOfVehicle) {
+    public VehicleMaintenance(Long serviceId, String serviceName, int servicePrice, String typeOfVehicle) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
