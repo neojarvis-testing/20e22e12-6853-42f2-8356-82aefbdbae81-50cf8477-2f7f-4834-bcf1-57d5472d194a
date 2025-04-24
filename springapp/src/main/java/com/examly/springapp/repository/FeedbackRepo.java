@@ -14,3 +14,4 @@ public interface FeedbackRepo extends JpaRepository<Feedback, Long>{
     List<Feedback> findAllUserById(int userId);
 
 }
+
