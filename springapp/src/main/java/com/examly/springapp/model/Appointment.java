@@ -105,4 +105,13 @@ public class Appointment {
         this.user = user;
     }
 
+    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location,
+            String status, User user) {
+        this.service = service;
+        this.appointmentDate = appointmentDate;
+        this.location = location;
+        this.status = status;
+        this.user = user;
+    }
+
 }

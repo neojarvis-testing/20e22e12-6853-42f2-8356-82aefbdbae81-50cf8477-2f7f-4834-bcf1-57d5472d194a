@@ -61,6 +61,24 @@ public class User {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+    public User() {
+    }
+    public User(int userId, String email, String password, String username, String mobileNumber, String userRole) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.mobileNumber = mobileNumber;
+        this.userRole = userRole;
+    }
+
+    public User(String email, String password, String username, String mobileNumber, String userRole) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.mobileNumber = mobileNumber;
+        this.userRole = userRole;
+    }
 
     
 }

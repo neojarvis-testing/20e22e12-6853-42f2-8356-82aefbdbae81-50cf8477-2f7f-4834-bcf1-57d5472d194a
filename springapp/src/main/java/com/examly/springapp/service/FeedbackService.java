@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
+import java.util.List;
 
 import com.examly.springapp.model.Feedback;
-import java.util.*;
 
 public interface FeedbackService {
     public Feedback createFeedback(Feedback feedback);
@@ -9,4 +9,6 @@ public interface FeedbackService {
     public List<Feedback> getFeedbackByUserId(int userId);
     public boolean deleteFeedback(Long id);
     public Feedback getFeedbackById(Long feedbackId);
+
 }
+    
