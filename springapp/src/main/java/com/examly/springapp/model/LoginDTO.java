@@ -16,7 +16,7 @@ public class LoginDTO {
     private String username;
 
     @NotBlank(message = "User role cannot be empty")
-    @Pattern(regexp = "^(ADMIN|USER|MODERATOR)$", message = "Invalid user role")
+    @Pattern(regexp = "^(ADMIN|USER)$", message = "Invalid user role")
     private String userRole;
 
     public LoginDTO(String token, int userId, String username, String userRole) {
