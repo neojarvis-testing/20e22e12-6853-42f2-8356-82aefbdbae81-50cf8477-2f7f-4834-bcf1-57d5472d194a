@@ -18,7 +18,8 @@ public interface AppointmentService {
  
     public String deleteAppointment(long appointmentId);
  
-    public AppointmentDTO getAppointmentById(long appointmentId);
+    public Optional<Appointment> getAppointmentById(long appointmentId);
  
     public AppointmentDTO getLastAppointmentbyUserId(int userId);
+
 }

@@ -1,4 +1,5 @@
 package com.examly.springapp.controller;
+ 
 import java.util.List;
 import java.util.Optional;
 import org.apache.catalina.connector.Response;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.examly.springapp.model.Appointment;
+
 import com.examly.springapp.model.AppointmentDTO;
-import com.examly.springapp.service.AppointmentServiceImpl; 
+import com.examly.springapp.service.AppointmentServiceImpl;
 @RestController
 public class AppointmentController {
  
@@ -25,7 +26,7 @@ public class AppointmentController {
  
     @PostMapping("/api/appointment")
     public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
-        return ResponseEntity.status(201).body(appointmentDTO);
+        return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
     }
  
     @GetMapping("/api/appointment/user/{userId}")
@@ -39,8 +40,8 @@ public class AppointmentController {
     }
  
     @GetMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable long appointmentId) {
-        return ResponseEntity.status(200).body(appointmentService.getAppointmentById(appointmentId));
+    public ResponseEntity<Object> getAppointmentById(@PathVariable long appointmentId) {
+        return ResponseEntity.status(200).body(appointmentService.getAppointmentById(appointmentId).get());
     }
  
     @GetMapping("/api/appointment")
@@ -49,7 +50,7 @@ public class AppointmentController {
     }
  
     @PutMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody AppointmentDTO appointmentDTO,
+    public ResponseEntity<Object> updateAppointment(@RequestBody AppointmentDTO appointmentDTO,
             @PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.updateAppointment(appointmentDTO, appointmentId));
     }
@@ -59,4 +60,3 @@ public class AppointmentController {
         return ResponseEntity.status(200).body(appointmentService.deleteAppointment(appointmentId));
     }
 }
-

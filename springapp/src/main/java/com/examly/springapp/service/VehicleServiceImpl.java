@@ -29,6 +29,9 @@ public class VehicleServiceImpl implements VehicleService{
             return null;
         }
         vehicleMaintenance.setServiceId(serviceId);
+        vehicleMaintenance.setServiceName(vehicleMaintenanceDTO.getServiceName());
+        vehicleMaintenance.setServicePrice(vehicleMaintenanceDTO.getServicePrice());
+        vehicleMaintenance.setTypeOfVehicle(vehicleMaintenanceDTO.getTypeOfVehicle());
         vehicleMaintenance=vehicleServiceRepo.save(vehicleMaintenance);
         return VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
     }
