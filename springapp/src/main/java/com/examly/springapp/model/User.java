@@ -6,6 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * Represents a user entity in the system.
+ * Each user has a unique identifier, login credentials, and a role.
+ */
+
 @Entity
 public class User {
     @Id
@@ -18,6 +23,8 @@ public class User {
     private String mobileNumber;
     private String userRole;
 
+    // Getter and Setter methods to access and modify user details
+    
     public int getUserId() {
         return userId;
     }

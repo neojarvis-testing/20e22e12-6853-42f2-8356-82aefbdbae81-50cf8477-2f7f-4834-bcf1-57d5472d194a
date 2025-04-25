@@ -5,6 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * Represents a vehicle maintenance service in the system.
+ * Each service has a unique ID, name, price, and associated vehicle type.
+ */
+
 @Entity
 public class VehicleMaintenance {
     @Id
@@ -37,16 +42,26 @@ public class VehicleMaintenance {
     public void setTypeOfVehicle(String typeOfVehicle) {
         this.typeOfVehicle = typeOfVehicle;
     }
+
+    //Default constructor.
+
     public VehicleMaintenance() {
     }
+
+    /**
+     * Parameterized constructor for creating a service instance with predefined values.
+     *
+     * @param serviceId Unique identifier for the service
+     * @param serviceName Name of the maintenance service
+     * @param servicePrice Cost associated with the service
+     * @param typeOfVehicle Vehicle type applicable for the service
+     */
+
     public VehicleMaintenance(Long serviceId, String serviceName, int servicePrice, String typeOfVehicle) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
         this.typeOfVehicle = typeOfVehicle;
     }
-    
-
-
 
 }
