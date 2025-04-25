@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.config.UserPrinciple;
-import com.examly.springapp.mapper.UserMpper;
+import com.examly.springapp.mapper.UserMapper;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.repository.UserRepo;
@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserDetailsService {
     // }
 
     public UserDTO registerUser(UserDTO userDTO) {
-        User user=UserMpper.mapUserDtoToUser(userDTO);
+        User user=UserMapper.mapUserDtoToUser(userDTO);
         user.setPassword(encoder.encode(user.getPassword()));
         user=userRepo.save(user);
-        return UserMpper.mapUserToUserDTO(user);
+        return UserMapper.mapUserToUserDTO(user);
     }
     
 
