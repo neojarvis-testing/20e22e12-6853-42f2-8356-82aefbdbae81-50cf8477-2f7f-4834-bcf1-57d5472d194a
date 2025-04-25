@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exception.VehicleMaintenanceListEmptyException;
+import com.examly.springapp.exception.VehicleMaintenanceServiceNotFoundException;
 import com.examly.springapp.mapper.VechicleMapper;
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.model.VehicleMaintenanceDTO;
@@ -26,7 +28,7 @@ public class VehicleServiceImpl implements VehicleService{
     public VehicleMaintenanceDTO updateService(Long serviceId, VehicleMaintenanceDTO vehicleMaintenanceDTO) {
         VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(serviceId).orElse(null);
         if(vehicleMaintenance==null){
-            return null;
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID: "+serviceId+" not found");
         }
         vehicleMaintenance.setServiceId(serviceId);
         vehicleMaintenance.setServiceName(vehicleMaintenanceDTO.getServiceName());
@@ -45,16 +47,28 @@ public class VehicleServiceImpl implements VehicleService{
     }
 
     public List<VehicleMaintenance> getAllServices() {
-        return vehicleServiceRepo.findAll();
+        List<VehicleMaintenance> vehicleMaintenanceList=vehicleServiceRepo.findAll();
+        if(vehicleMaintenanceList.isEmpty()){
+            throw new VehicleMaintenanceListEmptyException("Vehicle Service List is Empty");
+        }
+        return vehicleMaintenanceList;
     }
 
     public Optional<VehicleMaintenance> getServiceById(Long serviceId) {
-        return vehicleServiceRepo.findById(serviceId);
+        Optional<VehicleMaintenance> vehicleMaintenance=vehicleServiceRepo.findById(serviceId);
+        if(vehicleMaintenance.isEmpty()){
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Service With ID: "+serviceId+" not found");
+        }
+        return vehicleMaintenance;
     }
 
 
     public List<VehicleMaintenance> findByServiceName(String serviceName) {
-        return vehicleServiceRepo.findByServiceName(serviceName);
+        List<VehicleMaintenance> vehicleMaintenanceList=vehicleServiceRepo.findByServiceName(serviceName);
+        if(vehicleMaintenanceList.isEmpty()){
+            throw new VehicleMaintenanceListEmptyException("Vehicle Maintenance For that name not found");
+        }
+        return vehicleMaintenanceList;
     }
     
 }

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.config.UserPrinciple;
+import com.examly.springapp.exception.UserNotFoundException;
 import com.examly.springapp.mapper.UserMapper;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
@@ -25,11 +26,6 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder encoder;
-
-    // public User registerUser(User user) {
-    //     user.setPassword(encoder.encode(user.getPassword()));
-    //     return userRepo.save(user);
-    // }
 
     public UserDTO registerUser(UserDTO userDTO) {
         User user=UserMapper.mapUserDtoToUser(userDTO);
@@ -51,7 +47,7 @@ public class UserServiceImpl implements UserDetailsService {
     public User loginUser(User user) {
         User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser == null) {
-            return null;
+            throw new UserNotFoundException("User Email Not Found");
         }
         // No need to encode the password again here
         return existingUser;

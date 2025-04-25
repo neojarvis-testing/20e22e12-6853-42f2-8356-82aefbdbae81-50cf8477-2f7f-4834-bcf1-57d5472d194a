@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exception.FeedbackListEmptyException;
+import com.examly.springapp.exception.FeedbackNotFoundException;
+import com.examly.springapp.exception.UserNotFoundException;
 import com.examly.springapp.mapper.FeedbackMapper;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.FeedbackDTO;
@@ -25,7 +28,7 @@ public class FeedbackServiceImpl {
         User existingUser=userRepo.findById(feedbackDTO.getUserId()).orElse(null);
         Feedback feedback=FeedbackMapper.mapFeedbackDTOToFeedbac(feedbackDTO, existingUser);
         if(existingUser==null){
-            return null;
+            throw new UserNotFoundException("User Not found");
         }
         feedback.setUser(existingUser);
         feedback=feedbackRepo.save(feedback);
@@ -33,11 +36,19 @@ public class FeedbackServiceImpl {
     }
  
     public List<FeedbackDTO> getAllFeedback() {
-        return feedbackRepo.findAll().stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
+        List<Feedback> feedbackList=feedbackRepo.findAll();
+        if(feedbackList.isEmpty()){
+            throw new FeedbackListEmptyException("No Feedbacks are there");
+        }
+        return feedbackList.stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
     }
  
     public List<FeedbackDTO> getFeedbackByUserId(int userId) {
-        return feedbackRepo.findAllUserById(userId).stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
+        List<Feedback> feedbackList=feedbackRepo.findAllUserById(userId);
+        if(feedbackList==null){
+            throw new FeedbackListEmptyException("Feedback list is empty for the user");
+        }
+        return feedbackList.stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
     }
  
     public boolean deleteFeedback(Long id) {
@@ -54,7 +65,7 @@ public class FeedbackServiceImpl {
     public FeedbackDTO getFeedbackById(Long feedbackId) {
         Feedback feedback = feedbackRepo.findById(feedbackId).orElse(null);
         if(feedback==null){
-            return null;
+            throw new FeedbackNotFoundException("Feedback with ID: "+feedbackId+" not found");
         }
         else{
             return FeedbackMapper.mapFeedbackToFeedbackDTO(feedback);
