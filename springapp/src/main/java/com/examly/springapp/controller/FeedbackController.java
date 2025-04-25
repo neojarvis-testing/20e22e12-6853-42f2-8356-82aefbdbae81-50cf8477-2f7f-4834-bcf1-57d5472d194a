@@ -18,12 +18,12 @@ public class FeedbackController {
     public FeedbackController(FeedbackServiceImpl feedbackService) {
         this.feedbackService = feedbackService;
     }
-
+ 
     @PostMapping("/api/feedback")
     public ResponseEntity<FeedbackDTO> createFeedback(@RequestBody FeedbackDTO feedbackDTO){
         return ResponseEntity.status(201).body(feedbackService.createFeedback(feedbackDTO));
     }
-
+ 
     @GetMapping("/api/feedback")
     public ResponseEntity<List<FeedbackDTO>> getAllFeedback(){
         return ResponseEntity.status(200).body(feedbackService.getAllFeedback());
