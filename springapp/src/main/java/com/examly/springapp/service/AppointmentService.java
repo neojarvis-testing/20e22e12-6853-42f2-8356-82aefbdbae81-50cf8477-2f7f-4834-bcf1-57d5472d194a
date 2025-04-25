@@ -4,20 +4,21 @@ import java.util.List;
 import java.util.Optional;
  
 import com.examly.springapp.model.Appointment;
+import com.examly.springapp.model.AppointmentDTO;
  
 public interface AppointmentService {
  
-    public Appointment addAppointment(Appointment appointment);
+    public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO);
  
-    public List<Appointment> getAppointmentsbyUserId(int userId);
+    public List<AppointmentDTO> getAppointmentsbyUserId(int userId);
  
-    public List<Appointment> getAllAppointments();
+    public List<AppointmentDTO> getAllAppointments();
  
-    public Appointment updateAppointment(Appointment appointment, long appointmentId);
+    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId);
  
     public String deleteAppointment(long appointmentId);
  
-    public Optional<Appointment> getAppointmentById(long appointmentId);
+    public AppointmentDTO getAppointmentById(long appointmentId);
  
-    public Appointment getLastAppointmentbyUserId(int userId);
+    public AppointmentDTO getLastAppointmentbyUserId(int userId);
 }

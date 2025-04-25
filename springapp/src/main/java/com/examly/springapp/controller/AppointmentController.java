@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.Appointment;
+import com.examly.springapp.model.AppointmentDTO;
 import com.examly.springapp.service.AppointmentServiceImpl; 
 @RestController
 public class AppointmentController {
@@ -23,9 +24,8 @@ public class AppointmentController {
     }
  
     @PostMapping("/api/appointment")
-    public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
-        appointment = appointmentService.addAppointment(appointment);
-        return ResponseEntity.status(201).body(appointment);
+    public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        return ResponseEntity.status(201).body(appointmentDTO);
     }
  
     @GetMapping("/api/appointment/user/{userId}")
@@ -34,24 +34,24 @@ public class AppointmentController {
     }
  
     @GetMapping("/api/appointment/user/{userId}/last") // End Point Get Last Appointment Date for the particular User
-    public ResponseEntity<Object> getLastAppointmentbyUserId(@PathVariable int userId) {
+    public ResponseEntity<AppointmentDTO> getLastAppointmentbyUserId(@PathVariable int userId) {
         return ResponseEntity.status(200).body(appointmentService.getLastAppointmentbyUserId(userId));
     }
  
     @GetMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<Object> getAppointmentById(@PathVariable long appointmentId) {
-        return ResponseEntity.status(200).body(appointmentService.getAppointmentById(appointmentId).get());
+    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable long appointmentId) {
+        return ResponseEntity.status(200).body(appointmentService.getAppointmentById(appointmentId));
     }
  
     @GetMapping("/api/appointment")
-    public ResponseEntity<Object> getAllAppointments() {
+    public ResponseEntity<List<AppointmentDTO>> getAllAppointments() {
        return ResponseEntity.status(200).body(appointmentService.getAllAppointments());
     }
  
     @PutMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<Object> updateAppointment(@RequestBody Appointment appointment,
+    public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody AppointmentDTO appointmentDTO,
             @PathVariable long appointmentId) {
-        return ResponseEntity.status(200).body(appointmentService.updateAppointment(appointment, appointmentId));
+        return ResponseEntity.status(200).body(appointmentService.updateAppointment(appointmentDTO, appointmentId));
     }
  
     @DeleteMapping("/api/appointment/{appointmentId}")
