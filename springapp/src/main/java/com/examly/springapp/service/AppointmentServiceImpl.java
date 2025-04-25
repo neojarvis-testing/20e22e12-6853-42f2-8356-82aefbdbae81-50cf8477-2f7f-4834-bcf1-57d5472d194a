@@ -12,7 +12,6 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
-import java.util.stream.Collectors;
 import com.examly.springapp.mapper.AppointmentMapper;
  
 @Service
