@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.model.FeedbackDTO;
 import com.examly.springapp.service.FeedbackServiceImpl;
 @RestController
 public class FeedbackController {
@@ -19,17 +20,19 @@ public class FeedbackController {
     public FeedbackController(FeedbackServiceImpl feedbackService) {
         this.feedbackService = feedbackService;
     }
+
     @PostMapping("/api/feedback")
-    public ResponseEntity<Feedback>createFeedback(@RequestBody Feedback feedback){
-        return ResponseEntity.status(201).body(feedbackService.createFeedback(feedback));
+    public ResponseEntity<FeedbackDTO> createFeedback(@RequestBody FeedbackDTO feedbackDTO){
+        return ResponseEntity.status(201).body(feedbackService.createFeedback(feedbackDTO));
     }
+
     @GetMapping("/api/feedback")
-    public ResponseEntity<List<Feedback>>getAllFeedback(){
+    public ResponseEntity<List<FeedbackDTO>> getAllFeedback(){
         return ResponseEntity.status(200).body(feedbackService.getAllFeedback());
     }
  
     @GetMapping("/api/feedback/user/{userId}")
-    public ResponseEntity<List<Feedback>>getFeedbackByUserId(@PathVariable int userId){
+    public ResponseEntity<List<FeedbackDTO>> getFeedbackByUserId(@PathVariable int userId){
         return ResponseEntity.status(200).body(feedbackService.getFeedbackByUserId(userId));
     }
  
@@ -45,7 +48,7 @@ public class FeedbackController {
         }
  
     @GetMapping("/api/feedback/{feedbackId}")
-    public ResponseEntity<Feedback>getFeedbackById(@PathVariable Long feedbackId){
+    public ResponseEntity<FeedbackDTO> getFeedbackById(@PathVariable Long feedbackId){
         return ResponseEntity.status(200).body(feedbackService.getFeedbackById(feedbackId));
     }
  
