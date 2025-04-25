@@ -45,8 +45,5 @@ public class VehicleMaintenance {
         this.servicePrice = servicePrice;
         this.typeOfVehicle = typeOfVehicle;
     }
-    
-
-
 
 }

@@ -8,7 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.config.UserPrinciple;
+import com.examly.springapp.mapper.UserMpper;
 import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.repository.UserRepo;
 
 @Service
@@ -24,10 +26,18 @@ public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public User registerUser(User user) {
+    // public User registerUser(User user) {
+    //     user.setPassword(encoder.encode(user.getPassword()));
+    //     return userRepo.save(user);
+    // }
+
+    public UserDTO registerUser(UserDTO userDTO) {
+        User user=UserMpper.mapUserDtoToUser(userDTO);
         user.setPassword(encoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        user=userRepo.save(user);
+        return UserMpper.mapUserToUserDTO(user);
     }
+    
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
