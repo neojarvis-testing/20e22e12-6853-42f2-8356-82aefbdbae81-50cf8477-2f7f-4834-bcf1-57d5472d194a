@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.mapper.VechicleMapper;
 import com.examly.springapp.model.VehicleMaintenance;
+import com.examly.springapp.model.VehicleMaintenanceDTO;
 import com.examly.springapp.repository.VehicleServiceRepo;
 @Service
 public class VehicleServiceImpl implements VehicleService{
@@ -15,17 +17,20 @@ public class VehicleServiceImpl implements VehicleService{
     public VehicleServiceImpl(VehicleServiceRepo vehicleServiceRepo) {
         this.vehicleServiceRepo = vehicleServiceRepo;
     }
-    public VehicleMaintenance addService(VehicleMaintenance vehicleMaintenance) {
-        return vehicleServiceRepo.save(vehicleMaintenance);  
+    public VehicleMaintenanceDTO addService(VehicleMaintenanceDTO vehicleMaintenanceDTO) {
+      VehicleMaintenance vehicleMaintenance=VechicleMapper.mapUserDtoToVehicle(vehicleMaintenanceDTO);
+        vehicleServiceRepo.save(vehicleMaintenance); 
+        return  VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
     }
 
-    public VehicleMaintenance updateService(Long serviceId, VehicleMaintenance vehicleMaintenance) {
-        VehicleMaintenance vehicleMaintain=vehicleServiceRepo.findById(serviceId).orElse(null);
-        if(vehicleMaintain==null){
+    public VehicleMaintenanceDTO updateService(Long serviceId, VehicleMaintenanceDTO vehicleMaintenanceDTO) {
+        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(serviceId).orElse(null);
+        if(vehicleMaintenance==null){
             return null;
         }
         vehicleMaintenance.setServiceId(serviceId);
-        return vehicleServiceRepo.save(vehicleMaintenance);
+        vehicleMaintenance=vehicleServiceRepo.save(vehicleMaintenance);
+        return VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
     }
 
     public String deleteService(Long serviceId) {
