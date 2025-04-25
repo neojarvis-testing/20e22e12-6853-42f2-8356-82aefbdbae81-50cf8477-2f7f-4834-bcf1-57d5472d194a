@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.examly.springapp.model.VehicleMaintenance;
 @Repository
 public interface VehicleServiceRepo extends JpaRepository<VehicleMaintenance,Long>{
-    @Query("select vehicleMaintenance   from VehicleMaintenance vehicleMaintenance where vehicleMaintenance.serviceName=?1")
+    @Query("select vehicleMaintenance from VehicleMaintenance vehicleMaintenance where vehicleMaintenance.serviceName=?1")
     List<VehicleMaintenance> findByServiceName(String serviceName);
 
 }

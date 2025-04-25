@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.config.JwtUtils;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.service.UserServiceImpl;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
@@ -33,13 +36,13 @@ public class UserController {
 
     
     @PostMapping("/api/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
-        return ResponseEntity.status(201).body(userService.registerUser(user));
+    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
+        return ResponseEntity.status(201).body(userService.registerUser(userDTO));
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(
+    public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
+        Authentication authentication = authenticationManager.authenticate( 
             new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -52,4 +55,5 @@ public class UserController {
         LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }

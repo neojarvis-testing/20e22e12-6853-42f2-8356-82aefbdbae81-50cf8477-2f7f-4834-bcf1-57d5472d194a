@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
  
 import com.examly.springapp.model.Appointment;
+import com.examly.springapp.model.AppointmentDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
+import java.util.stream.Collectors;
+import com.examly.springapp.mapper.AppointmentMapper;
  
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -26,41 +29,49 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.vehicleServiceRepo=vehicleServiceRepo;
     }
  
-    public Appointment addAppointment(Appointment appointment) {
-        VehicleMaintenance existingService=appointment.getService();
-        User existingUser=appointment.getUser();
+    public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
+        VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
+        User existingUser=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
+        Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
         if(existingService==null || existingUser==null){
             return null;
         }
         appointment.setService(existingService);
         appointment.setUser(existingUser);
-        return appointmentRepo.save(appointment);
+        appointment=appointmentRepo.save(appointment);
+        return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
-    public List<Appointment> getAppointmentsbyUserId(int userId) {
+    public List<AppointmentDTO> getAppointmentsbyUserId(int userId) {
         User user = userRepo.findById(userId).orElse(null);
         if (user == null) {
             return null; // Exceptions will be added in future
         }
-        return appointmentRepo.findByUserId(userId);
+        List<Appointment> appointmentList=appointmentRepo.findByUserId(userId);
+        List<AppointmentDTO>  list=  appointmentList.stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
+        return list;
     }
  
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepo.findAll();
+    public List<AppointmentDTO> getAllAppointments() {
+        return appointmentRepo.findAll().stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
     }
  
-    public Appointment updateAppointment(Appointment appointment, long appointmentId) {
-        Appointment appointment2 = appointmentRepo.findById(appointmentId).orElse(null);
-        if (appointment2 == null) {
+    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId) {
+        Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
+        if (existingAppointment == null) {
             return null;  // Exceptions will be added in future
         }
+        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
+        User user=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
+        Appointment appointment=AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, vehicleMaintenance, user);
         appointment.setAppointmentId(appointmentId);
-        User user=appointment.getUser();
-        VehicleMaintenance vehicleMaintenance=appointment.getService();
+        appointment.setLocation(appointmentDTO.getLocation());
+        appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
+        appointment.setStatus(appointmentDTO.getStatus());
         userRepo.save(user);
         vehicleServiceRepo.save(vehicleMaintenance);
- 
-        return appointmentRepo.save(appointment);
+        appointment=appointmentRepo.save(appointment);
+        return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
     public String deleteAppointment(long appointmentId) {
@@ -76,7 +87,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.findById(appointmentId);
     }
  
-    public Appointment getLastAppointmentbyUserId(int userId) {
-        return appointmentRepo.getLastAppointmentbyUserId(userId);
+    public AppointmentDTO getLastAppointmentbyUserId(int userId) {
+        Appointment appointment= appointmentRepo.getLastAppointmentbyUserId(userId);
+        return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
+
+
 }

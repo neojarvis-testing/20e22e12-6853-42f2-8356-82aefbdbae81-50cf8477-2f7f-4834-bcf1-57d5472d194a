@@ -4,8 +4,10 @@ import java.util.List;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
+
+import com.examly.springapp.mapper.FeedbackMapper;
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.model.FeedbackDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.FeedbackRepo;
 import com.examly.springapp.repository.UserRepo;
@@ -19,21 +21,23 @@ public class FeedbackServiceImpl {
     @Autowired
     UserRepo userRepo;
  
-    public Feedback createFeedback(Feedback feedback) {
-        User existingUser=userRepo.findById(feedback.getUser().getUserId()).orElse(null);
+    public FeedbackDTO createFeedback(FeedbackDTO feedbackDTO) {
+        User existingUser=userRepo.findById(feedbackDTO.getUserId()).orElse(null);
+        Feedback feedback=FeedbackMapper.mapFeedbackDTOToFeedbac(feedbackDTO, existingUser);
         if(existingUser==null){
             return null;
         }
         feedback.setUser(existingUser);
-        return feedbackRepo.save(feedback);
+        feedback=feedbackRepo.save(feedback);
+        return FeedbackMapper.mapFeedbackToFeedbackDTO(feedback);
     }
  
-    public List<Feedback> getAllFeedback() {
-        return feedbackRepo.findAll();
+    public List<FeedbackDTO> getAllFeedback() {
+        return feedbackRepo.findAll().stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
     }
  
-    public List<Feedback> getFeedbackByUserId(int userId) {
-        return feedbackRepo.findAllUserById(userId);
+    public List<FeedbackDTO> getFeedbackByUserId(int userId) {
+        return feedbackRepo.findAllUserById(userId).stream().map(feedback->FeedbackMapper.mapFeedbackToFeedbackDTO(feedback)).toList();
     }
  
     public boolean deleteFeedback(Long id) {
@@ -47,19 +51,14 @@ public class FeedbackServiceImpl {
         }
     }
  
-    public Feedback getFeedbackById(Long feedbackId) {
+    public FeedbackDTO getFeedbackById(Long feedbackId) {
         Feedback feedback = feedbackRepo.findById(feedbackId).orElse(null);
         if(feedback==null){
             return null;
         }
         else{
-            return feedback;
+            return FeedbackMapper.mapFeedbackToFeedbackDTO(feedback);
         }
     }
- 
- 
-   
- 
-   
  
 }
