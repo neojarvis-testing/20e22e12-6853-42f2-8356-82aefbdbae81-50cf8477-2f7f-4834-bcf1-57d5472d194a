@@ -26,24 +26,24 @@ public class FeedbackController {
         this.feedbackService = feedbackService;
     }
 
+
     /**
      * Handles creation of a new feedback entry.
      * @param feedback The feedback details provided in the request body
      * @return ResponseEntity containing the newly created feedback with HTTP status 201 (Created)
      */
- 
-
-
-
     @PostMapping("/api/feedback")
     public ResponseEntity<FeedbackDTO> createFeedback(@RequestBody FeedbackDTO feedbackDTO){
         return ResponseEntity.status(201).body(feedbackService.createFeedback(feedbackDTO));
     }
 
+
      /**
      * Retrieves all feedback entries stored in the system.
      * @return ResponseEntity containing a list of all feedback entries with HTTP status 200 (OK)
      */
+
+ 
 
     @GetMapping("/api/feedback")
     public ResponseEntity<List<FeedbackDTO>> getAllFeedback(){

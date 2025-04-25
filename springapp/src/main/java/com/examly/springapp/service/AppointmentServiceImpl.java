@@ -12,7 +12,10 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
-import java.util.stream.Collectors;
+import com.examly.springapp.exception.AppointmentListEmptyException;
+import com.examly.springapp.exception.AppointmentNotFoundException;
+import com.examly.springapp.exception.UserNotFoundException;
+import com.examly.springapp.exception.VehicleMaintenanceServiceNotFoundException;
 import com.examly.springapp.mapper.AppointmentMapper;
  
 @Service
@@ -31,21 +34,23 @@ public class AppointmentServiceImpl implements AppointmentService {
  
     public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
         VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
-        User existingUser=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
-        Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
-        if(existingService==null || existingUser==null){
-            return null;
+        if(existingService==null){
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getServiceId()+" not found");
         }
-        appointment.setService(existingService);
-        appointment.setUser(existingUser);
-        appointment=appointmentRepo.save(appointment);
-        return AppointmentMapper.mapToAppointmentDTO(appointment);
+        else{
+            User existingUser=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
+            Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
+            appointment.setService(existingService);
+            appointment.setUser(existingUser);
+            appointment=appointmentRepo.save(appointment);
+            return AppointmentMapper.mapToAppointmentDTO(appointment);
+        }
     }
  
     public List<AppointmentDTO> getAppointmentsbyUserId(int userId) {
         User user = userRepo.findById(userId).orElse(null);
         if (user == null) {
-            return null; // Exceptions will be added in future
+            throw new UserNotFoundException("User Name not found"); // Exceptions will be added in future
         }
         List<Appointment> appointmentList=appointmentRepo.findByUserId(userId);
         List<AppointmentDTO>  list=  appointmentList.stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
@@ -53,7 +58,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
  
     public List<AppointmentDTO> getAllAppointments() {
-        return appointmentRepo.findAll().stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
+        List<Appointment> appointmentList=appointmentRepo.findAll();
+        if(appointmentList.isEmpty()){
+            throw new AppointmentListEmptyException("Appointment List is Empty");
+        }
+        return appointmentList.stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
     }
  
     public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId) {
@@ -84,14 +93,22 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
  
     public Optional<Appointment> getAppointmentById(long appointmentId) {
-        return appointmentRepo.findById(appointmentId);
+        Optional<Appointment> appointment=appointmentRepo.findById(appointmentId);
+        if(appointment.isEmpty()){
+            throw new AppointmentNotFoundException("Appointment with ID: "+appointmentId+" not found");
+        }
+        return appointment;
     }
  
     public AppointmentDTO getLastAppointmentbyUserId(int userId) {
         Appointment appointment= appointmentRepo.getLastAppointmentbyUserId(userId);
+        if(appointment==null){
+            throw new AppointmentNotFoundException("Appointment not found for the uset with ID : "+userId);
+        }
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
- 
 }
+
+
  

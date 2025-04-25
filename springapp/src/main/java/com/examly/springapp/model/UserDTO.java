@@ -2,6 +2,7 @@ package com.examly.springapp.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserDTO {
@@ -17,6 +18,7 @@ public class UserDTO {
     @Size(min=10,message="Mobile number must be at least 10 numbers")
     private String mobileNumber;
     @NotBlank(message = "User role is required")
+    @Pattern(regexp = "^(ADMIN|USER)$", message = "Invalid user role")
     private String userRole;
       // Constructors
     public UserDTO() {

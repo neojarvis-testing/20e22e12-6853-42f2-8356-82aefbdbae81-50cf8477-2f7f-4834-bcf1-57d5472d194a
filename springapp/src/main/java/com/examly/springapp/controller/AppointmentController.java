@@ -18,6 +18,13 @@ import com.examly.springapp.service.AppointmentServiceImpl;
 public class AppointmentController {
  
     private final AppointmentServiceImpl appointmentService;
+
+     /**
+     * Constructor-based injection ensures that the AppointmentServiceImpl instance
+     * is provided at the time of object creation, promoting better testability.
+     *
+     * @param appointmentService The service instance for handling appointment logic
+     */
  
      /**
      * Constructor-based injection ensures that the AppointmentServiceImpl instance
@@ -30,20 +37,20 @@ public class AppointmentController {
     public AppointmentController(AppointmentServiceImpl appointmentService) {
         this.appointmentService = appointmentService;
     }
- 
+
     /**
      * Handles creation of a new appointment.
      *
      * @param appointment The appointment details provided in the request body
      * @return ResponseEntity containing the newly created appointment with HTTP status 201 (Created)
      */
- 
+
+
     @PostMapping("/api/appointment")
     public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
     }
- 
-   
+
     @GetMapping("/api/appointment/user/{userId}")
     public ResponseEntity<Object> getAppointmentsbyUserId(@PathVariable int userId) {
         return ResponseEntity.status(200).body(appointmentService.getAppointmentsbyUserId(userId));
