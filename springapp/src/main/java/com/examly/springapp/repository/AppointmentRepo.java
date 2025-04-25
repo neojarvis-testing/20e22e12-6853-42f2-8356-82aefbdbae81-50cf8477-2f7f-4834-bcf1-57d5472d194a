@@ -11,7 +11,6 @@ import com.examly.springapp.model.Appointment;
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment,Long>{
  
- 
     @Query("select appointment from Appointment appointment where appointment.user.userId = ?1")
     List<Appointment> findByUserId(int userId);
  

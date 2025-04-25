@@ -50,6 +50,12 @@ public class Feedback {
         this.message = message;
         this.rating = rating;
     }
+
+    public Feedback(User user, String message, int rating) {
+        this.user = user;
+        this.message = message;
+        this.rating = rating;
+    }
     
     
 

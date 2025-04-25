@@ -45,8 +45,11 @@ public class VehicleMaintenance {
         this.servicePrice = servicePrice;
         this.typeOfVehicle = typeOfVehicle;
     }
+    public VehicleMaintenance(String serviceName, int servicePrice, String typeOfVehicle) {
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.typeOfVehicle = typeOfVehicle;
+    }
     
-
-
 
 }
