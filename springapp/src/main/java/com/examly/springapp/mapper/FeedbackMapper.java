@@ -16,7 +16,7 @@ public class FeedbackMapper {
     
     public static FeedbackDTO mapFeedbackToFeedbackDTO(Feedback feedback){
         return new FeedbackDTO(
-            feedback.getUser().getUserId(),
+            feedback.getUser().getId(),
             feedback.getMessage(),
             feedback.getRating()
         );

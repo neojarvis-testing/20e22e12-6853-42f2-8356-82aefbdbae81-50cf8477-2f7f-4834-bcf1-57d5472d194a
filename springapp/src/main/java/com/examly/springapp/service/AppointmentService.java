@@ -8,13 +8,13 @@ import com.examly.springapp.model.AppointmentDTO;
  
 public interface AppointmentService {
  
-    public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO);
+    public Appointment addAppointment(Appointment appointment);
  
     public List<AppointmentDTO> getAppointmentsbyUserId(int userId);
  
     public List<AppointmentDTO> getAllAppointments();
  
-    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId);
+    //public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId);
  
     public String deleteAppointment(long appointmentId);
  

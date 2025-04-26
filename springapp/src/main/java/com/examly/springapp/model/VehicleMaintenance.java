@@ -9,16 +9,11 @@ import jakarta.persistence.Id;
 public class VehicleMaintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceId;
+    private Long id;
     private String serviceName;
     private int servicePrice;
     private String typeOfVehicle;
-    public Long getServiceId() {
-        return serviceId;
-    }
-    public void setServiceId(long serviceId) {
-        this.serviceId = serviceId;
-    }
+    
     public String getServiceName() {
         return serviceName;
     }
@@ -39,8 +34,8 @@ public class VehicleMaintenance {
     }
     public VehicleMaintenance() {
     }
-    public VehicleMaintenance(Long serviceId, String serviceName, int servicePrice, String typeOfVehicle) {
-        this.serviceId = serviceId;
+    public VehicleMaintenance(Long id, String serviceName, int servicePrice, String typeOfVehicle) {
+        this.id = id;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
         this.typeOfVehicle = typeOfVehicle;
@@ -49,6 +44,12 @@ public class VehicleMaintenance {
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
         this.typeOfVehicle = typeOfVehicle;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     
 

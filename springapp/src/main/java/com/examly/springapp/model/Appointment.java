@@ -2,6 +2,7 @@ package com.examly.springapp.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,24 +14,19 @@ import jakarta.persistence.ManyToOne;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointmentId;
-    @ManyToOne
+    // private Long appointmentId;
+    private Long id;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "serviceId")
     private VehicleMaintenance service;
     private LocalDate appointmentDate;
     private String location;
     private String status = "Pending";
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
 
-    public Long getAppointmentId() {
-        return appointmentId;
-    }
-
-    public void setAppointmentId(Long appointmentId) {
-        this.appointmentId = appointmentId;
-    }
+    
 
     public VehicleMaintenance getService() {
         return service;
@@ -75,9 +71,9 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long appointmentId, VehicleMaintenance service, LocalDate appointmentDate, String location,
+    public Appointment(Long id, VehicleMaintenance service, LocalDate appointmentDate, String location,
             String status, User user) {
-        this.appointmentId = appointmentId;
+        this.id = id;
         this.service = service;
         this.appointmentDate = appointmentDate;
         this.location = location;
@@ -92,6 +88,14 @@ public class Appointment {
         this.location = location;
         this.status = status;
         this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

@@ -1,7 +1,5 @@
 package com.examly.springapp.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,8 +17,7 @@ import com.examly.springapp.repository.UserRepo;
 @Service
 public class UserServiceImpl implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepo userRepo;
+    private UserRepo userRepo;
 
     @Autowired
     public UserServiceImpl(UserRepo userRepo) {
@@ -30,34 +27,54 @@ public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public UserDTO registerUser(UserDTO userDTO) {
-        logger.info("Registering user with email: {}", userDTO.getEmail());
-        User user = UserMapper.mapUserDtoToUser(userDTO);
+    // public UserDTO registerUser(UserDTO userDTO) {
+    //     User user=UserMapper.mapUserDtoToUser(userDTO);
+    //     user.setPassword(encoder.encode(user.getPassword()));
+    //     user=userRepo.save(user);
+    //     return UserMapper.mapUserToUserDTO(user);
+    // }
+
+    public User registerUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        user = userRepo.save(user);
-        logger.info("User successfully registered with ID: {}", user.getUserId());
-        return UserMapper.mapUserToUserDTO(user);
+        user=userRepo.save(user);
+        return user;
     }
     
+
+    // @Override
+    // public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    //     User existingUser = userRepo.findByEmail(email);
+    //     if (existingUser == null) {
+    //         throw new UsernameNotFoundException("User name not found");
+    //     }
+    //     return UserPrinciple.build(existingUser);
+    // }
+
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        logger.info("Loading user details by email: {}", email);
-        User existingUser = userRepo.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User existingUser = userRepo.findByUsername(username);
         if (existingUser == null) {
-            logger.error("User not found with email: {}", email);
             throw new UsernameNotFoundException("User name not found");
         }
         return UserPrinciple.build(existingUser);
     }
 
+    // public User loginUser(User user) {
+    //     User existingUser = userRepo.findByEmail(user.getEmail());
+    //     if (existingUser == null) {
+    //         throw new UserNotFoundException("User Email Not Found");
+    //     }
+    //     // No need to encode the password again here
+    //     return existingUser;
+    // }
+
     public User loginUser(User user) {
-        logger.info("Attempting login for email: {}", user.getEmail());
-        User existingUser = userRepo.findByEmail(user.getEmail());
+        User existingUser = userRepo.findByUsername(user.getUsername());
         if (existingUser == null) {
-            logger.error("User email not found: {}", user.getEmail());
             throw new UserNotFoundException("User Email Not Found");
         }
-        logger.info("User successfully logged in with email: {}", user.getEmail());
+        // No need to encode the password again here
         return existingUser;
     }
+
 }

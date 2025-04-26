@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserDTO {
+    private int userId;
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
     private String email;
@@ -26,11 +27,24 @@ public class UserDTO {
     
     
 
-    public UserDTO(@Email(message = "Invalid email format") @NotBlank(message = "Email is required") String email,
+    // public UserDTO(@Email(message = "Invalid email format") @NotBlank(message = "Email is required") String email,
+    //         @NotBlank(message = "Username cannot be empty") String username,
+    //         @NotBlank(message = "Password cannot be empty") @Size(min = 8, message = "Password must be at least 8 characters long") String password,
+    //         @NotBlank @Size(min = 10, message = "Mobile number must be at least 10 numbers") String mobileNumber,
+    //         @NotBlank(message = "User role is required") String userRole) {
+    //     this.email = email;
+    //     this.username = username;
+    //     this.password = password;
+    //     this.mobileNumber = mobileNumber;
+    //     this.userRole = userRole;
+    // }
+
+    public UserDTO(int userId, @Email(message = "Invalid email format") @NotBlank(message = "Email is required") String email,
             @NotBlank(message = "Username cannot be empty") String username,
             @NotBlank(message = "Password cannot be empty") @Size(min = 8, message = "Password must be at least 8 characters long") String password,
             @NotBlank @Size(min = 10, message = "Mobile number must be at least 10 numbers") String mobileNumber,
             @NotBlank(message = "User role is required") String userRole) {
+        this.userId=userId;
         this.email = email;
         this.username = username;
         this.password = password;

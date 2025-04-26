@@ -14,8 +14,19 @@ public class UserMapper {
         );
     }
 
+    // public static UserDTO mapUserToUserDTO(User user){
+    //     return new UserDTO(
+    //         user.getEmail(),
+    //         user.getPassword(),
+    //         user.getUsername(),
+    //         user.getMobileNumber(),
+    //         user.getUserRole()
+    //     );
+    // }
+
     public static UserDTO mapUserToUserDTO(User user){
         return new UserDTO(
+            user.getId(),
             user.getEmail(),
             user.getPassword(),
             user.getUsername(),
