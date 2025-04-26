@@ -23,13 +23,23 @@ public class VehicleServiceController {
 
     @Autowired
     VehicleServiceImpl vehicleServiceImpl;
+    // @PostMapping("/api/services")
+    // public ResponseEntity<VehicleMaintenanceDTO> addService(@Valid @RequestBody VehicleMaintenanceDTO vehicleMaintenanceDTO){
+    //     return ResponseEntity.status(201).body(vehicleServiceImpl.addService(vehicleMaintenanceDTO));
+    // }
+
     @PostMapping("/api/services")
-    public ResponseEntity<VehicleMaintenanceDTO> addService(@Valid @RequestBody VehicleMaintenanceDTO vehicleMaintenanceDTO){
+    public ResponseEntity<VehicleMaintenance> addService(@Valid @RequestBody VehicleMaintenance vehicleMaintenanceDTO){
         return ResponseEntity.status(201).body(vehicleServiceImpl.addService(vehicleMaintenanceDTO));
     }
     
+    // @PutMapping("/api/services/{id}")
+    // public ResponseEntity<VehicleMaintenanceDTO> updateService(@Valid @PathVariable Long id,@RequestBody VehicleMaintenanceDTO vehicleMaintenanceDTO){
+    //     return ResponseEntity.status(200).body(vehicleServiceImpl.updateService(id, vehicleMaintenanceDTO));
+    // }
+
     @PutMapping("/api/services/{id}")
-    public ResponseEntity<VehicleMaintenanceDTO> updateService(@Valid @PathVariable Long id,@RequestBody VehicleMaintenanceDTO vehicleMaintenanceDTO){
+    public ResponseEntity<VehicleMaintenance> updateService(@Valid @PathVariable Long id,@RequestBody VehicleMaintenance vehicleMaintenanceDTO){
         return ResponseEntity.status(200).body(vehicleServiceImpl.updateService(id, vehicleMaintenanceDTO));
     }
 
@@ -40,15 +50,25 @@ public class VehicleServiceController {
 
     @GetMapping("/api/services")
     public ResponseEntity<List<VehicleMaintenance>> getAllServices(){
-        return ResponseEntity.status(201).body(vehicleServiceImpl.getAllServices());
+        return ResponseEntity.status(200).body(vehicleServiceImpl.getAllServices());
     }
+
+    // @GetMapping("/api/services/{id}")
+    // public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id){
+    //     return ResponseEntity.status(200).body(vehicleServiceImpl.getServiceById(id).get());
+    // }
 
     @GetMapping("/api/services/{id}")
     public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id){
-        return ResponseEntity.status(200).body(vehicleServiceImpl.getServiceById(id).get());
+        return ResponseEntity.status(200).body(vehicleServiceImpl.getServiceById(id));
     }
 
     @GetMapping("/api/services/serviceName")
+    public ResponseEntity<List<VehicleMaintenance>>  findByServiceNames(@RequestParam("serviceName") String serviceName){
+        return ResponseEntity.status(200).body(vehicleServiceImpl.findByServiceName(serviceName));
+    }
+
+    @GetMapping("/api/services/service")
     public ResponseEntity<List<VehicleMaintenance>>  findByServiceName(@RequestParam("serviceName") String serviceName){
         return ResponseEntity.status(200).body(vehicleServiceImpl.findByServiceName(serviceName));
     }

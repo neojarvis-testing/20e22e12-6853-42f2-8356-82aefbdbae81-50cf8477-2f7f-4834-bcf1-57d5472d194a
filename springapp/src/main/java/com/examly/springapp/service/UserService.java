@@ -6,7 +6,7 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 
 public interface UserService {
-public UserDTO registerUser(UserDTO userDTO);
+public User registerUser(User user);
 public UserDetails loadUserByUsername(String email);
 public User loginUser(User user);
 }

@@ -19,23 +19,40 @@ public class VehicleServiceImpl implements VehicleService{
     public VehicleServiceImpl(VehicleServiceRepo vehicleServiceRepo) {
         this.vehicleServiceRepo = vehicleServiceRepo;
     }
-    public VehicleMaintenanceDTO addService(VehicleMaintenanceDTO vehicleMaintenanceDTO) {
-      VehicleMaintenance vehicleMaintenance=VechicleMapper.mapUserDtoToVehicle(vehicleMaintenanceDTO);
-        vehicleServiceRepo.save(vehicleMaintenance); 
-        return  VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
-    }
+    // public VehicleMaintenanceDTO addService(VehicleMaintenanceDTO vehicleMaintenanceDTO) {
+    //   VehicleMaintenance vehicleMaintenance=VechicleMapper.mapUserDtoToVehicle(vehicleMaintenanceDTO);
+    //     vehicleServiceRepo.save(vehicleMaintenance); 
+    //     return  VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
+    // }
 
-    public VehicleMaintenanceDTO updateService(Long serviceId, VehicleMaintenanceDTO vehicleMaintenanceDTO) {
-        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(serviceId).orElse(null);
+    public VehicleMaintenance addService(VehicleMaintenance vehicleMaintenanceDTO) {
+          return  vehicleServiceRepo.save(vehicleMaintenanceDTO);
+      }
+
+    // public VehicleMaintenanceDTO updateService(Long id, VehicleMaintenanceDTO vehicleMaintenanceDTO) {
+    //     VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(id).orElse(null);
+    //     if(vehicleMaintenance==null){
+    //         throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID: "+id+" not found");
+    //     }
+    //     vehicleMaintenance.setId(id);
+    //     vehicleMaintenance.setServiceName(vehicleMaintenanceDTO.getServiceName());
+    //     vehicleMaintenance.setServicePrice(vehicleMaintenanceDTO.getServicePrice());
+    //     vehicleMaintenance.setTypeOfVehicle(vehicleMaintenanceDTO.getTypeOfVehicle());
+    //     vehicleMaintenance=vehicleServiceRepo.save(vehicleMaintenance);
+    //     return VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
+    // }
+
+    public VehicleMaintenance updateService(Long id, VehicleMaintenance vehicleMaintenanceDTO) {
+        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(id).orElse(null);
         if(vehicleMaintenance==null){
-            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID: "+serviceId+" not found");
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID: "+id+" not found");
         }
-        vehicleMaintenance.setServiceId(serviceId);
+        vehicleMaintenance.setId(id);
         vehicleMaintenance.setServiceName(vehicleMaintenanceDTO.getServiceName());
         vehicleMaintenance.setServicePrice(vehicleMaintenanceDTO.getServicePrice());
         vehicleMaintenance.setTypeOfVehicle(vehicleMaintenanceDTO.getTypeOfVehicle());
         vehicleMaintenance=vehicleServiceRepo.save(vehicleMaintenance);
-        return VechicleMapper.mapUserToUserDTO(vehicleMaintenance);
+        return vehicleMaintenance;
     }
 
     public String deleteService(Long serviceId) {
@@ -54,9 +71,9 @@ public class VehicleServiceImpl implements VehicleService{
         return vehicleMaintenanceList;
     }
 
-    public Optional<VehicleMaintenance> getServiceById(Long serviceId) {
-        Optional<VehicleMaintenance> vehicleMaintenance=vehicleServiceRepo.findById(serviceId);
-        if(vehicleMaintenance.isEmpty()){
+    public VehicleMaintenance getServiceById(Long serviceId) {
+        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(serviceId).orElse(null);
+        if(vehicleMaintenance==null){
             throw new VehicleMaintenanceServiceNotFoundException("Vehicle Service With ID: "+serviceId+" not found");
         }
         return vehicleMaintenance;

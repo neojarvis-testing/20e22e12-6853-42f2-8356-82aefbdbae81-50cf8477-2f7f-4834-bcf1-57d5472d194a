@@ -35,25 +35,45 @@ public class UserController {
     private JwtUtils jwtUtils;
 
     
+    // @PostMapping("/api/register")
+    // public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
+    //     return ResponseEntity.status(201).body(userService.registerUser(userDTO));
+    // }
+
     @PostMapping("/api/register")
-    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
-        return ResponseEntity.status(201).body(userService.registerUser(userDTO));
+    public ResponseEntity<User> registerUser(@RequestBody User user){
+        return ResponseEntity.status(201).body(userService.registerUser(user));
     }
+
+    // @PostMapping("/api/login")
+    // public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
+    //     Authentication authentication = authenticationManager.authenticate( 
+    //         new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+    //     );
+    //     SecurityContextHolder.getContext().setAuthentication(authentication);
+    //     String token = jwtUtils.generateToken(authentication);
+    //     User existingUser = userService.loginUser(user);
+    //     System.out.println("User Id "+existingUser.getUserId());
+    //     if (existingUser == null) {
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    //     }
+    //     LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
+    //     return ResponseEntity.status(HttpStatus.OK).body(response);
+    // }
 
     @PostMapping("/api/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate( 
-            new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
         User existingUser = userService.loginUser(user);
-        System.out.println("User Id "+existingUser.getUserId());
+        System.out.println("User Id "+existingUser.getId());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
-        LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
+        LoginDTO response = new LoginDTO(token, existingUser.getId(), existingUser.getUsername(), existingUser.getUserRole());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
 }

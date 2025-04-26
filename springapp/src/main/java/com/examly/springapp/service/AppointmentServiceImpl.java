@@ -32,18 +32,33 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.vehicleServiceRepo=vehicleServiceRepo;
     }
  
-    public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
-        VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
+    // public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
+    //     VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
+    //     if(existingService==null){
+    //         throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getId()+" not found");
+    //     }
+    //     else{
+    //         User existingUser=userRepo.findById(appointmentDTO.getId()).orElse(null);
+    //         Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
+    //         appointment.setService(existingService);
+    //         appointment.setUser(existingUser);
+    //         appointment=appointmentRepo.save(appointment);
+    //         return AppointmentMapper.mapToAppointmentDTO(appointment);
+    //     }
+    // }
+
+    public Appointment addAppointment(Appointment appointment) {
+        VehicleMaintenance existingService=vehicleServiceRepo.findById(appointment.getService().getId()).orElse(null);
         if(existingService==null){
-            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getServiceId()+" not found");
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getId()+" not found");
         }
         else{
-            User existingUser=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
-            Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
-            appointment.setService(existingService);
+            User existingUser=userRepo.findById(appointment.getUser().getId()).orElse(null);
+            // existingUser=new User(2,"demouser@gmail.com","1122334455","user123","USER");
             appointment.setUser(existingUser);
+            appointment.setService(existingService);
             appointment=appointmentRepo.save(appointment);
-            return AppointmentMapper.mapToAppointmentDTO(appointment);
+            return appointment;
         }
     }
  
@@ -64,23 +79,46 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return appointmentList.stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
     }
+
+    public List<Appointment> getAllAppointment() {
+        return appointmentRepo.findAll();
+    }
  
-    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId) {
+    // public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId) {
+    //     Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
+    //     if (existingAppointment == null) {
+    //         return null;  // Exceptions will be added in future
+    //     }
+    //     VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
+    //     // User user=userRepo.findById(appointmentDTO.getId()).orElse(null);
+    //     User user=userRepo.findById(appointmentDTO.getUserId());
+    //     Appointment appointment=AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, vehicleMaintenance, user);
+    //     appointment.setId(appointmentId);
+    //     appointment.setLocation(appointmentDTO.getLocation());
+    //     appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
+    //     appointment.setStatus(appointmentDTO.getStatus());
+    //     userRepo.save(user);
+    //     vehicleServiceRepo.save(vehicleMaintenance);
+    //     appointment=appointmentRepo.save(appointment);
+    //     return AppointmentMapper.mapToAppointmentDTO(appointment);
+    // }
+
+    public Appointment updateAppointment(Appointment appointmentDTO, long appointmentId) {
         Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
         if (existingAppointment == null) {
             return null;  // Exceptions will be added in future
         }
-        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
-        User user=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
-        Appointment appointment=AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, vehicleMaintenance, user);
-        appointment.setAppointmentId(appointmentId);
-        appointment.setLocation(appointmentDTO.getLocation());
-        appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
-        appointment.setStatus(appointmentDTO.getStatus());
+        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getId()).orElse(null);
+        // User user=userRepo.findById(appointmentDTO.getId()).orElse(null);
+        User user=userRepo.findById(1).orElse(null);
+        existingAppointment.setId(appointmentId);
+        existingAppointment.setLocation(appointmentDTO.getLocation());
+        existingAppointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
+        existingAppointment.setStatus(appointmentDTO.getStatus());
         userRepo.save(user);
         vehicleServiceRepo.save(vehicleMaintenance);
-        appointment=appointmentRepo.save(appointment);
-        return AppointmentMapper.mapToAppointmentDTO(appointment);
+        existingAppointment=appointmentRepo.save(existingAppointment);
+        return existingAppointment;
     }
  
     public String deleteAppointment(long appointmentId) {
