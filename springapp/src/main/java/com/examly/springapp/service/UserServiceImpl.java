@@ -26,38 +26,55 @@ public class UserServiceImpl implements UserDetailsService {
  
     @Autowired
     private PasswordEncoder encoder;
-
  
-    // public User registerUser(User user) {
+    // public UserDTO registerUser(UserDTO userDTO) {
+    //     User user=UserMapper.mapUserDtoToUser(userDTO);
     //     user.setPassword(encoder.encode(user.getPassword()));
-    //     return userRepo.save(user);
+    //     user=userRepo.save(user);
+    //     return UserMapper.mapUserToUserDTO(user);
     // }
-    
-    public UserDTO registerUser(UserDTO userDTO) {
-        User user=UserMapper.mapUserDtoToUser(userDTO);
+ 
+    public User registerUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user=userRepo.save(user);
-        return UserMapper.mapUserToUserDTO(user);
+        return user;
     }
    
  
+    // @Override
+    // public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    //     User existingUser = userRepo.findByEmail(email);
+    //     if (existingUser == null) {
+    //         throw new UsernameNotFoundException("User name not found");
+    //     }
+    //     return UserPrinciple.build(existingUser);
+    // }
+ 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User existingUser = userRepo.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User existingUser = userRepo.findByUsername(username);
         if (existingUser == null) {
             throw new UsernameNotFoundException("User name not found");
         }
         return UserPrinciple.build(existingUser);
     }
  
+    // public User loginUser(User user) {
+    //     User existingUser = userRepo.findByEmail(user.getEmail());
+    //     if (existingUser == null) {
+    //         throw new UserNotFoundException("User Email Not Found");
+    //     }
+    //     // No need to encode the password again here
+    //     return existingUser;
+    // }
+ 
     public User loginUser(User user) {
-        User existingUser = userRepo.findByEmail(user.getEmail());
+        User existingUser = userRepo.findByUsername(user.getUsername());
         if (existingUser == null) {
             throw new UserNotFoundException("User Email Not Found");
         }
         // No need to encode the password again here
         return existingUser;
     }
+ 
 }
- 
- 

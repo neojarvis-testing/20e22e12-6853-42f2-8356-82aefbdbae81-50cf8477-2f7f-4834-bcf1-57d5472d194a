@@ -21,11 +21,11 @@ public class AppointmentMapper {
     // Convert Appointment entity into AppointmentDTO
     public static AppointmentDTO mapToAppointmentDTO(Appointment appointment) {
        return new AppointmentDTO(
-            appointment.getService().getServiceId(),
+            appointment.getService().getId(),
             appointment.getAppointmentDate(),
             appointment.getLocation(),
             appointment.getStatus(),
-            appointment.getUser().getUserId()
+            appointment.getUser().getId()
        );
     }
 }

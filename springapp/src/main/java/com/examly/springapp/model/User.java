@@ -1,36 +1,23 @@
 package com.examly.springapp.model;
-
+ 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-/**
- * Represents a user entity in the system.
- * Each user has a unique identifier, login credentials, and a role.
- */
-
+ 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
     @Column(unique = true)
     private String email;
     private String password;
     private String username;
     private String mobileNumber;
     private String userRole;
-
-    // Getter and Setter methods to access and modify user details
-    
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+ 
     public String getEmail() {
         return email;
     }
@@ -63,15 +50,15 @@ public class User {
     }
     public User() {
     }
-    public User(int userId, String email, String password, String username, String mobileNumber, String userRole) {
-        this.userId = userId;
+    public User(int id, String email, String password, String username, String mobileNumber, String userRole) {
+        this.id=id;
         this.email = email;
         this.password = password;
         this.username = username;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
-
+ 
     public User(String email, String password, String username, String mobileNumber, String userRole) {
         this.email = email;
         this.password = password;
@@ -79,6 +66,13 @@ public class User {
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
-
-    
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+ 
+   
+   
 }
