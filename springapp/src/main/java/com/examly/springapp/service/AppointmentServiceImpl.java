@@ -46,7 +46,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     //         return AppointmentMapper.mapToAppointmentDTO(appointment);
     //     }
     // }
-
+ 
     public Appointment addAppointment(Appointment appointment) {
         VehicleMaintenance existingService=vehicleServiceRepo.findById(appointment.getService().getId()).orElse(null);
         if(existingService==null){
@@ -79,7 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return appointmentList.stream().map(appointment->AppointmentMapper.mapToAppointmentDTO(appointment)).toList();
     }
-
+ 
     public List<Appointment> getAllAppointment() {
         return appointmentRepo.findAll();
     }
@@ -102,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     //     appointment=appointmentRepo.save(appointment);
     //     return AppointmentMapper.mapToAppointmentDTO(appointment);
     // }
-
+ 
     public Appointment updateAppointment(Appointment appointmentDTO, long appointmentId) {
         Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
         if (existingAppointment == null) {
@@ -145,6 +145,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
-
-
+ 
+ 
 }
