@@ -21,6 +21,9 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UsernavbarComponent } from './components/usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
