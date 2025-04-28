@@ -12,7 +12,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Component
-public class JwtUtils {
+public class JwtUtils {  
     @Value("${SECRET_KEY}")
     private String SECRET_KEY;
     public String generateToken(Authentication authentication) {
