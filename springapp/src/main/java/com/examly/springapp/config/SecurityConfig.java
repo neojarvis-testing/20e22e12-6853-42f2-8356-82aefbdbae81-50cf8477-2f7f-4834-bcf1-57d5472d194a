@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
- 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -25,7 +25,7 @@ public class SecurityConfig {
     PasswordEncoder passwordEncoder;
     @Autowired
     JwtAuthenticationFilter jwtAuthenticationFilter;
- 
+
     @Autowired
     public void configure(AuthenticationManagerBuilder authority)throws Exception{
         authority.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -39,7 +39,7 @@ public class SecurityConfig {
             .and()
             .build();
     }
- 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
@@ -52,9 +52,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/service/{id}").hasAnyRole("ADMIN")
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .anyRequest().permitAll())
+                .anyRequest().authenticated())
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
- 
+
