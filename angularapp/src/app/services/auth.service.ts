@@ -12,7 +12,7 @@ export class AuthService {
 
   private apiUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,private router:Router) { }
 
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/register', user);
@@ -24,19 +24,19 @@ export class AuthService {
  
 
   isAdmin(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.admin;
+    return localStorage.getItem('userRole') === environment.userRoles.admin;
   }
 
   isUser(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.user;
+    return localStorage.getItem('userRole') === environment.userRoles.user;
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('token') !== null;
+    return localStorage.getItem('token') !== null;
   }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

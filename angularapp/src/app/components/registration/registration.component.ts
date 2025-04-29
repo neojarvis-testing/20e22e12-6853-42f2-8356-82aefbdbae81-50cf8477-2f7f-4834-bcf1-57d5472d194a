@@ -63,22 +63,6 @@ export class RegistrationComponent implements OnInit {
       console.log(newUser);
       this.service.registerUser(newUser).subscribe(
         (user) => {
-          // this.service.loginUser(loginObj).subscribe(
-          //   (result) => {
-          //     console.log(result);
-          //     sessionStorage.setItem('username', result.username);
-          //     sessionStorage.setItem('token', result.token);
-          //     sessionStorage.setItem('userRole', result.userRole);
-          //     this.router.navigate(['/home']);
-          //     setTimeout(() => {
-          //       this.isLoading = false;
-          //     }, 2000);
-          //   },
-          //   (error) => {
-          //     this.isLoading = false;
-          //     this.router.navigate(['/error']);
-          //   }
-          // );
           this.router.navigate(['/login']);
         },
         (error) => {

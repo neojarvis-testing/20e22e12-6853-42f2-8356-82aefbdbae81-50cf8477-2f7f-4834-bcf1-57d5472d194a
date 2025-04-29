@@ -9,7 +9,6 @@ import { AdminviewappointmentComponent } from './components/adminviewappointment
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './components/adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
-import { AuthguardComponent } from './components/authguard/authguard.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminviewfeedbackComponent,
     AdminviewserviceComponent,
     AdminviewuserdetailsComponent,
-    AuthguardComponent,
     ErrorComponent,
     HomeComponent,
     LoginComponent,

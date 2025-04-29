@@ -19,8 +19,8 @@ export class UserdetailsService {
     return this.http.delete<void>(`${this.apiUrl}/users/${userId}`)
   }
 
-  getUserByName(name:string):Observable<User>{
-    return this.http.get<User>(`${this.apiUrl}/users`)
+  getUserByName(name:string):Observable<User[]>{
+    return this.http.get<User[]>(`${this.apiUrl}/users?name=${name}`);
   }
   updateUser(userId:number,UpdateUser:User):Observable<User>{
     return this.http.put<User>(`${this.apiUrl}/users/${userId}`,UpdateUser)
