@@ -3,7 +3,7 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.model.VehicleMaintenanceDTO;
 
 public class VechicleMapper {
-     public static VehicleMaintenance mapUserDtoToVehicle(VehicleMaintenanceDTO vehicleMaintenanceDTO){
+     public static VehicleMaintenance mapVehicleDTOToVehicle(VehicleMaintenanceDTO vehicleMaintenanceDTO){
         return new VehicleMaintenance(
             vehicleMaintenanceDTO.getServiceName(),
             vehicleMaintenanceDTO.getServicePrice(),
@@ -11,8 +11,9 @@ public class VechicleMapper {
         );
     }
 
-    public static VehicleMaintenanceDTO mapUserToUserDTO(VehicleMaintenance vehicleMaintenance){
+    public static VehicleMaintenanceDTO mapVehicleToVehicleDTO(VehicleMaintenance vehicleMaintenance){
         return new VehicleMaintenanceDTO(
+            vehicleMaintenance.getId(),
             vehicleMaintenance.getServiceName(),
             vehicleMaintenance.getServicePrice(),
             vehicleMaintenance.getTypeOfVehicle()
