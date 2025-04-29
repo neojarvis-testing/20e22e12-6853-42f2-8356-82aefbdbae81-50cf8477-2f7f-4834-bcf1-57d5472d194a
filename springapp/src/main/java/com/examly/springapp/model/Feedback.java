@@ -11,18 +11,18 @@ import jakarta.persistence.ManyToOne;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feedbackId;
+    private Long id;
     @ManyToOne
     @JoinColumn(name="userId")
     private User user;
     private String message;
     private int rating;
 
-    public Long getFeedbackId() {
-        return feedbackId;
+    public Long getId() {
+        return id;
     }
-    public void setFeedbackId(Long feedbackId) {
-        this.feedbackId = feedbackId;
+    public void setId(Long id) {
+        this.id = id;
     }
     public User getUser() {
         return user;
@@ -44,13 +44,13 @@ public class Feedback {
     }
     public Feedback() {
     }
-    public Feedback(Long feedbackId, User user, String message, int rating) {
-        this.feedbackId = feedbackId;
+
+    public Feedback(Long id, User user, String message, int rating) {
+        this.id = id;
         this.user = user;
         this.message = message;
         this.rating = rating;
     }
-
     public Feedback(User user, String message, int rating) {
         this.user = user;
         this.message = message;

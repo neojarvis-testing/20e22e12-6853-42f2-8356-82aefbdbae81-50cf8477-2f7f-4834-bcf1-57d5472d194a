@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class FeedbackDTO {
 
+    private Long id;
+
     @NotNull(message = "User ID is required")
     private int userId;
 
@@ -41,14 +43,25 @@ public class FeedbackDTO {
         this.rating = rating;
     }
 
-    public FeedbackDTO(@NotNull(message = "User ID is required") int userId,
+    
+
+    public FeedbackDTO(Long id, @NotNull(message = "User ID is required") int userId,
             @NotBlank(message = "Message is required") String message,
             @Min(value = 1, message = "Rating must be at least 1") @Max(value = 5, message = "Rating must be at most 5") int rating) {
+        this.id = id;
         this.userId = userId;
         this.message = message;
         this.rating = rating;
     }
 
     public FeedbackDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
