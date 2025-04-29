@@ -43,7 +43,8 @@ export class AuthService {
 
   
    getAuthenticatedToken(): string | null {
-      return localStorage.getItem('token');
-   }
+       return localStorage.getItem('token');
+      }
+
   
 }

@@ -15,8 +15,8 @@ export class AppointmentService {
  
 
   // Add Appointment 
-  addAppointments(appointmentData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
+  addAppointments(appointmentData:any): Observable<Appointment> {
+    return this.http.post<Appointment>(`${this.apiUrl}/appointments`, appointmentData);
   }
 
   // Get Appointments by User ID
@@ -35,22 +35,19 @@ export class AppointmentService {
   }
 
   // Get All Appointments 
-  getAllAppointments(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/appointments`);
+  getAllAppointments(): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments`);
   }
 
- 
-
-  
 
   // Update Appointment 
-  updateAppointments(appointmentId: number, appointmentData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/appointments/${appointmentId}`, appointmentData);
+  updateAppointments(appointmentId: number, appointmentData: any): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.apiUrl}/appointments/${appointmentId}`, appointmentData);
   }
 
   // Delete Appointment
-  deleteAppointment(appointmentId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/appointment/${appointmentId}`);
+  deleteAppointment(appointmentId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/appointment/${appointmentId}`);
   }
 
   // Get Sorted Appointments (With Pagination)

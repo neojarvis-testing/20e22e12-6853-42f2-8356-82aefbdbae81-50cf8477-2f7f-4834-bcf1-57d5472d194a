@@ -24,6 +24,7 @@ import com.examly.springapp.service.AppointmentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 @RestController
 @Tag(name = "Appointment Service Controller", description = "APIs for managing Appointment services.")
 public class AppointmentController {
@@ -51,7 +52,7 @@ public class AppointmentController {
 
     @Operation(summary = "Create a new appointment", description = "Allows a user to create a new appointment for vehicle maintenance.")
     @PostMapping("/api/appointments")
-    public ResponseEntity<AppointmentDTO> addAppointments(@RequestBody AppointmentDTO appointmentDTO) {
+    public ResponseEntity<AppointmentDTO> addAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointments(appointmentDTO));
     }
 
@@ -104,7 +105,7 @@ public class AppointmentController {
 
     @Operation(summary = "Update appointment by ID", description = "Updates details of an existing appointment by its ID.")
     @PutMapping("/api/appointments/{appointmentId}")
-    public ResponseEntity<AppointmentDTO> updateAppointments(@RequestBody AppointmentDTO appointmentDTO,
+    public ResponseEntity<AppointmentDTO> updateAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO,
             @PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.updateAppointments(appointmentDTO, appointmentId));
     }
