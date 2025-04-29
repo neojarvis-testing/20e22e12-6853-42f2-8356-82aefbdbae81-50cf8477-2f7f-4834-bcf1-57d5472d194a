@@ -1,24 +1,15 @@
-<div class="feedback-container">
-  <h2>Submit Your Feedback</h2>
-
-  <!-- Display success message -->
-  <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
-
-  <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
-    <label for="message">Message:</label>
-    <textarea id="message" formControlName="message" required minlength="5" placeholder="Write your feedback..."></textarea>
-
-    <label for="rating">Rating (1-5):</label>
-    <input id="rating" formControlName="rating" type="number" min="1" max="5" required />
-
-    <button type="submit" [disabled]="feedbackForm.invalid">Submit Feedback</button>
-  </form>
-
-  <!-- Modal for success confirmation -->
-  <div *ngIf="showModal" class="modal">
-    <div class="modal-content">
-      <p>Feedback submitted successfully!</p>
-      <button (click)="closeModal()">Close</button>
-    </div>
-  </div>
+<h1>Feedback form</h1>
+<div>
+    <form (ngSubmit)="addFeedback()">
+        <div>
+            <textarea name="message" id="message" cols="30" rows="10" [(ngModel)]="newFeedback.message">
+            </textarea>
+        </div>
+ 
+        <div>
+            <input type="number" name="rating" id="rating" [(ngModel)]="newFeedback.rating">
+        </div>
+ 
+        <button type="submit">Add Feedback</button>
+    </form>
 </div>

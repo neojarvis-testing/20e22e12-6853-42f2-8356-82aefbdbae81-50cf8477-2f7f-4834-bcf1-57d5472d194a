@@ -1,6 +1,6 @@
 export interface Feedback{
     feedbackId?:number
-    userId:number
+    userId:any
     message:string
     rating:number
 }
