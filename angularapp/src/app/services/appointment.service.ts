@@ -14,7 +14,7 @@ export class AppointmentService {
 
  
 
-  // Add Appointment DTO (Admin)
+  // Add Appointment 
   addAppointments(appointmentData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
   }
@@ -34,19 +34,16 @@ export class AppointmentService {
     return this.http.get<Appointment>(`${this.apiUrl}/appointment/user/${userId}/last`);
   }
 
-  // Get All Appointments (DTO)
+  // Get All Appointments 
   getAllAppointments(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/appointments`);
   }
 
-  // Get All Appointments (Standard)
-  getAllAppointment(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.apiUrl}/appointment`);
-  }
+ 
 
   
 
-  // Update Appointment DTO (Admin)
+  // Update Appointment 
   updateAppointments(appointmentId: number, appointmentData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/appointments/${appointmentId}`, appointmentData);
   }
