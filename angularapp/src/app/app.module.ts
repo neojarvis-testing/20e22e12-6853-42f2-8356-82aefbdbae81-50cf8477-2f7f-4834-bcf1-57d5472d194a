@@ -22,6 +22,8 @@ import { UsernavbarComponent } from './components/usernavbar/usernavbar.componen
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
