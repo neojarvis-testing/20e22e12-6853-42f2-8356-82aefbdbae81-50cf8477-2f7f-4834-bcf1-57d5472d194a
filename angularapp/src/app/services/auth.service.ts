@@ -36,13 +36,13 @@ export class AuthService {
   }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
   
    getAuthenticatedToken(): string | null {
-      return localStorage.getItem('token');
-   }
+       return localStorage.getItem('token');
+   }
   
 }

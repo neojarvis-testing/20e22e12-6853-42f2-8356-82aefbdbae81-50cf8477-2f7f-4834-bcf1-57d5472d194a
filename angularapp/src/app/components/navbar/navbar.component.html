@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" routerLink="/">Vehicle Maintenance Service</a>
@@ -43,11 +42,18 @@
  
                     <!-- User Links -->
                     <ng-container *ngIf="userRole === 'USER'">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/job-list">Job List</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                               Appointments
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/add-appointment">Book Appointment</a></li>
+                                <li><a class="dropdown-item" routerLink="/view-appointments">View Appointment </a></li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/my-application">My Applications</a>
+                            <a class="nav-link" routerLink="/view-feedback">feedback</a>
                         </li>
                     </ng-container>
  
