@@ -1,7 +1,7 @@
 package com.examly.springapp.model;
- 
+
 import java.time.LocalDate;
- 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
- 
+
 @Entity
 public class Appointment {
     @Id
@@ -25,52 +25,52 @@ public class Appointment {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
- 
-   
- 
+
+    
+
     public VehicleMaintenance getService() {
         return service;
     }
- 
+
     public void setService(VehicleMaintenance service) {
         this.service = service;
     }
- 
+
     public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
- 
+
     public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
- 
+
     public String getLocation() {
         return location;
     }
- 
+
     public void setLocation(String location) {
         this.location = location;
     }
- 
+
     public String getStatus() {
         return status;
     }
- 
+
     public void setStatus(String status) {
         this.status = status;
     }
- 
+
     public User getUser() {
         return user;
     }
- 
+
     public void setUser(User user) {
         this.user = user;
     }
- 
+
     public Appointment() {
     }
- 
+
     public Appointment(Long id, VehicleMaintenance service, LocalDate appointmentDate, String location,
             String status, User user) {
         this.id = id;
@@ -80,7 +80,7 @@ public class Appointment {
         this.status = status;
         this.user = user;
     }
- 
+
     public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location,
             String status, User user) {
         this.service = service;
@@ -89,13 +89,13 @@ public class Appointment {
         this.status = status;
         this.user = user;
     }
- 
+
     public Long getId() {
         return id;
     }
- 
+
     public void setId(Long id) {
         this.id = id;
     }
- 
+
 }

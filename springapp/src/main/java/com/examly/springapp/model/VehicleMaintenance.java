@@ -1,10 +1,10 @@
 package com.examly.springapp.model;
- 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
- 
+
 @Entity
 public class VehicleMaintenance {
     @Id
@@ -13,7 +13,7 @@ public class VehicleMaintenance {
     private String serviceName;
     private int servicePrice;
     private String typeOfVehicle;
-   
+    
     public String getServiceName() {
         return serviceName;
     }
@@ -51,6 +51,6 @@ public class VehicleMaintenance {
     public void setId(Long id) {
         this.id = id;
     }
-   
- 
+    
+
 }

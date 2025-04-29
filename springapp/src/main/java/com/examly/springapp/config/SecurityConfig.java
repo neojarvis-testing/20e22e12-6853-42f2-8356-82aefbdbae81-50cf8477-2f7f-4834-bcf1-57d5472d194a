@@ -53,7 +53,6 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
         .authorizeHttpRequests(auth->auth
-        .requestMatchers(HttpMethod.POST, "/api/register","/api/login").permitAll()
         .requestMatchers(HttpMethod.GET,"/api/appointment/{appointmentId}","/api/appointment/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET, "/api/feedback","/api/services/{id}","/api/appointment").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")
@@ -64,7 +63,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/api/appointment").hasAnyRole("USER")
         .requestMatchers(HttpMethod.PUT, "/api/services/{id}","/api/appointment/{appointmentId}").hasAnyRole("ADMIN")
         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html").permitAll()
-        .anyRequest().authenticated())
+        .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);    
         return http.build();

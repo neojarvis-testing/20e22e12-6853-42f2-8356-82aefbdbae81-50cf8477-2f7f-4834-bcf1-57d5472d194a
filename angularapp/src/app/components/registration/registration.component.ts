@@ -20,12 +20,18 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private service: AuthService){
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6),this.passwordValidator]],
       confirmPassword: ['', Validators.required],
       username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       userRole: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
+  }
+  passwordValidator(control: AbstractControl) {
+    const password = control.value;
+    const regex = /^[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    
+    return regex.test(password) ? null : {invalidPassword: true };
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -63,22 +69,6 @@ export class RegistrationComponent implements OnInit {
       console.log(newUser);
       this.service.registerUser(newUser).subscribe(
         (user) => {
-          // this.service.loginUser(loginObj).subscribe(
-          //   (result) => {
-          //     console.log(result);
-          //     sessionStorage.setItem('username', result.username);
-          //     sessionStorage.setItem('token', result.token);
-          //     sessionStorage.setItem('userRole', result.userRole);
-          //     this.router.navigate(['/home']);
-          //     setTimeout(() => {
-          //       this.isLoading = false;
-          //     }, 2000);
-          //   },
-          //   (error) => {
-          //     this.isLoading = false;
-          //     this.router.navigate(['/error']);
-          //   }
-          // );
           this.router.navigate(['/login']);
         },
         (error) => {
