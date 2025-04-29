@@ -12,10 +12,7 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) {}
 
-  // Add Appointment (User)
-  addAppointment(appointmentData: Appointment): Observable<Appointment> {
-    return this.http.post<Appointment>(`${this.apiUrl}/appointment`, appointmentData);
-  }
+ 
 
   // Add Appointment DTO (Admin)
   addAppointments(appointmentData: any): Observable<any> {
@@ -47,10 +44,7 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(`${this.apiUrl}/appointment`);
   }
 
-  // Update Appointment
-  updateAppointment(appointmentId: number, appointmentData: Appointment): Observable<Appointment> {
-    return this.http.put<Appointment>(`${this.apiUrl}/appointment/${appointmentId}`, appointmentData);
-  }
+  
 
   // Update Appointment DTO (Admin)
   updateAppointments(appointmentId: number, appointmentData: any): Observable<any> {

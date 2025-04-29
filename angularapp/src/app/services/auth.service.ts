@@ -35,8 +35,9 @@ export class AuthService {
     return sessionStorage.getItem('token') !== null;
   }
 
-  // logout() {
-  //   sessionStorage.clear();
-  //   this.router.navigate(['/login']);
-  // }
+
+  logout() {
+    localStorage.clear();
+    //this.router.navigate(['/login']);
+  }
 }

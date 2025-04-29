@@ -1,1 +1,24 @@
-<p>adminviewservice works!</p>
+<h1>Vehicle Service Details</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>SL. No</th>
+                <th>Service Name</th>
+                <th>Service Price</th>
+                <th>Type of Vehicle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of services;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{s.serviceName}}</td>
+                <td>{{s.servicePrice}}</td>
+                <td>{{s.typeOfVehicle}}</td>
+                <button (click)="edit(s.id)">Edit</button>
+                <button (click)="delete(s.id)">Delete</button>
+            </tr>
+        </tbody>
+    </table>
+</div>

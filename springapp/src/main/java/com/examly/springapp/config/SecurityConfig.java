@@ -53,6 +53,7 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
         .authorizeHttpRequests(auth->auth
+        .requestMatchers(HttpMethod.POST,"/api/register","/api/login").permitAll()
         .requestMatchers(HttpMethod.GET,"/api/appointment/{appointmentId}","/api/appointment/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET, "/api/feedback","/api/services/{id}","/api/appointment").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")

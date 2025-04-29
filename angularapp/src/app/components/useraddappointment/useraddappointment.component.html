@@ -1,7 +1,7 @@
-<div class="container">
+<!-- <div class="container">
   <h2>Select a Service & Book an Appointment</h2>
 
-  <!-- Services Table -->
+  
   <table class="table table-striped text-center">
     <thead class="table-dark">
       <tr>
@@ -18,8 +18,8 @@
       <tr *ngFor="let service of services; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ service.serviceName }}</td>
-        <td>{{ service.price }}</td>
-        <td>{{ service.vehicleType }}</td>
+        <td>{{ service.servicePrice }}</td>
+        <td>{{ service.typeOfVehicle }}</td>
         <td>
           <input type="date" class="form-control" [(ngModel)]="service.selectedDate">
         </td>
@@ -27,10 +27,10 @@
           <input type="text" class="form-control" [(ngModel)]="service.selectedLocation" placeholder="Enter location">
         </td>
         <td>
-          <button class="btn btn-sm btn-success" (click)="bookAppointment(service)" 
+          <button class="btn btn-sm btn-success" (click)="submitAppointment(service)" 
             [disabled]="!service.selectedDate || !service.selectedLocation">Book</button>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
