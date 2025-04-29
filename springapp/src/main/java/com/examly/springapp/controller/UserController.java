@@ -76,4 +76,5 @@ public class UserController {
         LoginDTO response = new LoginDTO(token, existingUser.getId(), existingUser.getUsername(), existingUser.getUserRole());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    
 }

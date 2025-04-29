@@ -45,10 +45,10 @@ public class AppointmentController {
      * @return ResponseEntity containing the newly created appointment with HTTP status 201 (Created)
      */
 
-    // @PostMapping("/api/appointment")
-    // public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
-    //     return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
-    // }
+    @PostMapping("/api/appointments")
+    public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        return ResponseEntity.status(201).body(appointmentService.addAppointments(appointmentDTO));
+    }
 
     @PostMapping("/api/appointment")
     @Transactional

@@ -9,7 +9,7 @@ public class AppointmentDTO {
    
 
     @NotNull(message = "Service ID is required")
-    private Long serviceId;
+    private Long id;
 
     @NotNull(message = "Appointment date is required")
     private LocalDate appointmentDate;
@@ -23,12 +23,12 @@ public class AppointmentDTO {
     @NotNull(message = "User ID is required")
     private int userId;
 
-    public AppointmentDTO(@NotNull(message = "Service ID is required") Long serviceId,
+    public AppointmentDTO(@NotNull(message = "Service ID is required") Long id,
             @NotNull(message = "Appointment date is required") LocalDate appointmentDate,
             @NotBlank(message = "Location is required") String location,
             @NotBlank(message = "Status is required") String status,
             @NotNull(message = "User ID is required") int userId) {
-        this.serviceId = serviceId;
+        this.id = id;
         this.appointmentDate = appointmentDate;
         this.location = location;
         this.status = status;
@@ -38,12 +38,12 @@ public class AppointmentDTO {
     public AppointmentDTO() {
     }
 
-    public Long getServiceId() {
-        return serviceId;
+    public Long getId() {
+        return id;
     }
 
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+    public void setServiceId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getAppointmentDate() {

@@ -32,20 +32,20 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.vehicleServiceRepo=vehicleServiceRepo;
     }
  
-    // public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
-    //     VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getServiceId()).orElse(null);
-    //     if(existingService==null){
-    //         throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getId()+" not found");
-    //     }
-    //     else{
-    //         User existingUser=userRepo.findById(appointmentDTO.getId()).orElse(null);
-    //         Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
-    //         appointment.setService(existingService);
-    //         appointment.setUser(existingUser);
-    //         appointment=appointmentRepo.save(appointment);
-    //         return AppointmentMapper.mapToAppointmentDTO(appointment);
-    //     }
-    // }
+    public AppointmentDTO addAppointments(AppointmentDTO appointmentDTO) {
+        VehicleMaintenance existingService=vehicleServiceRepo.findById(appointmentDTO.getId()).orElse(null);
+        if(existingService==null){
+            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getId()+" not found");
+        }
+        else{
+            User existingUser=userRepo.findById(appointmentDTO.getUserId()).orElse(null);
+            Appointment appointment = AppointmentMapper.mapAppointmentDTOToAppointment(appointmentDTO, existingService, existingUser);
+            appointment.setService(existingService);
+            appointment.setUser(existingUser);
+            appointment=appointmentRepo.save(appointment);
+            return AppointmentMapper.mapToAppointmentDTO(appointment);
+        }
+    }
 
     public Appointment addAppointment(Appointment appointment) {
         VehicleMaintenance existingService=vehicleServiceRepo.findById(appointment.getService().getId()).orElse(null);
