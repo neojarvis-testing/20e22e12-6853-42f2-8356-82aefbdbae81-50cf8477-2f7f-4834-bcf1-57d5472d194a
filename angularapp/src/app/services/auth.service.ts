@@ -9,42 +9,43 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-
+ 
   private apiUrl: string = environment.apiUrl;
-
-  constructor(private http: HttpClient) { }
-
+ 
+  constructor(private http: HttpClient, private router: Router) { }
+ 
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/register', user);
   }
-
+ 
   loginUser(login: Login): Observable<any> {
     return this.http.post<any>(this.apiUrl + '/login', login);
   }
  
-
+ 
   isAdmin(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.admin;
+    return localStorage.getItem('userRole') === environment.userRoles.admin;
   }
-
+ 
   isUser(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.user;
+    return localStorage.getItem('userRole') === environment.userRoles.user;
   }
-
+ 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('token') !== null;
+    return localStorage.getItem('token') !== null;
   }
-
-  // logout() {
-  //   sessionStorage.clear();
-  //   this.router.navigate(['/login']);
-  // }
-
-  // getUserId(username: string): Observable<number> {
-  //   return this.http.get<number>(`${this.apiUrl}/users/${username}/id`);
-  // }
-
-  getUserId(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/user/${userId}`);
+ 
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
+ 
+ 
+   getAuthenticatedToken(): string | null {
+      return localStorage.getItem('token');
+   }
+
+   getUserId(userId: number): Observable<User> { 
+    return this.http.get<User>(`${this.apiUrl}/user/${userId}`); }
+ 
 }
