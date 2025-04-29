@@ -9,7 +9,13 @@ const routes: Routes = [
   {path:'register',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
   {path:'add-service',component:AdminaddserviceComponent},
+
   {path:'view-services',component:AdminviewserviceComponent},
+
+  {path:'view-service',component:AdminviewserviceComponent},
+  {path:'edit-service/:id',component:AdminaddserviceComponent},
+  
+
 ];
 
 @NgModule({
