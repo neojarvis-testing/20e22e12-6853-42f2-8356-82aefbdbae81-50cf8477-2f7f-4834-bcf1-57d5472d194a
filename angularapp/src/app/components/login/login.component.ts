@@ -8,26 +8,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  login:any={
-    username:'',
-    password:''
-  }
+  login: any = {
+    username: '',
+    password: ''
+  };
 
-  constructor(private loginService:AuthService) { }
+  constructor(private loginService: AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  loginUser():void{
-    this.loginService.loginUser(this.login).subscribe((data)=>{
-      alert("loggin successful")
+  loginUser(): void {
+    this.loginService.loginUser(this.login).subscribe((data) => {
+      alert("Login successful");
       console.log(data);
-      localStorage.setItem('token',data.token);
-      localStorage.setItem('userId',data.userId)
-      localStorage.setItem('userRole',data.userRole)
-    },(error)=>{
-      alert("login unsuccessfull");
-    })
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('userRole', data.userRole);
+    }, (error) => {
+      alert("Login unsuccessful");
+    });
   }
-
 }
