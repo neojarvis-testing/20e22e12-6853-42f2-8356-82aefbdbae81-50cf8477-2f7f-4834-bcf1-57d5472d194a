@@ -1,5 +1,5 @@
 package com.examly.springapp.config;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+ 
     @Autowired
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
@@ -30,7 +30,7 @@ public class SecurityConfig {
     public void configure(AuthenticationManagerBuilder authority)throws Exception{
         authority.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
-
+ 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
@@ -51,9 +51,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/services/{id}").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/service/{id}").hasAnyRole("ADMIN")
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                .anyRequest().permitAll())
                 .anyRequest().authenticated())
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
+
