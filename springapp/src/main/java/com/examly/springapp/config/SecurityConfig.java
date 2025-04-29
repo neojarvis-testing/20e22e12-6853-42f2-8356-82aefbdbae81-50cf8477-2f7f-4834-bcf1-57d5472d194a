@@ -12,11 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
- 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
- 
     @Autowired
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
@@ -39,7 +37,7 @@ public class SecurityConfig {
             .and()
             .build();
     }
- 
+ //bean
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
