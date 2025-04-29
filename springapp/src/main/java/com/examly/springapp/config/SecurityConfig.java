@@ -47,11 +47,14 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/api/register", "/api/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/service").hasAnyRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/services/{id}", "/api/services", "/api/services/serviceName").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/services/{id}", "/api/services", 
+                "/api/services/serviceName").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/api/services/{id}").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/service/{id}").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasAnyRole("USER")
+                .requestMatchers(HttpMethod.GET, "/api/feedback").hasAnyRole("ADMIN")
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

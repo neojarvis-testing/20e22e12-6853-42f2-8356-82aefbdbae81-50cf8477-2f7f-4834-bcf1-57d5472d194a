@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userRole', data.userRole);
     }, (error) => {
       alert("Login unsuccessful");
+      console.log(error);
     });
   }
 }
