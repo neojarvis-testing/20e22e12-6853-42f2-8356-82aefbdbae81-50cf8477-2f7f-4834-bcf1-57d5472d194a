@@ -1,1 +1,36 @@
-<p>useraddappointment works!</p>
+<div class="container">
+  <h2>Select a Service & Book an Appointment</h2>
+
+  <!-- Services Table -->
+  <table class="table table-striped text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>S.No</th>
+        <th>Service Name</th>
+        <th>Price (₹)</th>
+        <th>Vehicle Type</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let service of services; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ service.serviceName }}</td>
+        <td>{{ service.price }}</td>
+        <td>{{ service.vehicleType }}</td>
+        <td>
+          <input type="date" class="form-control" [(ngModel)]="service.selectedDate">
+        </td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="service.selectedLocation" placeholder="Enter location">
+        </td>
+        <td>
+          <button class="btn btn-sm btn-success" (click)="bookAppointment(service)" 
+            [disabled]="!service.selectedDate || !service.selectedLocation">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
