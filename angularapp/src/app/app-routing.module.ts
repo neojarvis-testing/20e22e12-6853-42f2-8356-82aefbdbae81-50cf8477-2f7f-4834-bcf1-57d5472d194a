@@ -4,30 +4,21 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { AdminaddserviceComponent } from './components/adminaddservice/adminaddservice.component';
 import { AdminviewserviceComponent } from './components/adminviewservice/adminviewservice.component';
-import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
-import { HomeComponent } from './components/home/home.component';
-import { AdminviewappointmentComponent } from './components/adminviewappointment/adminviewappointment.component';
-import { UseraddappointmentComponent } from './components/useraddappointment/useraddappointment.component';
-import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
-
+import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
+ 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
   {path:'register',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
   {path:'add-service',component:AdminaddserviceComponent},
-  {path:'view-services',component:AdminviewserviceComponent},
+  {path:'view-service',component:AdminviewserviceComponent},
   {path:'edit-service/:id',component:AdminaddserviceComponent},
-  {path:'view-all-feedback',component:AdminviewfeedbackComponent},
-  {path:'view-appointments',component:AdminviewappointmentComponent},
-  {path:'add-appointment',component:UseraddappointmentComponent},
-  {path:'view-feedback',component:UserviewfeedbackComponent},
-  {path:'add-feedback',component:UseraddfeedbackComponent}
-
-  
-
+  {path:'add-feedback',component:UseraddfeedbackComponent},
+  {path:'view-feedback-user',component:UserviewfeedbackComponent},
+  {path:'view-feedback-admin',component:AdminviewfeedbackComponent}
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
