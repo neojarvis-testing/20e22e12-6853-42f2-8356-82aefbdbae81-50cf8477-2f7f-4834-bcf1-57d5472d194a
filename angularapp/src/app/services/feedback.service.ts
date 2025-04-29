@@ -21,7 +21,7 @@ constructor(private http: HttpClient) {}
  * @returns Observable of the created Feedback object.
  */
 createFeedback(feedback: Feedback): Observable<Feedback> {
-  return this.http.post<Feedback>(`${this.apiUrl}/feedback/`, feedback);
+   return this.http.post<Feedback>(`${this.apiUrl}/feedbacks`, feedback);
 }
 
 /**
