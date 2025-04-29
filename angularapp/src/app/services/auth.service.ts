@@ -12,7 +12,7 @@ export class AuthService {
 
   private apiUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/register', user);
@@ -37,6 +37,6 @@ export class AuthService {
 
   logout() {
     sessionStorage.clear();
-    this.router.navigate(['/login']);
+    //this.router.navigate(['/login']);
   }
 }

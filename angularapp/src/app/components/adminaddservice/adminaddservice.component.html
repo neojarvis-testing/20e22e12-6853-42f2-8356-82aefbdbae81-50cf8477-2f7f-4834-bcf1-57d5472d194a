@@ -1,1 +1,18 @@
-<p>adminaddservice works!</p>
+<h1>Vehicle Service Component</h1>
+<div>
+    <form (ngSubmit)="addVehicle()">
+        <div>
+            <input type="text" name="serviceName" id="serviceName" [(ngModel)]="newService.serviceName">
+        </div>
+
+        <div>
+            <input type="number" name="servicePrice" id="servicePrice" [(ngModel)]="newService.servicePrice">
+        </div>
+
+        <div>
+            <input type="text" name="typeOfVehicle" id="typeOfVehicle" [(ngModel)]="newService.typeOfVehicle">
+        </div>
+
+        <button type="submit">Add Service</button>
+    </form>
+</div>
