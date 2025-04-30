@@ -4,14 +4,10 @@
 
 export const environment = {
   production: false,
-
-  apiUrl:'https://8080-ffcecddabdebeefacfbfddfefcecfffbcfdda.premiumproject.examly.io/api',
-
-
-
-  apiUrl:'https://8080-ecafbaffaffacfbfddfefcecfffbcfdda.premiumproject.examly.io/api',
-
-
+  
+  
+  apiUrl:'https://8080-efbdffbfaafacfbfddfefcecfffbcfdda.premiumproject.examly.io/api',
+  
   userRoles:{
     admin:'ADMIN',
     user:'USER'

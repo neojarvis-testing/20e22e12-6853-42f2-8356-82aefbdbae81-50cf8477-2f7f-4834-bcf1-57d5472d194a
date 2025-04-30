@@ -2,7 +2,7 @@ package com.examly.springapp.controller;
  
 import java.security.Provider.Service;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 @RestController
 @Tag(name = "Appointment Service Controller", description = "APIs for managing Appointment services.")
 public class AppointmentController {
@@ -58,7 +59,7 @@ public class AppointmentController {
 
     @Operation(summary = "Create a new appointment", description = "Allows a user to create a new appointment for vehicle maintenance.")
     @PostMapping("/api/appointments")
-    public ResponseEntity<AppointmentDTO> addAppointments(@RequestBody AppointmentDTO appointmentDTO) {
+    public ResponseEntity<AppointmentDTO> addAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointments(appointmentDTO));
     }
 
@@ -126,22 +127,22 @@ public class AppointmentController {
 
     @Operation(summary = "Update appointment by ID", description = "Updates details of an existing appointment by its ID.")
     @PutMapping("/api/appointments/{appointmentId}")
-    public ResponseEntity<AppointmentDTO> updateAppointments(@RequestBody AppointmentDTO appointmentDTO,
+    public ResponseEntity<AppointmentDTO> updateAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO,
             @PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.updateAppointments(appointmentDTO, appointmentId));
     }
  
     @Operation(summary = "Delete appointment by ID", description = "Deletes an appointment by its unique ID.")
     @DeleteMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<String> deleteAppointment(@PathVariable long appointmentId) {
+    public ResponseEntity<Map<String,String>> deleteAppointment(@PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.deleteAppointment(appointmentId));
     }
 
-    // @Operation(summary = "Get appointment by ID", description = "Fetches an appointment by its unique ID.")
-    // @GetMapping("/api/appointment/{id}")
-    // public ResponseEntity<Object> getAppointmentsById(@PathVariable long id) {
-    //     return ResponseEntity.status(200).body(appointmentService.getAppointmentsById(id).get());
-    // }
+    @Operation(summary = "Get appointment by ID", description = "Fetches an appointment by its unique ID.")
+    @GetMapping("/api/appointments/{id}")
+    public ResponseEntity<AppointmentDTO> getAppointmentsById(@PathVariable long id) {
+        return ResponseEntity.status(200).body(appointmentService.getAppointmentsById(id));
+    }
 
     @Operation(summary = "Appointments Sort By Appointment Date", description = "Shows all the appointments using pagination and sorting.")
         @GetMapping("/appointments")

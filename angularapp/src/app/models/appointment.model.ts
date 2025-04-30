@@ -3,9 +3,9 @@ import { VehicleMaintenance } from "./vehicle-maintenance.model";
 
 export interface Appointment{
     appointmentId?:number
-    service:VehicleMaintenance
+    serviceId?:number
     appointmentDate:string
     location:string
     status?:string
-    user?:User
+    userId?:number
 }
