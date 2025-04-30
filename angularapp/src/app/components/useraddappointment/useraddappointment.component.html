@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <h2>Book a Vehicle Service</h2>
   <table class="table table-bordered">
     <thead>
@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let service of services">
-        <td>{{ service.serviceId}}</td>
+        <td>{{ service.id}}</td>
         <td>{{ service.serviceName }}</td>
         <td>{{ service.servicePrice }}</td>
         <td>{{ service.typeOfVehicle }}</td>
@@ -22,49 +22,6 @@
         <td><input type="text" [(ngModel)]="service.location" class="form-control" required /></td>
         <td>
           <button class="btn btn-primary" (click)="bookAppointment(service)">Book</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
-
-
-
-
-<div class="container mt-4">
-  <h2>Book Vehicle Service Appointment</h2>
-
-  <table class="table table-bordered table-striped mt-3">
-    <thead>
-      <tr>
-        <th>Service ID</th>
-        <th>Service Name</th>
-        <th>Price</th>
-        <th>Type of Vehicle</th>
-        <th>Appointment Date</th>
-        <th>Location</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let service of services">
-        <td>{{ service.serviceId }}</td>
-        <td>{{ service.serviceName }}</td>
-        <td>{{ service.servicePrice }}</td>
-        <td>{{ service.typeOfVehicle }}</td>
-        <td>
-          <input type="date" class="form-control"
-            [(ngModel)]="appointmentData[service.serviceId].appointmentDate"
-            name="date{{service.serviceId}}" />
-        </td>
-        <td>
-          <input type="text" class="form-control"
-            [(ngModel)]="appointmentData[service.serviceId].location"
-            placeholder="Enter Location"
-            name="loc{{service.serviceId}}" />
-        </td>
-        <td>
-          <button class="btn btn-success" (click)="bookAppointment(service.serviceId)">Book</button>
         </td>
       </tr>
     </tbody>

@@ -12,7 +12,6 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) {}
 
- 
 
   // Add Appointment 
   addAppointments(appointmentData:any): Observable<Appointment> {
@@ -58,5 +57,9 @@ export class AppointmentService {
     sortDir: string = 'asc'
   ): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.apiUrl}/appointments?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
+  }
+
+  getAppointmentById(id:number):Observable<Appointment>{
+    return this.http.get<Appointment>(`${this.apiUrl}/appointments/${id}`)
   }
 }

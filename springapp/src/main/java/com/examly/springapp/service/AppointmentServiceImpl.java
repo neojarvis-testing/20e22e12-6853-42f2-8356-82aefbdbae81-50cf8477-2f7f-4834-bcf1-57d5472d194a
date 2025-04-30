@@ -1,6 +1,6 @@
 package com.examly.springapp.service;
  
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -136,13 +136,20 @@ public class AppointmentServiceImpl implements AppointmentService {
         return existingAppointment;
     }
  
-    public String deleteAppointment(long appointmentId) {
-        Appointment appointment3 = appointmentRepo.findById(appointmentId).orElse(null);
-        if (appointment3 == null) {
-            return "Appointment with ID: "+appointmentId+" not found";
+    public Map<String,String> deleteAppointment(long appointmentId) {
+        Appointment appointment = appointmentRepo.findById(appointmentId).orElse(null);
+
+        if (appointment == null) {
+            return Map.of("message","Appointment with ID: \" + appointmentId + \" not found");
         }
+
+        // Safely remove foreign key references before deletion
+        appointment.setUser(null);
+        appointment.setService(null);
+        appointmentRepo.save(appointment);
+        
         appointmentRepo.deleteById(appointmentId);
-        return "Appointment deleted successfully";
+        return Map.of("message","Appointment deleted successfully");
     }
  
     public Optional<Appointment> getAppointmentById(long appointmentId) {
@@ -165,14 +172,13 @@ public class AppointmentServiceImpl implements AppointmentService {
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
 
-    public Optional<Appointment> getAppointmentsById(long id) {
-        //logger.info("Fetching appointment by ID: {}", appointmentId);
-        Optional<Appointment> appointment = appointmentRepo.findById(id);
-        if (appointment.isEmpty()) {
-            //logger.error("Appointment not found with ID: {}", appointmentId);
-            throw new AppointmentNotFoundException("Appointment with ID: " + id + " not found");
+    public AppointmentDTO getAppointmentsById(long id) {
+        Appointment appointment=appointmentRepo.findById(id).orElse(null);
+        System.out.println(appointment);
+        if(appointment==null){
+            throw new AppointmentNotFoundException("Appointment with Appointment ID: "+id+" not found");
         }
-        return appointment;
+        return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
 
      public List<Appointment> getAppointmentsByPagination(Integer pageNo, Integer pageSize, String sortBy, String sortDir) {

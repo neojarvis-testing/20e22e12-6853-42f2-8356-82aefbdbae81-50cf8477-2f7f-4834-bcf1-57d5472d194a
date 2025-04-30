@@ -33,3 +33,5 @@ export class VehicleService {
     return this.http.delete<void>(`${this.apiUrl}/services/${id}`)
   }
 }
+
+

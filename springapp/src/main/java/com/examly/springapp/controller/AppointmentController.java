@@ -2,7 +2,7 @@ package com.examly.springapp.controller;
  
 import java.security.Provider.Service;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
@@ -112,15 +112,15 @@ public class AppointmentController {
  
     @Operation(summary = "Delete appointment by ID", description = "Deletes an appointment by its unique ID.")
     @DeleteMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<String> deleteAppointment(@PathVariable long appointmentId) {
+    public ResponseEntity<Map<String,String>> deleteAppointment(@PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.deleteAppointment(appointmentId));
     }
 
-    // @Operation(summary = "Get appointment by ID", description = "Fetches an appointment by its unique ID.")
-    // @GetMapping("/api/appointment/{id}")
-    // public ResponseEntity<Object> getAppointmentsById(@PathVariable long id) {
-    //     return ResponseEntity.status(200).body(appointmentService.getAppointmentsById(id).get());
-    // }
+    @Operation(summary = "Get appointment by ID", description = "Fetches an appointment by its unique ID.")
+    @GetMapping("/api/appointments/{id}")
+    public ResponseEntity<AppointmentDTO> getAppointmentsById(@PathVariable long id) {
+        return ResponseEntity.status(200).body(appointmentService.getAppointmentsById(id));
+    }
 
     @Operation(summary = "Appointments Sort By Appointment Date", description = "Shows all the appointments using pagination and sorting.")
         @GetMapping("/appointments")
