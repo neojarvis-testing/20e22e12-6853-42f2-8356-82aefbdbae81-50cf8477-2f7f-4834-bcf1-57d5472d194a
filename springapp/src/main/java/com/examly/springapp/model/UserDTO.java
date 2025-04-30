@@ -1,10 +1,10 @@
 package com.examly.springapp.model;
-
+ 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-
+ 
 public class UserDTO {
     private int id;
     @Email(message = "Invalid email format")
@@ -24,8 +24,8 @@ public class UserDTO {
       // Constructors
     public UserDTO() {
     }
-    
-
+   
+ 
     public UserDTO(int id, @Email(message = "Invalid email format") @NotBlank(message = "Email is required") String email,
             @NotBlank(message = "Username cannot be empty") String username,
             @NotBlank(message = "Password cannot be empty") @Size(min = 8, message = "Password must be at least 8 characters long") String password,
@@ -38,9 +38,9 @@ public class UserDTO {
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
-
-    
-
+ 
+   
+ 
     public String getEmail() {
         return email;
     }
@@ -65,22 +65,23 @@ public class UserDTO {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
-
+ 
     public String getMobileNumber() {
         return mobileNumber;
     }
-
+ 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
-
-
+ 
+ 
     public int getId() {
         return id;
     }
-
-
+ 
+ 
     public void setId(int id) {
         this.id = id;
     }
 }
+ 

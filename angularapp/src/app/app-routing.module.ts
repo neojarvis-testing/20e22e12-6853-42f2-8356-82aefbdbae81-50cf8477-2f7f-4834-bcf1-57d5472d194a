@@ -11,6 +11,8 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UseraddappointmentComponent } from './components/useraddappointment/useraddappointment.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
 
 
 
@@ -26,7 +28,9 @@ const routes: Routes = [
   {path:'add-appointment',component:UseraddappointmentComponent},
   {path:'view-feedback',component:UserviewfeedbackComponent},
   {path:'add-feedback',component:UseraddfeedbackComponent},
-  {path:'view-userappointment',component:UserviewappointmentComponent}
+  {path:'view-userappointment',component:UserviewappointmentComponent},
+  {path:'user-profile',component:ProfileComponent},
+  {path:'admin-view-userDetails',component:AdminviewuserdetailsComponent}
 ];
 
 @NgModule({
