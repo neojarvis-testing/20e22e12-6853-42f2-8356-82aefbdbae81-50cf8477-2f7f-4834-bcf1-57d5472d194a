@@ -1,1 +1,29 @@
-<p>userviewfeedback works!</p>
+
+<h1>Feedback Details</h1>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">SL. No</th>
+        <th scope="col">Feedback</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td> <!-- Auto-increment SL. No -->
+        <td>{{ feedback.message }}</td>
+        <td>{{ feedback.rating }}</td>
+        <td>
+          <button (click)="deleteFeedback(feedback.id)" aria-label="Delete Feedback">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Display message if no feedback is found -->
+  <p *ngIf="feedbacks.length === 0">No feedback available.</p>
+</div>

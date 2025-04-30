@@ -14,8 +14,6 @@ import { UserviewappointmentComponent } from './components/userviewappointment/u
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
 
-
-
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'register',component:RegistrationComponent},
@@ -32,7 +30,7 @@ const routes: Routes = [
   {path:'user-profile',component:ProfileComponent},
   {path:'admin-view-userDetails',component:AdminviewuserdetailsComponent}
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

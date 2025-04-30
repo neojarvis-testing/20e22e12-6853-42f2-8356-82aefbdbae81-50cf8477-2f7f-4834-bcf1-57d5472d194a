@@ -2,7 +2,7 @@ package com.examly.springapp.service;
  
 import java.util.*;
 import java.util.Optional;
-
+ 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class AppointmentServiceImpl implements AppointmentService {
  
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
-
+ 
     public Appointment addAppointment(Appointment appointment) {
         VehicleMaintenance existingService=vehicleServiceRepo.findById(appointment.getService().getId()).orElse(null);
         if(existingService==null){
@@ -94,7 +94,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return appointmentList.stream().map(AppointmentMapper::mapToAppointmentDTO).toList();
     }
-
+ 
     public List<Appointment> getAllAppointment() {
         return appointmentRepo.findAll();
     }
@@ -117,7 +117,7 @@ public class AppointmentServiceImpl implements AppointmentService {
  
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
-
+ 
     public Appointment updateAppointment(Appointment appointmentDTO, long appointmentId) {
         Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
         if (existingAppointment == null) {
@@ -138,16 +138,16 @@ public class AppointmentServiceImpl implements AppointmentService {
  
     public Map<String,String> deleteAppointment(long appointmentId) {
         Appointment appointment = appointmentRepo.findById(appointmentId).orElse(null);
-
+ 
         if (appointment == null) {
             return Map.of("message","Appointment with ID: \" + appointmentId + \" not found");
         }
-
+ 
         // Safely remove foreign key references before deletion
         appointment.setUser(null);
         appointment.setService(null);
         appointmentRepo.save(appointment);
-        
+       
         appointmentRepo.deleteById(appointmentId);
         return Map.of("message","Appointment deleted successfully");
     }
@@ -171,7 +171,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
-
+ 
     public AppointmentDTO getAppointmentsById(long id) {
         Appointment appointment=appointmentRepo.findById(id).orElse(null);
         System.out.println(appointment);
@@ -180,11 +180,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
-
+ 
      public List<Appointment> getAppointmentsByPagination(Integer pageNo, Integer pageSize, String sortBy, String sortDir) {
             // Determine sort direction
-            Sort sort = sortDir.equalsIgnoreCase("desc") 
-                        ? Sort.by(sortBy).descending() 
+            Sort sort = sortDir.equalsIgnoreCase("desc")
+                        ? Sort.by(sortBy).descending()
                         : Sort.by(sortBy).ascending();
  
             // Create PageRequest object
@@ -197,3 +197,4 @@ public class AppointmentServiceImpl implements AppointmentService {
             return pagedAppointments.getContent();
         }
 }
+ 

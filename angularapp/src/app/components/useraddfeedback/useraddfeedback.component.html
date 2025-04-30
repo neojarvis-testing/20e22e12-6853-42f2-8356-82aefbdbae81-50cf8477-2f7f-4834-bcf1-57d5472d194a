@@ -1,1 +1,37 @@
-<p>useraddfeedback works!</p>
+<h1>                                                                                                                                        </h1>
+<div class="feedback-container">
+  <h1 style="font-size: 30px; font-weight: bold; color: #3700ff; text-align: center; text-transform: uppercase; letter-spacing: 2px; position: relative;">
+  ✨ Share Your Feedback ✨</h1>
+  <!-- <h1>Feedback Form</h1> -->
+  <p>Share your thoughts with us and help improve our services!</p>
+
+  <!-- Display success message -->
+  <p *ngIf="successMessage" class="success-message" aria-live="polite">{{ successMessage }}</p>
+
+  <!-- Feedback Form -->
+  <div class="form-wrapper">
+    <form [formGroup]="feedbackForm" (ngSubmit)="addFeedback()">
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" formControlName="message" required minlength="5" placeholder="Write your feedback here..."></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="rating">Rating (1-5):</label>
+        <input id="rating" formControlName="rating" type="number" min="1" max="5" required />
+      </div>
+  
+      <button type="submit" [disabled]="feedbackForm.invalid">
+        {{ feedbackForm.invalid ? 'Please complete the form' : 'Submit Feedback' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Modal for success confirmation -->
+  <div *ngIf="successMessage" class="modal">
+    <div class="modal-content">
+      <p>{{ successMessage }}</p>
+      <button (click)="successMessage = ''">Close</button>
+    </div>
+  </div>
+</div>

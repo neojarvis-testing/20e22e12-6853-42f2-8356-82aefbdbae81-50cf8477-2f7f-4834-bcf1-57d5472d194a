@@ -1,1 +1,37 @@
-<p>adminviewfeedback works!</p>
+
+<h1 class="feedback-heading">📢 User Feedback & Ratings</h1>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>SL. No</th>
+                <th>Username</th>
+                <th>Feedback</th>
+                <th>Ratings</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+ 
+        <tbody>
+            <tr *ngFor="let feedback of userDetails; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ feedback.username }}</td>
+                <td>{{ feedback.message }}</td>
+                <td>{{ feedback.rating }}</td>
+                <td><button (click)="showProfile(feedback.userId)">Show Profile</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Profile Modal -->
+<div *ngIf="userDetail" class="profile-modal">
+    <div class="modal-content">
+        <h2>User Details</h2>
+        <p><strong>Email:</strong> {{ userDetail.email }}</p>
+        <p><strong>Username:</strong> {{ userDetail.username }}</p>
+        <p><strong>Mobile Number:</strong> {{ userDetail.mobileNumber }}</p>
+        <button (click)="closeProfile()">Close</button>
+    </div>
+</div>
