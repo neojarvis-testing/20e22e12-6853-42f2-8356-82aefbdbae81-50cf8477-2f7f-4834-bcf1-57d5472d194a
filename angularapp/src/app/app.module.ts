@@ -8,7 +8,6 @@ import { AdminviewappointmentComponent } from './components/adminviewappointment
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './components/adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
-import { AuthguardComponent } from './components/authguard/authguard.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -33,7 +32,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AdminviewfeedbackComponent,
     AdminviewserviceComponent,
     AdminviewuserdetailsComponent,
-    AuthguardComponent,
     ErrorComponent,
     HomeComponent,
     LoginComponent,
@@ -49,9 +47,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

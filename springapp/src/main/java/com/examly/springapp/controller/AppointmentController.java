@@ -154,5 +154,9 @@ public class AppointmentController {
             // Pass sorting direction to the service layer
             return appointmentService.getAppointmentsByPagination(pageNo, pageSize, sortBy, sortDir);
     }
+
+}
+
+
 }
 
