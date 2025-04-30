@@ -1,12 +1,12 @@
 package com.examly.springapp.service;
-
+ 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+ 
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.model.VehicleMaintenanceDTO;
-
+ 
 public interface VehicleService {
     // public VehicleMaintenanceDTO addService(VehicleMaintenanceDTO vehicleMaintenanceDTO);
     public VehicleMaintenance addService(VehicleMaintenance vehicleMaintenanceDTO);
@@ -17,8 +17,6 @@ public interface VehicleService {
     public List<VehicleMaintenanceDTO> findByServiceName(String serviceName);
 
 
-
-
-
-
 }
+ 
+ 

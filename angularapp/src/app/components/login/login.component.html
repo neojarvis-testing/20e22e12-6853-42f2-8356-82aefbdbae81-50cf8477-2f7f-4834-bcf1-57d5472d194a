@@ -1,14 +1,44 @@
-<h1>Login form</h1>
-<div>
-    <form (ngSubmit)="loginUser()">
-        <div>
-            <input type="text" name="username" id="username" [(ngModel)]="login.username">
+<div class="container-fluid login-page vh-100">
+    <div class="row h-100">
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
+        <div class="backImage login-image"></div>
+        <div class="overlay-text"
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2em; font-weight: bold; font-family: serif; color: white; background-color: rgba(0, 0, 0, 0.3); padding: 10px 20px; border-radius: 10px;">
+          Vehicle Service
         </div>
-
-        <div>
-            <input type="password" name="password" id="password" [(ngModel)]="login.password">
+      </div>
+  
+      <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <div class="w-75 p-4"
+          style="background-color: rgb(255, 255, 255); border-radius: 10px; box-shadow: 0 0 10px navy !important; margin-left: 40px;">
+          <div class="login-form">
+            <h1 class="text-center mb-4" style="font-family: serif; font-weight: bold;">Login</h1>
+            <form #loginForm="ngForm" (ngSubmit)="loginUser()" class="needs-validation" novalidate>
+              <div class="mb-3">
+                User Name <span style="color: red;">*</span> <br>
+                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="login.username" required
+                  placeholder="Username" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
+                <div style="color: red; font-size: 0.8em;" *ngIf="loginForm.submitted && !login.username">*Username is required</div>
+              </div>
+  
+              <div class="mb-3">
+                Password <span style="color: red;">*</span> <br>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="login.password" required
+                  placeholder="Password" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
+                <div style="color: red; font-size: 0.8em;" *ngIf="loginForm.submitted && !login.password">*Password is required</div>
+              </div>
+  
+              <div class="text-center">
+                <button type="submit" class="w-100"
+                  [disabled]="!login.username || !login.password"
+                  [ngStyle]="{'background-color': (!login.username || !login.password) ? 'transparent' : 'green', 'color': (!login.username || !login.password) ? 'gray' : 'white'}">
+                  Login
+                </button>
+              </div>
+            </form>
+            <p class="signup-link text-center">Don't have an account? <a routerLink="/signup">Register here</a></p>
+          </div>
         </div>
-
-        <button type="submit">Login</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
