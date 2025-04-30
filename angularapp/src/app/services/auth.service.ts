@@ -51,6 +51,18 @@ export class AuthService {
  
       }
  
+      getUserById(userId: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/user/${userId}`);
+      }
+   
+      updateUser(userId: number, userData: any): Observable<any> {
+        return this.http.put(`${this.apiUrl}/user/view/profile/${userId}`, userData);
+      }
+ 
  
    }
+ 
+
+   
+
  

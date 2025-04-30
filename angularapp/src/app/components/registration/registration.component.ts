@@ -27,6 +27,21 @@ export class RegistrationComponent implements OnInit {
       userRole: ['USER', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
+  showSuccessPopup = false;
+
+//   signupUser() {
+//   if (this.signupForm.valid) {
+//     // Your registration logic here (e.g., API call)
+//     // On success:
+//     this.showSuccessPopup = true;
+//   }
+// }
+
+closePopup() {
+  this.showSuccessPopup = false;
+  // Optionally redirect to login:
+  // this.router.navigate(['/login']);
+}
   passwordValidator(control: AbstractControl) {
     const password = control.value;
     const regex = /^[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;

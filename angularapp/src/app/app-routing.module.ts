@@ -11,6 +11,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UseraddappointmentComponent } from './components/useraddappointment/useraddappointment.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
+
 import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -42,6 +43,9 @@ const routes: Routes = [
 
   // Catch-All Route
   { path: '**', component: ErrorComponent }
+
+
+
 ];
 
  

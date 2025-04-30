@@ -12,9 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+ 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+ 
     @Autowired
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
@@ -37,14 +39,14 @@ public class SecurityConfig {
             .and()
             .build();
     }
- //bean
+ 
     @Bean
-
+ 
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
         .authorizeHttpRequests(auth->auth
-
+ 
         .requestMatchers(HttpMethod.GET,"/api/appointment/{appointmentId}","/api/appointment/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET, "/api/feedback","/api/services/{id}","/api/appointment").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")
@@ -56,12 +58,12 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.PUT, "/api/services/{id}","/api/appointment/{appointmentId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.POST,"/api/register","/api/login").permitAll()
         .requestMatchers(HttpMethod.POST,"/api/service").hasAnyRole("ADMIN")
-
+ 
         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html").permitAll()
         .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); 
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);    
+ 
         return http.build();
     }
 }
- 

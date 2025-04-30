@@ -1,23 +1,24 @@
 <app-navbar></app-navbar>
-<h1>Feedback Details</h1>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>SL. No</th>
-                <th>Feedback</th>
-                <th>Rating</th>
-                <th>Action</th>
-            </tr>
-        </thead>
- 
-        <tbody>
-            <tr *ngFor="let feedback of feedbacks">
-                <td>{{feedback.id}}</td>
-                <td>{{feedback.message}}</td>
-                <td>{{feedback.rating}}</td>
-                <td><button (click)="deleteFeedback(feedback.id)">Delete</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container mt-5">
+  <h1 class="text-center text-primary mb-4">Feedback Details</h1>
+
+  <div class="row">
+      <div class="col-md-6 offset-md-3">
+          <div *ngIf="feedbacks.length > 0" class="list-group shadow-lg rounded">
+              <div *ngFor="let feedback of feedbacks; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                      <h5 class="text-dark fw-bold">{{ feedback.message }}</h5>
+                      <p class="text-muted mb-0">Rating: <span class="badge bg-success">{{ feedback.rating }}</span></p>
+                  </div>
+                  <button class="btn btn-outline-danger btn-sm px-3 fw-bold" (click)="deleteFeedback(feedback.id)">
+                      ❌ Delete
+                  </button>
+              </div>
+          </div>
+
+          <div *ngIf="feedbacks.length === 0" class="alert alert-info text-center mt-3">
+              No feedback available. Be the first to share your thoughts! 😊
+          </div>
+      </div>
+  </div>
 </div>

@@ -1,5 +1,9 @@
+
 <app-navbar></app-navbar>
 <div class="container">
+
+<!-- <div class="container">
+
     <h2>Book a Vehicle Service</h2>
     <table class="table table-bordered">
       <thead>
@@ -26,4 +30,44 @@
       </tbody>
     </table>
   </div>
+ -->
 
+ <div class="container mt-5">
+  <h2 class="text-center text-primary fw-bold mb-4">Book a Vehicle Service</h2>
+
+  <div class="table-responsive shadow-lg p-3 bg-light rounded">
+      <table class="table table-hover table-striped table-bordered align-middle">
+          <thead class="bg-primary text-white">
+              <tr class="text-center">
+                  <th>Service ID</th>
+                  <th>Service Name</th>
+                  <th>Service Price</th>
+                  <th>Vehicle Type</th>
+                  <th>Appointment Date</th>
+                  <th>Location</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let service of vehicles" class="text-center">
+                  <td>{{ service.id }}</td>
+                  <td class="fw-bold">{{ service.serviceName }}</td>
+                  <td class="text-success fw-semibold">{{ service.servicePrice | currency:'USD' }}</td>
+                  <td>{{ service.typeOfVehicle }}</td>
+                  <td>{{ service.appointment.appointmentDate | date:'mediumDate' }}</td>
+                  <td>{{ service.appointment.location }}</td>
+                  
+                  <td>
+                      <span [ngClass]="{
+                          'badge bg-success': service.appointment.status === 'Confirmed',
+                          'badge bg-warning text-dark': service.appointment.status === 'Pending',
+                          'badge bg-danger': service.appointment.status === 'Cancelled'
+                      }">
+                          {{ service.appointment.status }}
+                      </span>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
