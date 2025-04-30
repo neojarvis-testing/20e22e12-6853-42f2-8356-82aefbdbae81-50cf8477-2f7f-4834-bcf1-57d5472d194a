@@ -22,7 +22,7 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.service.AppointmentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+ 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 @RestController
@@ -49,26 +49,26 @@ public class AppointmentController {
      * @param appointment The appointment details provided in the request body
      * @return ResponseEntity containing the newly created appointment with HTTP status 201 (Created)
      */
-
+ 
     // @PostMapping("/api/appointment")
     // public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
     //     return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
     // }
  
-
-
+ 
+ 
     @Operation(summary = "Create a new appointment", description = "Allows a user to create a new appointment for vehicle maintenance.")
     @PostMapping("/api/appointments")
     public ResponseEntity<AppointmentDTO> addAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointments(appointmentDTO));
     }
-
+ 
     @PostMapping("/api/appointment")
     @Transactional
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
     }
-
+ 
     // @PostMapping("/api/appointment")
     // @Transactional
     // public ResponseEntity<Appointment> addAppointments(@RequestBody Appointment appointmentDTO) {
@@ -83,10 +83,10 @@ public class AppointmentController {
     //     return ResponseEntity.status(201).body(obj);
     // }
    
-
-    
+ 
+   
     @Operation(summary = "Get appointments by user ID", description = "Retrieves all appointments linked to a specific user by their ID.")
-
+ 
     @GetMapping("/api/appointment/user/{userId}")
     public ResponseEntity<List<AppointmentDTO>> getAppointmentsbyUserId(@PathVariable int userId) {
         return ResponseEntity.status(200).body(appointmentService.getAppointmentsbyUserId(userId));
@@ -101,7 +101,7 @@ public class AppointmentController {
     public ResponseEntity<AppointmentDTO> getLastAppointmentbyUserId(@PathVariable int userId) {
         return ResponseEntity.status(200).body(appointmentService.getLastAppointmentbyUserId(userId));
     }
-    
+   
     @Operation(summary = "Get all appointments", description = "Retrieves a list of all appointments.")
     @GetMapping("/api/appointments")
     public ResponseEntity<List<AppointmentDTO>> getAllAppointments() {
@@ -124,7 +124,7 @@ public class AppointmentController {
             @PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.updateAppointment(appointmentDTO, appointmentId));
     }
-
+ 
     @Operation(summary = "Update appointment by ID", description = "Updates details of an existing appointment by its ID.")
     @PutMapping("/api/appointments/{appointmentId}")
     public ResponseEntity<AppointmentDTO> updateAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO,
@@ -137,13 +137,13 @@ public class AppointmentController {
     public ResponseEntity<Map<String,String>> deleteAppointment(@PathVariable long appointmentId) {
         return ResponseEntity.status(200).body(appointmentService.deleteAppointment(appointmentId));
     }
-
+ 
     @Operation(summary = "Get appointment by ID", description = "Fetches an appointment by its unique ID.")
     @GetMapping("/api/appointments/{id}")
     public ResponseEntity<AppointmentDTO> getAppointmentsById(@PathVariable long id) {
         return ResponseEntity.status(200).body(appointmentService.getAppointmentsById(id));
     }
-
+ 
     @Operation(summary = "Appointments Sort By Appointment Date", description = "Shows all the appointments using pagination and sorting.")
         @GetMapping("/appointments")
         public List<Appointment> getAppointmentsWithPagingAndSorting(
@@ -155,6 +155,5 @@ public class AppointmentController {
             // Pass sorting direction to the service layer
             return appointmentService.getAppointmentsByPagination(pageNo, pageSize, sortBy, sortDir);
     }
-
+ 
 }
-
