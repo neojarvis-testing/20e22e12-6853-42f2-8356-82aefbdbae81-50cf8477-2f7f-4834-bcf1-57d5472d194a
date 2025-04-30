@@ -1,1 +1,43 @@
-<p>profile works!</p>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+ <div class="container mt-4 p-3 border rounded shadow-sm bg-white" style="max-width: 500px; font-family: 'Inter', sans-serif;">
+   <h2 class="text-center mb-3 text-primary fw-bold" style="font-size: 1.5rem;">My Profile</h2>
+ 
+   <!-- Profile Container with Image -->
+   <div class="d-flex align-items-start">
+     <!-- Left side: Image -->
+     <img src="assets/profilelogo.webp" alt="Profile Image" class="img-fluid rounded me-3" style="width: 100px; height: 100px;">
+     
+     <!-- Right side: User Details -->
+     <div class="flex-grow-1">
+       <div *ngIf="!showEditForm">
+         <p class="mb-1"><strong>Username:</strong> {{ user.username }}</p>
+         <p class="mb-1"><strong>Email:</strong> {{ user.email }}</p>
+         <p class="mb-2"><strong>Phone:</strong> {{ user.mobileNumber }}</p>
+ 
+         <button class="btn btn-sm btn-outline-primary w-100 mt-2" (click)="toggleEditForm()">Edit Profile</button>
+       </div>
+ 
+       <form *ngIf="showEditForm" (submit)="updateProfile()">
+         <div class="form-group mb-2">
+           <label for="username" class="fw-semibold">Username:</label>
+           <input type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control form-control-sm border-primary" required />
+         </div>
+ 
+         <div class="form-group mb-2">
+           <label for="email" class="fw-semibold">Email:</label>
+           <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control form-control-sm border-primary" required />
+         </div>
+ 
+         <div class="form-group mb-2">
+           <label for="phone" class="fw-semibold">Phone Number:</label>
+           <input type="tel" id="phone" [(ngModel)]="user.mobileNumber" name="mobileNumber" class="form-control form-control-sm border-primary" required />
+         </div>
+ 
+         <button type="submit" class="btn btn-success w-100 fw-bold btn-sm mt-3">Update Profile</button>
+       </form>
+       
+       
+     </div>
+   </div>
+ </div>
