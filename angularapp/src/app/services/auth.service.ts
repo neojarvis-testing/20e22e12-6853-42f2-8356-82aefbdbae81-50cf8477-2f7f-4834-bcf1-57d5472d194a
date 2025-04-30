@@ -45,14 +45,4 @@ export class AuthService {
 
      return localStorage.getItem('token');
     }
-
-       return localStorage.getItem('token');
-   }
-
-   getUserId(userId: number): Observable<User> {
-     return this.http.get<User>(`${this.apiUrl}/user/${userId}`); }
-
-
-
-  
-}
+  }

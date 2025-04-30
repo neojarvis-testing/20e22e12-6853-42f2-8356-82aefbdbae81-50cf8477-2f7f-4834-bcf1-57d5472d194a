@@ -1,4 +1,4 @@
- <div class="container-fluid login-page vh-100">
+   <div class="container-fluid login-page vh-100">
   <div class="row h-100">
     <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
       <div class="backImage login-image"></div>
@@ -83,7 +83,7 @@
               <select class="form-select" id="userRole" formControlName="userRole"
                 style="border: none; border-bottom: 1px solid purple; border-radius: 0%;" required>
                 <option value="" disabled selected>Select Role</option>
-                <option value="USER">User</option>
+                <option value="USER">User</option> -->
                 <!-- <option value="ADMIN">Admin</option> -->
                </select>
               <div style="color: red"
@@ -98,9 +98,15 @@
                 Register
               </button>
               <!-- <button type="submit" class="btn btn-primary w-100">Signup</button> -->
-            </div>
-            
+             </div> 
           </form>
+          <div *ngIf="showSuccessPopup" class="popup-overlay">
+            <div class="popup-box">
+              <h4 style="color: green;">Registration Successful</h4>
+              <p>Your account has been created successfully. You can now log in to your account.</p>
+              <button (click)="closePopup()" style="background-color: green; color: white; border: none; padding: 8px 16px; border-radius: 5px;">OK</button>
+            </div>
+          </div>
           <p class="signup-link text-center">Already have an account? <a routerLink="/login">Login</a></p>
         </div>
       </div>
@@ -115,3 +121,4 @@
     </div>
   </div>
 </div>
+
