@@ -1,11 +1,11 @@
 package com.examly.springapp.model;
-
+ 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+ 
 @Entity
 public class User {
     @Id
@@ -17,7 +17,7 @@ public class User {
     private String username;
     private String mobileNumber;
     private String userRole;
-
+ 
     public String getEmail() {
         return email;
     }
@@ -50,19 +50,19 @@ public class User {
     }
     public User() {
     }
-    public User(int id, String email, String password, String username, String mobileNumber, String userRole) {
+    public User(int id, String email, String username, String password, String mobileNumber, String userRole) {
         this.id=id;
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
-
-    public User(String email, String password, String username, String mobileNumber, String userRole) {
+ 
+    public User(String email, String username, String password,String mobileNumber, String userRole) {
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
@@ -72,7 +72,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-
-    
-    
+ 
+   
+   
 }
