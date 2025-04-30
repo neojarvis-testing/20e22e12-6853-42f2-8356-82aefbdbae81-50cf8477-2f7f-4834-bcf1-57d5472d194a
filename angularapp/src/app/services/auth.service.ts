@@ -47,8 +47,19 @@ export class AuthService {
  
  
    getAuthenticatedToken(): string | null {
-
-
-     return localStorage.getItem('token');
-    }
-  }
+       return localStorage.getItem('token');
+ 
+      }
+ 
+      getUserById(userId: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/user/${userId}`);
+      }
+   
+      updateUser(userId: number, userData: any): Observable<any> {
+        return this.http.put(`${this.apiUrl}/user/view/profile/${userId}`, userData);
+      }
+ 
+ 
+   }
+ 
+ 

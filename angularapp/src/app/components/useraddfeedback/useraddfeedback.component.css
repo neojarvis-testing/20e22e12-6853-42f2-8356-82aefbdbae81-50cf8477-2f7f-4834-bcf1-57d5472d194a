@@ -1,0 +1,232 @@
+/* ---------------------- */
+/* General Styling */
+/* ---------------------- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  text-align: center;
+  padding: 20px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* ---------------------- */
+/* Feedback Container */
+/* ---------------------- */
+.feedback-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ---------------------- */
+/* Heading & Description */
+/* ---------------------- */
+.feedback-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007bff;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.feedback-container h1::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.feedback-container p {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* ---------------------- */
+/* Form Styling */
+/* ---------------------- */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #222;
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+}
+
+textarea, input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus, input:focus {
+  border-color: #ff6b81;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(255, 107, 129, 0.5);
+}
+
+/* ---------------------- */
+/* Centered Submit Button */
+/* ---------------------- */
+button {
+  display: block;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  padding: 14px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  width: 50%;
+  text-align: center;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #ff6b81, #ff8eb3);
+  transform: scale(1.08);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ---------------------- */
+/* Success Message Styling */
+/* ---------------------- */
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* ---------------------- */
+/* Smaller Modal Styling */
+/* ---------------------- */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(7px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 18px;
+  width: 280px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ---------------------- */
+/* Modal Close Button */
+/* ---------------------- */
+.modal-content button {
+  background: linear-gradient(135deg, #dc3545, #ff6b81);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.modal-content button:hover {
+  background: linear-gradient(135deg, #b22222, #ff8e98);
+  transform: scale(1.05);
+}
+
+/* ---------------------- */
+/* Dark Mode Styling */
+/* ---------------------- */
+body.dark-mode {
+  background-color: #222;
+  color: white;
+}
+
+.feedback-container.dark-mode {
+  background: #333;
+  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.1);
+}
+
+textarea.dark-mode, input.dark-mode {
+  background: #444;
+  color: white;
+}
+
+button.dark-mode {
+  background: linear-gradient(135deg, #007bff, #00aaff);
+}
+
+/* ---------------------- */
+/* Responsive Design */
+/* ---------------------- */
+@media (max-width: 600px) {
+  .feedback-container {
+      width: 90%;
+      padding: 20px;
+  }
+
+  textarea, input {
+      font-size: 14px;
+  }
+
+  button {
+      font-size: 16px;
+      padding: 12px;
+      width: 80%;
+  }
+
+  .modal-content {
+      width: 90%;
+      max-width: 250px;
+  }
+}
+
+/* ---------------------- */
+/* Animations */
+/* ---------------------- */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: scale(0.95);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
