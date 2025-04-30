@@ -1,4 +1,4 @@
-<div class="container-fluid login-page vh-100">
+ <div class="container-fluid login-page vh-100">
   <div class="row h-100">
     <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
       <div class="backImage login-image"></div>
@@ -12,7 +12,7 @@
       <div class="w-75 p-4"
         style="background-color: rgb(255, 255, 255); border-radius: 10px; box-shadow: 0 0 10px navy !important; margin-left: 40px;">
         <div class="login-form">
-          <h1 class="text-center mb-4" style="font-family: serif; font-weight: bold;">Signup</h1>
+          <h1 class="text-center mb-4" style="font-family: serif; font-weight: bold;">Registration</h1>
           <form [formGroup]="signupForm" (ngSubmit)="signupUser()" class="needs-validation" novalidate>
             <div class="mb-3">
               <input type="text" class="form-control" id="username" name="username" formControlName="username"
@@ -21,6 +21,10 @@
                 *ngIf="signupForm.controls.username.errors?.required && (signupForm.controls.username.dirty || signupForm.controls.username.touched)">
                 Username is required.
               </div>
+              <div style="color: red"
+              *ngIf="signupForm.controls.username.errors?.minlength && (signupForm.controls.username.dirty || signupForm.controls.username.touched)">
+              Username must be a minimum of 3 letters.
+            </div>
               <div style="color: red" *ngIf="signupForm.get('username')?.errors?.pattern">Username must contain
                 alphabets only.</div>
             </div>
@@ -52,13 +56,14 @@
             <div class="mb-3">
               <input type="password" class="form-control" id="password" name="password" formControlName="password"
                 placeholder="Password" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-              <div style="color: red"
-                *ngIf="signupForm.controls.password.errors?.required && (signupForm.controls.password.dirty || signupForm.controls.password.touched)">
-                Password is required.
-              </div>
-              <div style="color: red"
-                *ngIf="signupForm.controls.password.errors?.minlength && (signupForm.controls.password.dirty || signupForm.controls.password.touched)">
-                Password must be at least 6 characters.
+            
+              <div style="color: red" *ngIf="signupForm.controls.password.errors">
+                <ng-container *ngIf="signupForm.controls.password.errors?.required">
+                  Password is required.
+                </ng-container>
+                <ng-container *ngIf="!signupForm.controls.password.errors?.required && signupForm.controls.password.errors?.invalidPassword">
+                  Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.
+                </ng-container>
               </div>
             </div>
             <div class="mb-3">
@@ -80,15 +85,21 @@
                 <option value="" disabled selected>Select Role</option>
                 <option value="USER">User</option>
                 <!-- <option value="ADMIN">Admin</option> -->
-              </select>
+               </select>
               <div style="color: red"
                 *ngIf="signupForm.controls.userRole.errors?.required && (signupForm.controls.userRole.dirty || signupForm.controls.userRole.touched)">
                 Role is required.
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary w-100">Signup</button>
+              <button type="submit" class="w-100"
+                  [disabled]="signupForm.invalid"
+                       [ngStyle]="{'background-color': signupForm.invalid ? 'transparent' : 'blue', 'color': signupForm.invalid ? 'gray' : 'white'}">
+                Register
+              </button>
+              <!-- <button type="submit" class="btn btn-primary w-100">Signup</button> -->
             </div>
+            
           </form>
           <p class="signup-link text-center">Already have an account? <a routerLink="/login">Login</a></p>
         </div>

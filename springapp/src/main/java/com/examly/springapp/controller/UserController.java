@@ -142,7 +142,4 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String username){
     	return ResponseEntity.status(200).body(userService.getUserByUsername(username));
     }
-
 }
-
-

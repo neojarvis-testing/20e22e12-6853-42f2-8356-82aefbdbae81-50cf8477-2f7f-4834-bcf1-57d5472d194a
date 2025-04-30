@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6),this.passwordValidator]],
       confirmPassword: ['', Validators.required],
-      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/),Validators.minLength(3)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       userRole: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });

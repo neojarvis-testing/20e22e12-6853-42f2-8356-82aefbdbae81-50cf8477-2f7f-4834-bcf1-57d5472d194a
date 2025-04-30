@@ -24,19 +24,25 @@ export class AuthService {
  
 
   isAdmin(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.admin;
+    return localStorage.getItem('userRole') === environment.userRoles.admin;
   }
 
   isUser(): boolean {
-    return sessionStorage.getItem('userRole') === environment.userRoles.user;
+    return localStorage.getItem('userRole') === environment.userRoles.user;
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('token') !== null;
+    return localStorage.getItem('token') !== null;
   }
 
-  // logout() {
-  //   sessionStorage.clear();
-  //   this.router.navigate(['/login']);
-  // }
+  logout() {
+    sessionStorage.clear();
+    //this.router.navigate(['/login']);
+  }
+
+  
+   getAuthenticatedToken(): string | null {
+     return localStorage.getItem('token');
+    }
+  
 }
