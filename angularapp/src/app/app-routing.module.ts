@@ -21,7 +21,9 @@ const routes: Routes = [
   {path:'edit-service/:id',component:AdminaddserviceComponent},
   {path:'add-feedback',component:UseraddfeedbackComponent},
   {path:'view-feedback-user',component:UserviewfeedbackComponent},
-  {path:'view-feedback-admin',component:AdminviewfeedbackComponent}
+  {path:'view-feedback-admin',component:AdminviewfeedbackComponent},
+  
+
 
 ];
  
