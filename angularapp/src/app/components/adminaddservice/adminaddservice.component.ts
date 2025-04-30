@@ -9,13 +9,14 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   styleUrls: ['./adminaddservice.component.css']
 })
 export class AdminaddserviceComponent implements OnInit {
-
+  
   id:any
   isEdit:boolean=false;
   newService:VehicleMaintenance={
-    serviceName:'',
-    servicePrice:0,
-    typeOfVehicle:''
+    serviceName: '',
+    servicePrice: 0,
+    typeOfVehicle: '',
+    serviceId: 0
   }
 
   constructor(private vehicleService:VehicleService,private activatedRoute:ActivatedRoute) { }

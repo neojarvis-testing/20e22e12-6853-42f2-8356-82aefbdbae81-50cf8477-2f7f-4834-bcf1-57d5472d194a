@@ -1,1 +1,30 @@
-<p>useraddappointment works!</p>
+<div class="container">
+  <h2>Book a Vehicle Service</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Service ID</th>
+        <th>Service Name</th>
+        <th>Service Price</th>
+        <th>Vehicle Type</th>
+        <th>Appointment Date</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let service of services">
+        <td>{{ service.id}}</td>
+        <td>{{ service.serviceName }}</td>
+        <td>{{ service.servicePrice }}</td>
+        <td>{{ service.typeOfVehicle }}</td>
+        <td><input type="date" [(ngModel)]="service.appointmentDate" class="form-control" required /></td>
+        <td><input type="text" [(ngModel)]="service.location" class="form-control" required /></td>
+        <td>
+          <button class="btn btn-primary" (click)="bookAppointment(service)">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

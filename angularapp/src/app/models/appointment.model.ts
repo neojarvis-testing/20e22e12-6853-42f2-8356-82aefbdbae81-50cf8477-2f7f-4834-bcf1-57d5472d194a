@@ -1,11 +1,11 @@
-import { User } from "./user.model"
-import { VehicleMaintenance } from "./vehicle-maintenance.model"
+import { User } from "./user.model";
+import { VehicleMaintenance } from "./vehicle-maintenance.model";
 
 export interface Appointment{
     appointmentId?:number
-    service:VehicleMaintenance
+    serviceId?:number
     appointmentDate:string
     location:string
     status?:string
-    user?:User
+    userId?:number
 }
