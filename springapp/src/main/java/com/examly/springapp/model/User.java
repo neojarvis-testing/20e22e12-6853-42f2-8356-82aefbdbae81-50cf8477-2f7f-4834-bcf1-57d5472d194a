@@ -50,19 +50,19 @@ public class User {
     }
     public User() {
     }
-    public User(int id, String email, String password, String username, String mobileNumber, String userRole) {
+    public User(int id, String email, String username, String password, String mobileNumber, String userRole) {
         this.id=id;
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
- 
+
     public User(String email, String password, String username, String mobileNumber, String userRole) {
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
     }
