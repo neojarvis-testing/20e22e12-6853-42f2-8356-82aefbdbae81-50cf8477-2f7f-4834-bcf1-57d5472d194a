@@ -32,6 +32,10 @@ export class VehicleService {
   public deleteVehicleService(id:number):Observable<void>{
     return this.http.delete<void>(`${this.apiUrl}/services/${id}`)
   }
+
 }
+
+}
+
 
 

@@ -11,9 +11,9 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UseraddappointmentComponent } from './components/useraddappointment/useraddappointment.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
-
-
-
+ 
+ 
+ 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'register',component:RegistrationComponent},
@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'add-feedback',component:UseraddfeedbackComponent},
   {path:'view-userappointment',component:UserviewappointmentComponent}
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

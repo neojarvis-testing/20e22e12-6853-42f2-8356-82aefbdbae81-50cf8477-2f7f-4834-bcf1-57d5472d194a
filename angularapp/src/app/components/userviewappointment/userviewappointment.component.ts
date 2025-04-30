@@ -28,7 +28,7 @@ export class UserviewappointmentComponent implements OnInit {
 
   getVehicleServicesForAppointmentId():void{
     for(let appointment of this.appointments){
-        this.vehicleService.getVehicleServiceById(appointment.serviceId).subscribe((data)=>{
+
           const vehicleDetails={
             ...data,
             appointment
