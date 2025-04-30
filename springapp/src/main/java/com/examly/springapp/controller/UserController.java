@@ -139,7 +139,7 @@ public class UserController {
     
     @Operation(summary = "Get list of user by username", description = "Get the list of user by username.")
     @GetMapping("/api/name/{name}")
-    public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String username){
-    	return ResponseEntity.status(200).body(userService.getUserByUsername(username));
+    public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String name){
+    	return ResponseEntity.status(200).body(userService.getUserByUsername(name));
     }
 }
