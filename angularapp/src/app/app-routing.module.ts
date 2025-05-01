@@ -7,6 +7,7 @@ import { AdminviewserviceComponent } from './components/adminviewservice/adminvi
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {path:'register',component:RegistrationComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'edit-service/:id',component:AdminaddserviceComponent},
   {path:'add-feedback',component:UseraddfeedbackComponent},
   {path:'view-feedback-user',component:UserviewfeedbackComponent},
-  {path:'view-feedback-admin',component:AdminviewfeedbackComponent}
+  {path:'view-feedback-admin',component:AdminviewfeedbackComponent},
+  {path:'',component:HomeComponent}
 ];
 
 @NgModule({
