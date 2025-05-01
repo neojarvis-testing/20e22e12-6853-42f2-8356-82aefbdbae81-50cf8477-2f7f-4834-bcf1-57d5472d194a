@@ -2,59 +2,60 @@
 
 <div class="container-fluid login-page vh-100 d-flex align-items-center justify-content-center">
   <div class="row w-75 bg-light rounded shadow-lg p-4">
-      <!-- Left Section with Background Image -->
-      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
-          <img src="assets/loginpage.png" alt="Login Background" class="img-fluid login-image rounded">
-          <div class="overlay-text text-white fw-bold"></div>
-      </div>
+    
+    <!-- Left Section -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
+      <img src="assets/loginpage.png" alt="Login Background" class="img-fluid login-image rounded">
+    </div>
 
-      <!-- Right Section with Login Form -->
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
-          <div class="w-100 p-4 login-container">
-              <div class="login-form">
-                  <h1 class="text-center mb-4">Login</h1>
+    <!-- Right Section -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="w-100 p-4 login-container">
+        <div class="login-form">
+          <h1 class="text-center mb-4">Login</h1>
 
-                  <!-- Bootstrap Alert -->
-                  <div *ngIf="showAlert" class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
-                    <i *ngIf="alertType==='success'" class="fas fa-check-circle text-success"></i>
-                    <i *ngIf="alertType==='danger'" class="fas fa-exclamation-circle text-danger"></i>
-                    {{ alertMessage }}
-                    <button type="button" class="btn-close" (click)="showAlert = false"></button>
-                  </div>
-
-                  <form #loginForm="ngForm" (ngSubmit)="loginUser()" class="needs-validation" novalidate>
-                      <div class="mb-3">
-                          <label for="username">User Name <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control rounded-pill shadow-sm" id="username" name="username"
-                              [(ngModel)]="login.username" required placeholder="Enter your username">
-                          <div class="text-danger small" *ngIf="loginForm.submitted && !login.username">
-                              *Username is required
-                          </div>
-                      </div>
-
-                      <div class="mb-3">
-                          <label for="password">Password <span class="text-danger">*</span></label>
-                          <input type="password" class="form-control rounded-pill shadow-sm" id="password" name="password"
-                              [(ngModel)]="login.password" required placeholder="Enter your password">
-                          <div class="text-danger small" *ngIf="loginForm.submitted && !login.password">
-                              *Password is required
-                          </div>
-                      </div>
-
-                      <div class="text-center">
-                          <button type="submit" class="w-100 login-btn rounded-pill shadow-lg"
-                              [disabled]="!login.username || !login.password">
-                              <i class="fas fa-sign-in-alt"></i> Login
-                          </button>
-                      </div>
-                  </form>
-                  <p class="text-center mt-3">Don't have an account? <a routerLink="/register">Register here</a></p>
-              </div>
+          <!-- Bootstrap Alert -->
+          <div *ngIf="showAlert" class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+            <i *ngIf="alertType==='success'" class="fas fa-check-circle text-success"></i>
+            <i *ngIf="alertType==='danger'" class="fas fa-exclamation-circle text-danger"></i>
+            {{ alertMessage }}
+            <button type="button" class="btn-close" (click)="showAlert = false"></button>
           </div>
+
+          <!-- Template-driven Form -->
+          <form #loginForm="ngForm" (ngSubmit)="loginUser()" novalidate>
+            <div class="mb-3">
+              <label for="username">User Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control rounded-pill shadow-sm" id="username" name="username"
+                [(ngModel)]="login.username" #username="ngModel" required minlength="3" placeholder="Enter your username">
+              <div class="text-danger small" *ngIf="username.invalid && username.touched">
+                * Username is required (Min: 3 characters)
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password">Password <span class="text-danger">*</span></label>
+              <input type="password" class="form-control rounded-pill shadow-sm" id="password" name="password"
+                [(ngModel)]="login.password" #password="ngModel" required minlength="6" placeholder="Enter your password">
+              <div class="text-danger small" *ngIf="password.invalid && password.touched">
+                * Password is required (Min: 6 characters)
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="w-100 login-btn rounded-pill shadow-lg" [disabled]="loginForm.invalid">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </button>
+            </div>
+          </form>
+
+          <p class="text-center mt-3">Don't have an account? <a routerLink="/register">Register here</a></p>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
-<!-- Include Bootstrap and FontAwesome for icons -->
+<!-- Include Bootstrap & FontAwesome -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

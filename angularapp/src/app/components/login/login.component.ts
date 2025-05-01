@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +20,14 @@ export class LoginComponent implements OnInit {
   loginUser(): void {
     this.loginService.loginUser(this.login).subscribe(
       (data) => {
-        this.showBootstrapAlert("Login successful!", "success");
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful!',
+          text: 'Redirecting...',
+          showConfirmButton: false,
+          timer: 2000
+        });
+  
         console.log(data);
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
@@ -28,10 +35,16 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (error) => {
-        this.showBootstrapAlert("Login unsuccessful! Please check your credentials.", "danger");
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Unsuccessful!',
+          text: 'Please check your credentials.',
+          confirmButtonText: 'Try Again'
+        });
       }
     );
   }
+  
 
   showBootstrapAlert(message: string, type: string) {
     this.alertMessage = message;

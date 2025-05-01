@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -37,15 +37,26 @@ export class RegistrationComponent implements OnInit {
         mobileNumber: this.signupForm.value.mobileNumber,
         userRole: this.signupForm.value.userRole
       };
-
+  
       this.service.registerUser(newUser).subscribe(
         (user) => {
-          this.showBootstrapAlert("✅ Registration successful! Redirecting...", "success");
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'Redirecting to login...',
+            showConfirmButton: false,
+            timer: 3000
+          });
           setTimeout(() => this.router.navigate(['/login']), 3000);
         },
         (error) => {
           this.isLoading = false;
-          this.showBootstrapAlert("❌ Registration failed. Please try again.", "danger");
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Please try again.',
+            confirmButtonText: 'OK'
+          });
         }
       );
     }

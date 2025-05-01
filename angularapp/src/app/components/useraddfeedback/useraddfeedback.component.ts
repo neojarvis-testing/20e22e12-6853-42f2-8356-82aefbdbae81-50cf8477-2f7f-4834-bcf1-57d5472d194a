@@ -46,7 +46,7 @@ export class UseraddfeedbackComponent implements OnInit {
         () => {
           this.successMessage = 'Feedback added successfully!';
           this.feedbackForm.reset(); // Reset form after successful submission
-          alert(this.successMessage);
+         
         },
         (error) => {
           console.error('Error submitting feedback:', error);
