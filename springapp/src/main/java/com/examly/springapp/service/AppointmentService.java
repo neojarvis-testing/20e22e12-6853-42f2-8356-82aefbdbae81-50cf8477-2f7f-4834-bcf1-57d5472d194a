@@ -15,8 +15,6 @@ public interface AppointmentService {
  
     public List<AppointmentDTO> getAllAppointments();
  
-    //public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, long appointmentId);
- 
     public Map<String, String> deleteAppointment(long appointmentId);
  
     public Optional<Appointment> getAppointmentById(long appointmentId);

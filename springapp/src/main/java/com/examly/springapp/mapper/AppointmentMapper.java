@@ -7,8 +7,13 @@ import com.examly.springapp.model.VehicleMaintenance;
 
 public class AppointmentMapper {
 
+    // Private constructor to prevent instantiation
+    private AppointmentMapper() {
+        throw new UnsupportedOperationException("Utility class cannot be instantiated");
+    }
+
     // Convert AppointmentDTO into Appointment entity
-    public static Appointment mapAppointmentDTOToAppointment(AppointmentDTO appointmentDTO,VehicleMaintenance vehicleMaintenance,User user) {
+    public static Appointment mapAppointmentDTOToAppointment(AppointmentDTO appointmentDTO, VehicleMaintenance vehicleMaintenance, User user) {
         return new Appointment(
             vehicleMaintenance,
             appointmentDTO.getAppointmentDate(),
@@ -20,13 +25,13 @@ public class AppointmentMapper {
 
     // Convert Appointment entity into AppointmentDTO
     public static AppointmentDTO mapToAppointmentDTO(Appointment appointment) {
-       return new AppointmentDTO(
+        return new AppointmentDTO(
             appointment.getId(),
             appointment.getService().getId(),
             appointment.getAppointmentDate(),
             appointment.getLocation(),
             appointment.getStatus(),
             appointment.getUser().getId()
-       );
+        );
     }
 }

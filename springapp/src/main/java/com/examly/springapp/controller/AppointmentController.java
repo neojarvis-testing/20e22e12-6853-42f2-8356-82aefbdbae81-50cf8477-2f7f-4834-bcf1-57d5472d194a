@@ -1,10 +1,7 @@
 package com.examly.springapp.controller;
- 
-import java.security.Provider.Service;
+
 import java.time.LocalDate;
 import java.util.*;
-import java.util.Optional;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,13 +47,6 @@ public class AppointmentController {
      * @return ResponseEntity containing the newly created appointment with HTTP status 201 (Created)
      */
  
-    // @PostMapping("/api/appointment")
-    // public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
-    //     return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
-    // }
- 
- 
- 
     @Operation(summary = "Create a new appointment", description = "Allows a user to create a new appointment for vehicle maintenance.")
     @PostMapping("/api/appointments")
     public ResponseEntity<AppointmentDTO> addAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO) {
@@ -68,22 +58,7 @@ public class AppointmentController {
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
     }
- 
-    // @PostMapping("/api/appointment")
-    // @Transactional
-    // public ResponseEntity<Appointment> addAppointments(@RequestBody Appointment appointmentDTO) {
-    //     User user = new User();
-    //     LocalDate localDate = LocalDate.parse("2025-03-10");
-    //     user.setId(2);
-    //     VehicleMaintenance service = new VehicleMaintenance();
-    //     service.setId(1L);
-    //    //public Appointment(Long id, VehicleMaintenance service, LocalDate appointmentDate, String location,
-    // //    String status, User user)
-    //     Appointment obj = new Appointment(1L,service,localDate,"New York","Pending",user);
-    //     return ResponseEntity.status(201).body(obj);
-    // }
-   
- 
+
    
     @Operation(summary = "Get appointments by user ID", description = "Retrieves all appointments linked to a specific user by their ID.")
  

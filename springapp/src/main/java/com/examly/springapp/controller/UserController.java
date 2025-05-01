@@ -28,7 +28,6 @@ import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import java.util.*;
 
 
@@ -48,11 +47,6 @@ public class UserController {
     @Autowired
     private JwtUtils jwtUtils;
 
-   
-    // @PostMapping("/api/register")
-    // public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
-    //     return ResponseEntity.status(201).body(userService.registerUser(userDTO));
-    // }
  
 
 
@@ -70,22 +64,6 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user){
         return ResponseEntity.status(201).body(userService.registerUser(user));
     }
-
-    // @PostMapping("/api/login")
-    // public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
-    //     Authentication authentication = authenticationManager.authenticate(
-    //         new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
-    //     );
-    //     SecurityContextHolder.getContext().setAuthentication(authentication);
-    //     String token = jwtUtils.generateToken(authentication);
-    //     User existingUser = userService.loginUser(user);
-    //     System.out.println("User Id "+existingUser.getUserId());
-    //     if (existingUser == null) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-    //     }
-    //     LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
-    //     return ResponseEntity.status(HttpStatus.OK).body(response);
-    // }
  
 
     @Operation(
@@ -101,7 +79,6 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
         User existingUser = userService.loginUser(user);
-        System.out.println("User Id "+existingUser.getId());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
