@@ -1,3 +1,4 @@
+ 
 /* ---------------------- */
 /* General Styling */
 /* ---------------------- */
@@ -8,7 +9,7 @@ body {
   padding: 20px;
   transition: background 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
 /* Feedback Container */
 /* ---------------------- */
@@ -21,35 +22,46 @@ body {
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
-/* Heading & Description */
+/* Enhanced Heading & Description */
 /* ---------------------- */
-.feedback-container h1 {
+.feedback-heading {
   font-size: 28px;
   font-weight: bold;
-  color: #007bff;
+  color: #8800ff;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  position: relative;
+  animation: fadeIn 0.6s ease-in-out;
 }
-
-.feedback-container h1::after {
+ 
+/* Gradient Underline Effect */
+.feedback-heading::after {
   content: "";
   display: block;
-  width: 100px;
+  width: 120px;
   height: 4px;
-  background-color: #007bff;
-  margin: 10px auto 0;
+  background: linear-gradient(90deg, #ff007f, #ff758c);
+  margin: 12px auto 0;
   border-radius: 2px;
 }
-
+ 
+/* Glow Hover Effect */
+.feedback-heading:hover {
+  text-shadow: 3px 3px 6px rgba(255, 0, 127, 0.5);
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+ 
 .feedback-container p {
   font-size: 18px;
   color: #444;
   margin-bottom: 15px;
 }
-
+ 
 /* ---------------------- */
 /* Form Styling */
 /* ---------------------- */
@@ -58,7 +70,7 @@ body {
   flex-direction: column;
   gap: 16px;
 }
-
+ 
 label {
   font-weight: bold;
   font-size: 16px;
@@ -67,7 +79,8 @@ label {
   display: block;
   margin-bottom: 5px;
 }
-
+ 
+/* Input & Textarea Styling */
 textarea, input {
   width: 100%;
   padding: 12px;
@@ -76,20 +89,53 @@ textarea, input {
   font-size: 16px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
+ 
+/* Focus Effect */
 textarea:focus, input:focus {
   border-color: #ff6b81;
   outline: none;
   box-shadow: 0px 0px 8px rgba(255, 107, 129, 0.5);
 }
-
+ 
+/* ---------------------- */
+/* Star Rating System */
+/* ---------------------- */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 10px;
+}
+ 
+.star-rating input {
+  display: none;
+}
+ 
+.star-rating label {
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+ 
+/* Highlight stars on hover */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ff007f;
+}
+ 
+/* Highlight selected stars */
+.star-rating input:checked ~ label {
+  color: #ff007f;
+}
+ 
 /* ---------------------- */
 /* Centered Submit Button */
 /* ---------------------- */
 button {
   display: block;
   margin: 20px auto;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  background: linear-gradient(135deg, #cfff75, #82ff7e);
   color: white;
   padding: 14px;
   font-size: 18px;
@@ -101,21 +147,24 @@ button {
   width: 50%;
   text-align: center;
 }
-
+ 
+/* Button Hover Effect */
 button:hover {
-  background: linear-gradient(135deg, #ff6b81, #ff8eb3);
+  background: linear-gradient(135deg, #ff6bf5, #600624);
   transform: scale(1.08);
 }
-
+ 
+/* Button Press Effect */
 button:active {
   transform: scale(0.95);
 }
-
+ 
+/* Disabled Button */
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
+ 
 /* ---------------------- */
 /* Success Message Styling */
 /* ---------------------- */
@@ -125,7 +174,7 @@ button:disabled {
   font-size: 18px;
   margin-bottom: 20px;
 }
-
+ 
 /* ---------------------- */
 /* Smaller Modal Styling */
 /* ---------------------- */
@@ -141,7 +190,7 @@ button:disabled {
   backdrop-filter: blur(7px);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
+ 
 .modal-content {
   background: rgba(255, 255, 255, 0.95);
   padding: 18px;
@@ -151,7 +200,7 @@ button:disabled {
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
 /* Modal Close Button */
 /* ---------------------- */
@@ -164,12 +213,12 @@ button:disabled {
   border-radius: 6px;
   margin-top: 10px;
 }
-
+ 
 .modal-content button:hover {
   background: linear-gradient(135deg, #b22222, #ff8e98);
   transform: scale(1.05);
 }
-
+ 
 /* ---------------------- */
 /* Dark Mode Styling */
 /* ---------------------- */
@@ -177,21 +226,21 @@ body.dark-mode {
   background-color: #222;
   color: white;
 }
-
+ 
 .feedback-container.dark-mode {
   background: #333;
   box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.1);
 }
-
+ 
 textarea.dark-mode, input.dark-mode {
   background: #444;
   color: white;
 }
-
+ 
 button.dark-mode {
   background: linear-gradient(135deg, #007bff, #00aaff);
 }
-
+ 
 /* ---------------------- */
 /* Responsive Design */
 /* ---------------------- */
@@ -200,23 +249,23 @@ button.dark-mode {
       width: 90%;
       padding: 20px;
   }
-
+ 
   textarea, input {
       font-size: 14px;
   }
-
+ 
   button {
       font-size: 16px;
       padding: 12px;
       width: 80%;
   }
-
+ 
   .modal-content {
       width: 90%;
       max-width: 250px;
   }
 }
-
+ 
 /* ---------------------- */
 /* Animations */
 /* ---------------------- */

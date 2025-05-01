@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/),Validators.minLength(3)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      userRole: ['', Validators.required]
+      userRole: ['USER', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
   showSuccessPopup = false;

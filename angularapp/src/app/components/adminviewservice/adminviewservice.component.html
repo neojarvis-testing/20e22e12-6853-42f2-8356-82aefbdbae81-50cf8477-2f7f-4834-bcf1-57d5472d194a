@@ -1,24 +1,34 @@
-<h1>Vehicle Service Details</h1>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>SL. No</th>
-                <th>Service Name</th>
-                <th>Service Price</th>
-                <th>Type of Vehicle</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let s of services;let i=index">
-                <td>{{i+1}}</td>
-                <td>{{s.serviceName}}</td>
-                <td>{{s.servicePrice}}</td>
-                <td>{{s.typeOfVehicle}}</td>
-                <button (click)="edit(s.id)">Edit</button>
-                <button (click)="delete(s.id)">Delete</button>
-            </tr>
-        </tbody>
-    </table>
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <h1 class="text-center text-primary fw-bold mb-4">Vehicle Service Details</h1>
+ 
+    <div class="table-responsive shadow-lg p-3 bg-light rounded">
+        <table class="table table-hover table-striped table-bordered align-middle">
+            <thead class="bg-primary text-white text-center">
+                <tr>
+                    <th>SL. No</th>
+                    <th>Service Name</th>
+                    <th>Service Price</th>
+                    <th>Type of Vehicle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of services; let i = index" class="text-center">
+                    <td>{{ i + 1 }}</td>
+                    <td class="fw-bold">{{ s.serviceName }}</td>
+                    <td class="text-success fw-semibold">{{ s.servicePrice | currency:'USD' }}</td>
+                    <td>{{ s.typeOfVehicle }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm me-2" (click)="edit(s.id)">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="delete(s.id)">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

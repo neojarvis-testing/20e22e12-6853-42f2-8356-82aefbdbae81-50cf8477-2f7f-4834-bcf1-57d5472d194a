@@ -11,25 +11,43 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UseraddappointmentComponent } from './components/useraddappointment/useraddappointment.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
 
+import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails/adminviewuserdetails.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ErrorComponent } from './components/error/error.component';
+import { AdminGuard } from './admin.guard';
+import { UserGuard } from './user.guard';
+import { BothGuard } from './both.guard';
+ 
+ 
+ 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'register',component:RegistrationComponent},
-  {path:'login',component:LoginComponent},
-  {path:'add-service',component:AdminaddserviceComponent},
-  {path:'view-services',component:AdminviewserviceComponent},
-  {path:'edit-service/:id',component:AdminaddserviceComponent},
-  {path:'view-all-feedback',component:AdminviewfeedbackComponent},
-  {path:'view-appointments',component:AdminviewappointmentComponent},
-  {path:'add-appointment',component:UseraddappointmentComponent},
-  {path:'view-feedback',component:UserviewfeedbackComponent},
-  {path:'add-feedback',component:UseraddfeedbackComponent},
-  {path:'view-userappointment',component:UserviewappointmentComponent},
-  {path:'user-profile',component:ProfileComponent},
-  {path:'admin-view-userDetails',component:AdminviewuserdetailsComponent}
+  { path: '', component: HomeComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+
+  // Admin Routes with AdminGuard
+  { path: 'add-service', component: AdminaddserviceComponent, canActivate: [AdminGuard] },
+  { path: 'view-services', component: AdminviewserviceComponent, canActivate: [BothGuard] },
+  { path: 'edit-service/:id', component: AdminaddserviceComponent, canActivate: [AdminGuard] },
+  { path: 'view-all-feedback', component: AdminviewfeedbackComponent, canActivate: [AdminGuard] },
+  { path: 'view-appointments', component: AdminviewappointmentComponent, canActivate: [AdminGuard] },
+  { path: 'admin-view-userDetails', component: AdminviewuserdetailsComponent, canActivate: [AdminGuard] },
+
+  // User Routes with UserGuard
+  { path: 'add-appointment', component: UseraddappointmentComponent, canActivate: [UserGuard] },
+  { path: 'view-feedback', component: UserviewfeedbackComponent, canActivate: [UserGuard] },
+  { path: 'add-feedback', component: UseraddfeedbackComponent, canActivate: [UserGuard] },
+  { path: 'view-userappointment', component: UserviewappointmentComponent, canActivate: [UserGuard] },
+  { path: 'user-Profile', component: ProfileComponent, canActivate: [UserGuard] },
+
+  // Catch-All Route
+  { path: '**', component: ErrorComponent }
+
+
+
 ];
+
  
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
