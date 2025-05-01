@@ -1,12 +1,12 @@
 
-
+<app-navbar></app-navbar>
 <div class="feedback-container">
   <h1 class="feedback-heading">✨ Share Your Feedback ✨</h1>
   <p>Share your thoughts with us and help improve our services!</p>
-
+ 
   <!-- Display success message -->
   <p *ngIf="successMessage" class="success-message" aria-live="polite">{{ successMessage }}</p>
-
+ 
   <!-- Feedback Form -->
   <div class="form-wrapper">
     <form [formGroup]="feedbackForm" (ngSubmit)="addFeedback()">
@@ -14,7 +14,7 @@
         <label for="message">Message:</label>
         <textarea id="message" formControlName="message" required minlength="5" placeholder="Write your feedback here..."></textarea>
       </div>
-  
+ 
       <div class="form-group">
         <label>Rating:</label>
         <div class="star-rating">
@@ -25,13 +25,13 @@
           <input type="radio" id="star1" formControlName="rating" value="1"><label for="star1" title="1 star">★</label>
         </div>
       </div>
-  
+ 
       <button type="submit" [disabled]="feedbackForm.invalid">
         {{ feedbackForm.invalid ? 'Please complete the form' : 'Submit Feedback' }}
       </button>
     </form>
   </div>
-
+ 
   <!-- Modal for success confirmation -->
   <div *ngIf="successMessage" class="modal">
     <div class="modal-content">

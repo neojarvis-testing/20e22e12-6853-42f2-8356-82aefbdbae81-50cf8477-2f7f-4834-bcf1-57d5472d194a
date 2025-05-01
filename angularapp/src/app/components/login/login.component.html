@@ -1,14 +1,48 @@
-<h1>Login form</h1>
-<div>
-    <form (ngSubmit)="loginUser()">
-        <div>
-            <input type="text" name="username" id="username" [(ngModel)]="login.username">
-        </div>
+<app-navbar></app-navbar>
+<div class="container-fluid login-page vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-75 bg-light rounded shadow-lg p-4">
+      <!-- Left Section with Background Image -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
+          <img src="assets/loginpage.png" alt="Login Background" class="img-fluid login-image rounded">
+          <div class="overlay-text">
+              <!-- Vehicle Service Portal -->
+          </div>
+      </div>
 
-        <div>
-            <input type="password" name="password" id="password" [(ngModel)]="login.password">
-        </div>
+      <!-- Right Section with Login Form -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <div class="w-100 p-4 login-container">
+              <div class="login-form">
+                  <h1 class="text-center mb-4">Login</h1>
+                  <form #loginForm="ngForm" (ngSubmit)="loginUser()" class="needs-validation" novalidate>
+                      <div class="mb-3">
+                          <label for="username">User Name <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control rounded-pill" id="username" name="username"
+                              [(ngModel)]="login.username" required placeholder="Enter your username">
+                          <div class="text-danger small" *ngIf="loginForm.submitted && !login.username">
+                              *Username is required
+                          </div>
+                      </div>
 
-        <button type="submit">Login</button>
-    </form>
+                      <div class="mb-3">
+                          <label for="password">Password <span class="text-danger">*</span></label>
+                          <input type="password" class="form-control rounded-pill" id="password" name="password"
+                              [(ngModel)]="login.password" required placeholder="Enter your password">
+                          <div class="text-danger small" *ngIf="loginForm.submitted && !login.password">
+                              *Password is required
+                          </div>
+                      </div>
+
+                      <div class="text-center">
+                          <button type="submit" class="w-100 login-btn rounded-pill"
+                              [disabled]="!login.username || !login.password">
+                              Login
+                          </button>
+                      </div>
+                  </form>
+                  <p class="text-center mt-3">Don't have an account? <a routerLink="/signup">Register here</a></p>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
