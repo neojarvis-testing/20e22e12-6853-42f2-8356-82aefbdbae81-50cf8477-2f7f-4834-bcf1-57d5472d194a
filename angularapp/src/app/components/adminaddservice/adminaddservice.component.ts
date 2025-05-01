@@ -5,8 +5,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-adminaddservice',
-  templateUrl: './adminaddservice.component.html',
-  styleUrls: ['./adminaddservice.component.css']
+  templateUrl: './adminaddservice.component.html'
 })
 export class AdminaddserviceComponent implements OnInit {
   
@@ -19,7 +18,7 @@ export class AdminaddserviceComponent implements OnInit {
     serviceId: 0
   }
 
-  constructor(private vehicleService:VehicleService,private activatedRoute:ActivatedRoute) { }
+  constructor(private readonly vehicleService:VehicleService,private readonly activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.paramMap.get('id');

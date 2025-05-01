@@ -28,7 +28,6 @@ import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import java.util.*;
 
 
@@ -48,11 +47,6 @@ public class UserController {
     @Autowired
     private JwtUtils jwtUtils;
 
-   
-    // @PostMapping("/api/register")
-    // public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
-    //     return ResponseEntity.status(201).body(userService.registerUser(userDTO));
-    // }
  
 
 
@@ -70,22 +64,6 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user){
         return ResponseEntity.status(201).body(userService.registerUser(user));
     }
-
-    // @PostMapping("/api/login")
-    // public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
-    //     Authentication authentication = authenticationManager.authenticate(
-    //         new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
-    //     );
-    //     SecurityContextHolder.getContext().setAuthentication(authentication);
-    //     String token = jwtUtils.generateToken(authentication);
-    //     User existingUser = userService.loginUser(user);
-    //     System.out.println("User Id "+existingUser.getUserId());
-    //     if (existingUser == null) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-    //     }
-    //     LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
-    //     return ResponseEntity.status(HttpStatus.OK).body(response);
-    // }
  
 
     @Operation(
@@ -101,7 +79,6 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
         User existingUser = userService.loginUser(user);
-        System.out.println("User Id "+existingUser.getId());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
@@ -119,12 +96,11 @@ public class UserController {
  
     }
     
-    @Operation(summary = "Update User Profile", description = "Update user profile including username, mobile number, and profile image.")
+    @Operation(summary = "Update User by User", description = "Update user profile by the user.")
     @PutMapping("/api/user/view/profile/{userId}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) {
-        return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
+    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId,@RequestBody UserDTO userDTO){
+    	return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
     }
-
     
     @Operation(summary = "Get User by userId", description = "Fetch any particular user details by user id")
     @GetMapping("/api/user/{userId}")

@@ -7,16 +7,14 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent{
 
   login: any = {
     username: '',
     password: ''
   };
 
-  constructor(private loginService: AuthService,private router:Router) { }
-
-  ngOnInit(): void { }
+  constructor(private readonly loginService: AuthService,private readonly router:Router) { }
 
   loginUser(): void {
     this.loginService.loginUser(this.login).subscribe((data) => {
@@ -28,6 +26,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/'])
     }, (error) => {
       alert("Login unsuccessful");
+      console.log(error);
     });
   }
 }
