@@ -14,21 +14,21 @@ import jakarta.servlet.http.HttpServletRequest;
 @Component
 public class JwtUtils {  
     @Value("${SECRET_KEY}")
-    private String SECRET_KEY;
+    private String SECRETKEY;
     public String generateToken(Authentication authentication) {
         UserDetails userdetails= (UserDetails)authentication.getPrincipal();
         return Jwts.builder()
         .setSubject(userdetails.getUsername())
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis()+30*60*1000))
-        .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+        .signWith(SignatureAlgorithm.HS256, SECRETKEY)
         .compact();
     }
     public String extractUsername(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(SECRETKEY).parseClaimsJws(token).getBody().getSubject();
     }
     public Date extractExpiration(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration();
+        return Jwts.parser().setSigningKey(SECRETKEY).parseClaimsJws(token).getBody().getExpiration();
     }
     public boolean isTokenExpired(String token){
         Date expireDate=extractExpiration(token);
