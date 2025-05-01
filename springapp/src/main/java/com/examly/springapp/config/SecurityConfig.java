@@ -41,7 +41,6 @@ public class SecurityConfig {
     }
  
     @Bean
- 
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
@@ -63,7 +62,7 @@ public class SecurityConfig {
         .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);    
- 
+
         return http.build();
     }
 }

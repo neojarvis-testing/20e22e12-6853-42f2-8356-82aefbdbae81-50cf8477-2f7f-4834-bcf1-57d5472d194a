@@ -13,7 +13,7 @@ public class UserMapper {
             userDTO.getUserRole()
         );
     }
- 
+
     public static UserDTO mapUserToUserDTO(User user){
         return new UserDTO(
             user.getId(),
