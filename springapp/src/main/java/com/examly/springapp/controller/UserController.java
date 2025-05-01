@@ -1,5 +1,5 @@
 package com.examly.springapp.controller;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,33 +15,46 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 import com.examly.springapp.config.JwtUtils;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
+ 
+
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.*;
 
+
 @RestController
 @Tag(name = "User Controller", description = "APIs for managing User services.")
 public class UserController {
-
+ 
     private UserServiceImpl userService;
-
+ 
     @Autowired
     public UserController(UserServiceImpl uServiceImpl){
         this.userService=uServiceImpl;
     }
-
+ 
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtils jwtUtils;
+
+   
+    // @PostMapping("/api/register")
+    // public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO){
+    //     return ResponseEntity.status(201).body(userService.registerUser(userDTO));
+    // }
+ 
+
 
     @Operation(
             summary = "Register a new user",
@@ -52,18 +65,37 @@ public class UserController {
         return ResponseEntity.status(201).body(userService.registerUsers(userDTO));
     }
 
+
     @PostMapping("/api/register")
     public ResponseEntity<User> registerUser(@RequestBody User user){
         return ResponseEntity.status(201).body(userService.registerUser(user));
     }
 
+    // @PostMapping("/api/login")
+    // public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
+    //     Authentication authentication = authenticationManager.authenticate(
+    //         new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+    //     );
+    //     SecurityContextHolder.getContext().setAuthentication(authentication);
+    //     String token = jwtUtils.generateToken(authentication);
+    //     User existingUser = userService.loginUser(user);
+    //     System.out.println("User Id "+existingUser.getUserId());
+    //     if (existingUser == null) {
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    //     }
+    //     LoginDTO response = new LoginDTO(token, existingUser.getUserId(), existingUser.getUsername(), existingUser.getUserRole());
+    //     return ResponseEntity.status(HttpStatus.OK).body(response);
+    // }
+ 
+
     @Operation(
         summary = "Login user",
         description = "Authenticates a user using their username and password, and generates a JWT token."
     )
+
     @PostMapping("/api/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate( 
+        Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -76,6 +108,7 @@ public class UserController {
         LoginDTO response = new LoginDTO(token, existingUser.getId(), existingUser.getUsername(), existingUser.getUserRole());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 
     @Operation(summary = "Users Sort By username", description = "Shows all the users using pagination and sorting.")
     @GetMapping("/users")
@@ -106,7 +139,7 @@ public class UserController {
     
     @Operation(summary = "Get list of user by username", description = "Get the list of user by username.")
     @GetMapping("/api/name/{name}")
-    public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String username){
-    	return ResponseEntity.status(200).body(userService.getUserByUsername(username));
+    public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String name){
+    	return ResponseEntity.status(200).body(userService.getUserByUsername(name));
     }
 }

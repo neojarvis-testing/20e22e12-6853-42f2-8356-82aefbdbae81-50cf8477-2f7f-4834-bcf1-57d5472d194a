@@ -1,8 +1,8 @@
 package com.examly.springapp.mapper;
-
+ 
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
-
+ 
 public class UserMapper {
     public static User mapUserDtoToUser(UserDTO userDTO){
         return new User(
@@ -24,4 +24,9 @@ public class UserMapper {
             user.getUserRole()
         );
     }
+
 }
+
+ 
+
+

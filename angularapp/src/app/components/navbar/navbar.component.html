@@ -1,1 +1,103 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">Vehicle Maintenance Service</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+ 
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Unauthenticated Links -->
+                <ng-container *ngIf="!isLoggedIn">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/login">Login</a>
+                    </li>
+                </ng-container>
+ 
+                <!-- Authenticated Links -->
+                <ng-container *ngIf="isLoggedIn">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/">Home</a>
+                    </li>
+                   
+                    <!-- Admin Links -->
+                    <ng-container *ngIf="userRole === 'ADMIN'">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                Services
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/add-service">Add Service</a></li>
+                                <li><a class="dropdown-item" routerLink="/view-services">View Service</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/view-all-feedback">Feedbacks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/view-appointments">Appointment</a>
+                        </li>
+                    </ng-container>
+ 
+                    <!-- User Links -->
+                    <ng-container *ngIf="userRole === 'USER'">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                               Appointments
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/add-appointment">Book Appointment</a></li>
+                                <li><a class="dropdown-item" routerLink="/view-userappointment">View Appointment</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                               Feedbacks
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/add-feedback">Add Feedback</a></li>
+                                <li><a class="dropdown-item" routerLink="/view-feedback">View Feedback</a></li>
+                            </ul>
+                        </li>
+                    </ng-container>
+
+                    <!-- Profile Icon (Only when logged in) -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" routerLink="/user-Profile">
+                            <img src="assets/profilelogo.webp" alt="User Profile" class="rounded-circle border border-light" width="30" height="30">
+                        </a>
+                    </li>
+                    
+
+                    <!-- Logout Button -->
+                    <li class="nav-item">
+                        <button class="btn btn-danger ms-3" (click)="showLogoutPopup = true">Logout</button>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</nav>
+ 
+<!-- Logout Confirmation Popup -->
+<div class="modal fade show" *ngIf="showLogoutPopup" style="display: block;" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Logout</h5>
+                <button type="button" class="btn-close" (click)="showLogoutPopup = false"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" (click)="showLogoutPopup = false">Cancel</button>
+                <button class="btn btn-danger" (click)="logout()">Yes, Logout</button>
+            </div>
+        </div>
+    </div>
+</div>

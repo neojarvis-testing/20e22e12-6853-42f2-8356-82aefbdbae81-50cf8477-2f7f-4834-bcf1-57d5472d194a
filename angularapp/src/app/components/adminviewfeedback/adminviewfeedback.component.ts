@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
 import { User } from 'src/app/models/user.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
-
+ 
 @Component({
   selector: 'app-adminviewfeedback',
   templateUrl: './adminviewfeedback.component.html',
@@ -10,45 +10,70 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 })
 export class AdminviewfeedbackComponent implements OnInit {
 
-  feedbacks:Feedback[]=[];
-  userDetail:User;
-  userDetails:User[]=[]
-  user:User
-  userId:any
-  constructor(private feedbackService:FeedbackService) { }
+
+feedbacks: Feedback[] = []; // List of feedbacks
+  userDetails: any[] = []; // Store feedbacks with user details
+  userDetail: User | null = null; // Selected user profile
+  userId: number = Number(localStorage.getItem('userId')) || 0; // Ensure userId is a number
+
+  constructor(private feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
-    this.getAllFeedbacks();
-    this.userId=localStorage.getItem('userId');
-    this.feedbackService.getUserDetailById(this.userId).subscribe((data)=>{
-       this.user=data;
+    this.fetchFeedbacks();
+    this.fetchLoggedInUser();
+  }
+
+  /**
+   * Fetch all feedbacks and associate them with usernames.
+   */
+  fetchFeedbacks(): void {
+    this.feedbackService.getAllFeedbacks().subscribe((data) => {
+      console.log('Feedback Data:', data); // Debugging
+      this.feedbacks = data;
+      this.mapUsernames();
     });
   }
 
-  getAllFeedbacks():void{
-    this.feedbackService.getAllFeedbacks().subscribe((data)=>{
-      this.feedbacks=data;
-      this.getUserNameById();
-    })
+  /**
+   * Get details of the logged-in user.
+   */
+  fetchLoggedInUser(): void {
+    this.feedbackService.getUserDetailById(this.userId).subscribe((data) => {
+      console.log('Logged-in user:', data);
+    });
   }
 
-  showProfile(id:number){
-    this.feedbackService.getUserDetailById(id).subscribe((data)=>{
-      this.userDetail=data;
-      console.log(data);
-    })
-  }
+  /**
+   * Maps usernames to feedbacks efficiently.
+   */
+  mapUsernames(): void {
+    this.userDetails = this.feedbacks.map(feedback => ({
+      ...feedback,
+      username: '',
+    }));
 
-  getUserNameById() {
-    for (let feedback of this.feedbacks) {
-      this.feedbackService.getUserDetailById(feedback.userId).subscribe((data) => {
-        const enrichedFeedback = {
-          ...feedback,
-          username: data.username,
-        };
-        this.userDetails.push(enrichedFeedback);
+    this.userDetails.forEach(user => {
+      this.feedbackService.getUserDetailById(user.userId).subscribe((data) => {
+        user.username = data.username;
+        console.log('Updated userDetails:', this.userDetails); // Debugging
       });
-    }
-    console.log(this.userDetails);
+    });
+  }
+
+  /**
+   * Show user profile in a modal.
+   * @param id - The user's ID
+   */
+  showProfile(id: number): void {
+    this.feedbackService.getUserDetailById(id).subscribe((data) => {
+      this.userDetail = data; // Show profile in modal
+    });
+  }
+
+  /**
+   * Close profile modal.
+   */
+  closeProfile(): void {
+    this.userDetail = null; // Hide modal
   }
 }
