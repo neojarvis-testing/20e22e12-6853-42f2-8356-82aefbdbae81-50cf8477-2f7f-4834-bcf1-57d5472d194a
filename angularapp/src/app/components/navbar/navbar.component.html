@@ -27,12 +27,11 @@
                     <ng-container *ngIf="userRole === 'ADMIN'">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                services
+                                Services
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" routerLink="/add-service">Add Service</a></li>
-                                <li><a class="dropdown-item" routerLink="/view-services">View </a></li>
- 
+                                <li><a class="dropdown-item" routerLink="/view-services">View Service</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -41,6 +40,7 @@
                         <li class="nav-item">
                             <a class="nav-link" routerLink="/view-appointments">Appointment</a>
                         </li>
+                      
                     </ng-container>
  
                     <!-- User Links -->
@@ -51,18 +51,29 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" routerLink="/add-appointment">Book Appointment</a></li>
-                                <li><a class="dropdown-item" routerLink="/view-userappointment">View Appointment </a></li>
- 
+                                <li><a class="dropdown-item" routerLink="/view-userappointment">View Appointment</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
- 
-                            <a class="nav-link" routerLink="/view-feedback">feedback</a>
-                           
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                               Feedbacks
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/add-feedback">Add Feedback</a></li>
+                                <li><a class="dropdown-item" routerLink="/view-feedback">View Feedback</a></li>
+                            </ul>
                         </li>
-                       
                     </ng-container>
- 
+
+                    <!-- Profile Icon (Only when logged in) -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" routerLink="/user-Profile">
+                            <img src="assets/profilelogo.webp" alt="User Profile" class="rounded-circle border border-light" width="30" height="30">
+                        </a>
+                    </li>
+                    
+
                     <!-- Logout Button -->
                     <li class="nav-item">
                         <button class="btn btn-danger ms-3" (click)="showLogoutPopup = true">Logout</button>

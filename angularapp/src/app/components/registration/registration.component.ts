@@ -1,65 +1,91 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/models/login.model';
-import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { User } from 'src/app/models/user.model';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
   signupForm: FormGroup;
-  signupError: string;
+  alertMessage: string = '';
+  alertType: string = ''; // 'success' or 'danger'
+  showAlert: boolean = false;
   isLoading = false;
-  passwordMismatch = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private service: AuthService){
+  constructor(private fb: FormBuilder, private router: Router, private service: AuthService) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6),this.passwordValidator]],
+      password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator]],
       confirmPassword: ['', Validators.required],
-      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/),Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/), Validators.minLength(3)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      userRole: ['', Validators.required]
+      userRole: ['USER', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
-  showSuccessPopup = false;
 
-//   signupUser() {
-//   if (this.signupForm.valid) {
-//     // Your registration logic here (e.g., API call)
-//     // On success:
-//     this.showSuccessPopup = true;
-//   }
-// }
+  signupUser() {
+    if (this.signupForm.valid) {
+      this.isLoading = true;
+      const newUser: User = {
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        username: this.signupForm.value.username,
+        mobileNumber: this.signupForm.value.mobileNumber,
+        userRole: this.signupForm.value.userRole
+      };
+  
+      this.service.registerUser(newUser).subscribe(
+        (user) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'Redirecting to login...',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          setTimeout(() => this.router.navigate(['/login']), 3000);
+        },
+        (error) => {
+          this.isLoading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Please try again.',
+            confirmButtonText: 'OK'
+          });
+        }
+      );
+    }
+  }
 
-closePopup() {
-  this.showSuccessPopup = false;
-  // Optionally redirect to login:
-  // this.router.navigate(['/login']);
-}
+  showBootstrapAlert(message: string, type: string) {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.showAlert = true;
+
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 4000);
+  }
+
   passwordValidator(control: AbstractControl) {
     const password = control.value;
     const regex = /^[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
     
-    return regex.test(password) ? null : {invalidPassword: true };
+    return regex.test(password) ? null : { invalidPassword: true };
   }
 
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
 
-    if (!password || !confirmPassword) {
-      return null;
-    }
+    if (!password || !confirmPassword) return null;
 
-    if (confirmPassword.errors && !confirmPassword.errors.passwordMismatch) {
-      return null;
-    }
+    if (confirmPassword.errors && !confirmPassword.errors.passwordMismatch) return null;
 
     if (password.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
@@ -70,32 +96,5 @@ closePopup() {
     return null;
   }
 
-  signupUser() {
-    if (this.signupForm.valid) {
-      this.isLoading = true;
-      const loginObj: Login = { username: this.signupForm.value.username, password: this.signupForm.value.password };
-      const newUser: User = {
-        email: this.signupForm.value.email,
-        password: this.signupForm.value.password,
-        username: this.signupForm.value.username,
-        mobileNumber: this.signupForm.value.mobileNumber,
-        userRole: this.signupForm.value.userRole
-      };
-      console.log(newUser);
-      this.service.registerUser(newUser).subscribe(
-        (user) => {
-          this.router.navigate(['/login']);
-        },
-        (error) => {
-          this.isLoading = false;
-          this.signupError = 'Registration failed. Please try again.';
-          console.error(error);
-        }
-      );
-    }
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

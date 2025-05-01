@@ -1,116 +1,77 @@
-   <div class="container-fluid login-page vh-100">
-  <div class="row h-100">
-    <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
-      <div class="backImage login-image"></div>
-      <div class="overlay-text"
-        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2em; font-weight: bold; font-family: serif; color: white; background-color: rgba(0, 0, 0, 0.3); padding: 10px 20px; border-radius: 10px;">
-        Vehicle Service
-      </div>
-    </div>
-   
-    <div class="col-md-6 d-flex align-items-center justify-content-center">
-      <div class="w-75 p-4"
-        style="background-color: rgb(255, 255, 255); border-radius: 10px; box-shadow: 0 0 10px navy !important; margin-left: 40px;">
-        <div class="login-form">
-          <h1 class="text-center mb-4" style="font-family: serif; font-weight: bold;">Registration</h1>
-          <form [formGroup]="signupForm" (ngSubmit)="signupUser()" class="needs-validation" novalidate>
-            <div class="mb-3">
-              <input type="text" class="form-control" id="username" name="username" formControlName="username"
-                placeholder="Username" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-              <div style="color: red"
-                *ngIf="signupForm.controls.username.errors?.required && (signupForm.controls.username.dirty || signupForm.controls.username.touched)">
-                Username is required.
-              </div>
-              <div style="color: red"
-              *ngIf="signupForm.controls.username.errors?.minlength && (signupForm.controls.username.dirty || signupForm.controls.username.touched)">
-              Username must be a minimum of 3 letters.
-            </div>
-              <div style="color: red" *ngIf="signupForm.get('username')?.errors?.pattern">Username must contain
-                alphabets only.</div>
-            </div>
-            <div class="mb-3">
-              <input type="email" class="form-control" id="email" name="email" formControlName="email"
-                placeholder="Email" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-              <div style="color: red"
-                *ngIf="signupForm.controls.email.errors?.required && (signupForm.controls.email.dirty || signupForm.controls.email.touched)">
-                Email is required.
-              </div>
-              <div style="color: red"
-                *ngIf="signupForm.controls.email.errors?.email && (signupForm.controls.email.dirty || signupForm.controls.email.touched)">
-                Please enter a valid email.
-              </div>
-            </div>
-            <div class="mb-3">
-              <input type="tel" class="form-control" id="mobileNumber" name="mobileNumber"
-                formControlName="mobileNumber" placeholder="Mobile Number"
-                style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-              <div style="color: red"
-                *ngIf="signupForm.controls.mobileNumber.errors?.required && (signupForm.controls.mobileNumber.dirty || signupForm.controls.mobileNumber.touched)">
-                Mobile Number is required.
-              </div>
-              <div style="color: red"
-                *ngIf="signupForm.controls.mobileNumber.errors?.pattern && (signupForm.controls.mobileNumber.dirty || signupForm.controls.mobileNumber.touched)">
-                Mobile number must be 10 digits.
-              </div>
-            </div>
-            <div class="mb-3">
-              <input type="password" class="form-control" id="password" name="password" formControlName="password"
-                placeholder="Password" style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-            
-              <div style="color: red" *ngIf="signupForm.controls.password.errors">
-                <ng-container *ngIf="signupForm.controls.password.errors?.required">
-                  Password is required.
-                </ng-container>
-                <ng-container *ngIf="!signupForm.controls.password.errors?.required && signupForm.controls.password.errors?.invalidPassword">
-                  Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.
-                </ng-container>
-              </div>
-            </div>
-            <div class="mb-3">
-              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                formControlName="confirmPassword" placeholder="Confirm Password"
-                style="border: none; border-bottom: 1px solid purple; border-radius: 0;">
-              <div style="color: red"
-                *ngIf="signupForm.controls.confirmPassword.errors?.required && (signupForm.controls.confirmPassword.dirty || signupForm.controls.confirmPassword.touched)">
-                Confirm Password is required.
-              </div>
-              <div style="color: red"
-                *ngIf="signupForm.controls.confirmPassword.errors?.passwordMismatch && (signupForm.controls.confirmPassword.dirty || signupForm.controls.confirmPassword.touched)">
-                Passwords do not match.
-              </div>
-            </div>
-            <div class="mb-3">
-              <select class="form-select" id="userRole" formControlName="userRole"
-                style="border: none; border-bottom: 1px solid purple; border-radius: 0%;" required>
-                <option value="" disabled selected>Select Role</option>
-                <option value="USER">User</option> -->
-                <!-- <option value="ADMIN">Admin</option> -->
-               </select>
-              <div style="color: red"
-                *ngIf="signupForm.controls.userRole.errors?.required && (signupForm.controls.userRole.dirty || signupForm.controls.userRole.touched)">
-                Role is required.
-              </div>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="w-100"
-                  [disabled]="signupForm.invalid"
-                       [ngStyle]="{'background-color': signupForm.invalid ? 'transparent' : 'blue', 'color': signupForm.invalid ? 'gray' : 'white'}">
-                Register
-              </button>
-              <!-- <button type="submit" class="btn btn-primary w-100">Signup</button> -->
-             </div> 
-          </form>
-          <div *ngIf="showSuccessPopup" class="popup-overlay">
-            <div class="popup-box">
-              <h4 style="color: green;">Registration Successful</h4>
-              <p>Your account has been created successfully. You can now log in to your account.</p>
-              <button (click)="closePopup()" style="background-color: green; color: white; border: none; padding: 8px 16px; border-radius: 5px;">OK</button>
-            </div>
-          </div>
-          <p class="signup-link text-center">Already have an account? <a routerLink="/login">Login</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-navbar></app-navbar>
 
+<div class="container-fluid login-page d-flex align-items-center justify-content-center">
+    <div class="row w-75 bg-light rounded shadow-lg p-4">
+        
+        <!-- Left Section with Background Image -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center position-relative p-0">
+            <img src="assets/loginpage.png" alt="Registration Background" class="img-fluid login-image rounded">
+            <div class="overlay-text">Vehicle Service Portal</div>
+        </div>
+
+        <!-- Right Section with Registration Form -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <div class="w-100 p-4 registration-container">
+                <h1 class="text-center mb-4">Registration</h1>
+                <form [formGroup]="signupForm" (ngSubmit)="signupUser()" class="needs-validation" novalidate>
+
+                    <div class="mb-3">
+                        <label for="username">User Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control rounded-pill" id="username"
+                            formControlName="username" placeholder="Enter your username">
+                        <div *ngIf="signupForm.controls.username.invalid && signupForm.controls.username.touched" class="text-danger">
+                            Username is required (Min 3 characters, letters only).
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control rounded-pill" id="email"
+                            formControlName="email" placeholder="Enter your email">
+                        <div *ngIf="signupForm.controls.email.invalid && signupForm.controls.email.touched" class="text-danger">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mobileNumber">Mobile Number <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control rounded-pill" id="mobileNumber"
+                            formControlName="mobileNumber" placeholder="Enter your mobile number">
+                        <div *ngIf="signupForm.controls.mobileNumber.invalid && signupForm.controls.mobileNumber.touched" class="text-danger">
+                            Mobile number must be 10 digits.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control rounded-pill" id="password"
+                            formControlName="password" placeholder="Enter your password">
+                        <div *ngIf="signupForm.controls.password.invalid && signupForm.controls.password.touched" class="text-danger">
+                            Password must be at least 8 characters, including symbols.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword">Confirm Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control rounded-pill" id="confirmPassword"
+                            formControlName="confirmPassword" placeholder="Confirm your password">
+                        <div *ngIf="signupForm.controls.confirmPassword.invalid && signupForm.controls.confirmPassword.touched" class="text-danger">
+                            Confirmation password is required.
+                        </div>
+                        <div *ngIf="signupForm.controls.confirmPassword.value !== signupForm.controls.password.value && signupForm.controls.confirmPassword.touched" class="text-danger">
+                            Passwords do not match.
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="w-100 registration-btn rounded-pill" [disabled]="signupForm.invalid">
+                            Register
+                        </button>
+                    </div>
+
+                </form>
+                <p class="text-center mt-3">Already have an account? <a routerLink="/login">Login</a></p>
+            </div>
+        </div>
+    </div>
+</div>
