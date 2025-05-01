@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adminviewservice',
@@ -25,12 +26,32 @@ export class AdminviewserviceComponent implements OnInit {
     })
   }
 
-  delete(id:number):void{
-    this.vehicleService.deleteVehicleService(id).subscribe((data)=>{
-      alert('deleted successfully');
-      this.getAllVehicleServices();
-    })
+ 
+
+  delete(id: number): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.vehicleService.deleteVehicleService(id).subscribe(() => {
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Service deleted successfully.',
+            icon: 'success',
+            timer: 3000
+          });
+          this.getAllVehicleServices();
+        });
+      }
+    });
   }
+  
 
   edit(index:number):void{
     this.router.navigate(['/edit-service',index]);

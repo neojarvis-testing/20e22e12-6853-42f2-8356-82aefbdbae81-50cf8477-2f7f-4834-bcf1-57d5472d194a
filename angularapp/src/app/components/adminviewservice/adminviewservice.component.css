@@ -1,0 +1,31 @@
+.container {
+    background: linear-gradient(135deg, #f3f3f3, #e6e6e6);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.table thead {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+.table th {
+    font-size: 18px;
+    padding: 12px;
+}
+
+.table td {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+button {
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+}

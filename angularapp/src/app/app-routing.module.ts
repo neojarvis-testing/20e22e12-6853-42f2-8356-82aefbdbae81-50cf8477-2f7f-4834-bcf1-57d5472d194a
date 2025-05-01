@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: 'view-feedback', component: UserviewfeedbackComponent, canActivate: [UserGuard] },
   { path: 'add-feedback', component: UseraddfeedbackComponent, canActivate: [UserGuard] },
   { path: 'view-userappointment', component: UserviewappointmentComponent, canActivate: [UserGuard] },
-  { path: 'user-Profile', component: ProfileComponent, canActivate: [UserGuard] },
+  { path: 'user-Profile', component: ProfileComponent, canActivate: [BothGuard] },
 
   // Catch-All Route
   { path: '**', component: ErrorComponent }

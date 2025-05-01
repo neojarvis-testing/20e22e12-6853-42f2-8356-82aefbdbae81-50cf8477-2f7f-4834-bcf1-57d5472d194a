@@ -17,7 +17,7 @@
                 <tr *ngFor="let s of services; let i = index" class="text-center">
                     <td>{{ i + 1 }}</td>
                     <td class="fw-bold">{{ s.serviceName }}</td>
-                    <td class="text-success fw-semibold">{{ s.servicePrice | currency:'USD' }}</td>
+                    <td class="text-success fw-semibold">{{ s.servicePrice | currency:'INR' }}</td>
                     <td>{{ s.typeOfVehicle }}</td>
                     <td>
                         <button class="btn btn-warning btn-sm me-2" (click)="edit(s.id)">
