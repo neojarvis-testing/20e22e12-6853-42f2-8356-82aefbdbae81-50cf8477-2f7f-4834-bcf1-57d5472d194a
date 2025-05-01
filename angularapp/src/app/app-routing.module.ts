@@ -7,6 +7,7 @@ import { AdminviewserviceComponent } from './components/adminviewservice/adminvi
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
+import { HomeComponent } from './components/home/home.component';
  
 const routes: Routes = [
   {path:'register',component:RegistrationComponent},

@@ -1,8 +1,7 @@
-<h1>                                                                                                                                        </h1>
+
+
 <div class="feedback-container">
-  <h1 style="font-size: 30px; font-weight: bold; color: #3700ff; text-align: center; text-transform: uppercase; letter-spacing: 2px; position: relative;">
-  ✨ Share Your Feedback ✨</h1>
-  <!-- <h1>Feedback Form</h1> -->
+  <h1 class="feedback-heading">✨ Share Your Feedback ✨</h1>
   <p>Share your thoughts with us and help improve our services!</p>
 
   <!-- Display success message -->
@@ -17,8 +16,14 @@
       </div>
   
       <div class="form-group">
-        <label for="rating">Rating (1-5):</label>
-        <input id="rating" formControlName="rating" type="number" min="1" max="5" required />
+        <label>Rating:</label>
+        <div class="star-rating">
+          <input type="radio" id="star5" formControlName="rating" value="5"><label for="star5" title="5 stars">★</label>
+          <input type="radio" id="star4" formControlName="rating" value="4"><label for="star4" title="4 stars">★</label>
+          <input type="radio" id="star3" formControlName="rating" value="3"><label for="star3" title="3 stars">★</label>
+          <input type="radio" id="star2" formControlName="rating" value="2"><label for="star2" title="2 stars">★</label>
+          <input type="radio" id="star1" formControlName="rating" value="1"><label for="star1" title="1 star">★</label>
+        </div>
       </div>
   
       <button type="submit" [disabled]="feedbackForm.invalid">
