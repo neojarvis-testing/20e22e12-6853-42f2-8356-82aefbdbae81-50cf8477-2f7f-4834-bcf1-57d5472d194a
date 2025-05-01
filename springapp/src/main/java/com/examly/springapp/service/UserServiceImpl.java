@@ -77,16 +77,43 @@ public class UserServiceImpl implements UserDetailsService {
         return pagingUser.getContent();
     }
 
-	public UserDTO updateUser(int userId, UserDTO userDTO) {
-		User existingUser=userRepo.findById(userId).orElse(null);
-		if(existingUser==null) {
-			throw new UserNotFoundException("User not found");
-		}
-		existingUser=UserMapper.mapUserDtoToUser(userDTO);
-		existingUser.setId(userId);
-		User user=userRepo.save(existingUser);
-		return UserMapper.mapUserToUserDTO(user);
-	}
+	// public UserDTO updateUser(int userId, UserDTO userDTO) {
+	// 	User existingUser=userRepo.findById(userId).orElse(null);
+	// 	if(existingUser==null) {
+	// 		throw new UserNotFoundException("User not found");
+	// 	}
+	// 	existingUser=UserMapper.mapUserDtoToUser(userDTO);
+	// 	existingUser.setId(userId);
+	// 	User user=userRepo.save(existingUser);
+	// 	return UserMapper.mapUserToUserDTO(user);
+	// }
+
+    public UserDTO updateUser(int userId, UserDTO userDTO) {
+        Optional<User> userOpt = userRepo.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+
+        User existingUser = userOpt.get();
+
+        // Update fields if provided
+        if (userDTO.getEmail() != null) existingUser.setEmail(userDTO.getEmail());
+        if (userDTO.getUsername() != null) existingUser.setUsername(userDTO.getUsername());
+        if (userDTO.getPassword() != null) existingUser.setPassword(userDTO.getPassword());
+        if (userDTO.getMobileNumber() != null) existingUser.setMobileNumber(userDTO.getMobileNumber());
+        if (userDTO.getUserRole() != null) existingUser.setUserRole(userDTO.getUserRole());
+
+        // Update Profile Image (if provided)
+        if (userDTO.getProfileImage() != null && !userDTO.getProfileImage().isEmpty()) {
+            existingUser.setProfileImage(userDTO.getProfileImage());
+        }
+
+        User updatedUser = userRepo.save(existingUser);
+
+        return new UserDTO(updatedUser.getId(), updatedUser.getEmail(), updatedUser.getUsername(),
+                updatedUser.getPassword(), updatedUser.getMobileNumber(), updatedUser.getUserRole(), updatedUser.getProfileImage());
+    }
+
 
 	public UserDTO getUserById(int userId) {
 		User user=userRepo.findById(userId).orElse(null);

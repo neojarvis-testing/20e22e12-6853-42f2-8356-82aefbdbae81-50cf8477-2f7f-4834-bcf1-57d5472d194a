@@ -24,9 +24,24 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/),Validators.minLength(3)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      userRole: ['', Validators.required]
+      userRole: ['USER', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
+  showSuccessPopup = false;
+
+//   signupUser() {
+//   if (this.signupForm.valid) {
+//     // Your registration logic here (e.g., API call)
+//     // On success:
+//     this.showSuccessPopup = true;
+//   }
+// }
+
+closePopup() {
+  this.showSuccessPopup = false;
+  // Optionally redirect to login:
+  // this.router.navigate(['/login']);
+}
   passwordValidator(control: AbstractControl) {
     const password = control.value;
     const regex = /^[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;

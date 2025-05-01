@@ -119,11 +119,12 @@ public class UserController {
  
     }
     
-    @Operation(summary = "Update User by User", description = "Update user profile by the user.")
+    @Operation(summary = "Update User Profile", description = "Update user profile including username, mobile number, and profile image.")
     @PutMapping("/api/user/view/profile/{userId}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId,@RequestBody UserDTO userDTO){
-    	return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
+    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) {
+        return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
     }
+
     
     @Operation(summary = "Get User by userId", description = "Fetch any particular user details by user id")
     @GetMapping("/api/user/{userId}")
