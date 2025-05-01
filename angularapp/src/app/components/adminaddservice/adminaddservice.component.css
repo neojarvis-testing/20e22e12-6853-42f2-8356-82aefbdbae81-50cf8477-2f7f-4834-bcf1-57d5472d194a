@@ -1,0 +1,41 @@
+/* Background Image */
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+  
+  /* Centering Fix */
+  .container-fluid {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Form Card Styling */
+  .card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Input Fields */
+  .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Submit Button */
+  .btn-success {
+    background: linear-gradient(45deg, #28a745, #218838);
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px;
+  }
+  
+  .btn-success:hover {
+    background: #218838;
+  }
+  

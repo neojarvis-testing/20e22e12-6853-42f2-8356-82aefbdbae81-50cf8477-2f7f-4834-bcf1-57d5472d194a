@@ -1,23 +1,6 @@
-
-
 /* ---------------------- */
 /* General Styling */
 /* ---------------------- */
-.feedback-heading {
-  font-size: 28px; /* Reduced size */
-  font-weight: bold;
-  color: #b1889c;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 1px;
-  position: relative;
-  animation: fadeIn 0.6s ease-in-out;
-  padding: 10px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
@@ -25,7 +8,7 @@ body {
   padding: 30px;
   transition: background 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
 /* Table Container */
 /* ---------------------- */
@@ -38,7 +21,7 @@ body {
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
 /* Table Styling */
 /* ---------------------- */
@@ -51,14 +34,14 @@ table {
   background: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
-
+ 
 th, td {
   padding: 14px;
   border: 1px solid #ddd;
   text-align: center;
   font-size: 16px;
 }
-
+ 
 /* Table Header */
 th {
   background: linear-gradient(135deg, #007bff, #0056b3);
@@ -66,12 +49,12 @@ th {
   text-transform: uppercase;
   font-weight: bold;
 }
-
+ 
 /* Alternate Row Coloring */
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
+ 
 /* Hover Effect on Rows */
 tr:hover {
   background-color: #e2e6ea;
@@ -79,7 +62,7 @@ tr:hover {
   transform: scale(1.02);
   transition: all 0.3s ease-in-out;
 }
-
+ 
 /* ---------------------- */
 /* Button Styling */
 /* ---------------------- */
@@ -94,18 +77,18 @@ button {
   font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
-
+ 
 /* Button Hover */
 button:hover {
   background: linear-gradient(135deg, #b22222, #ff8e98);
   transform: scale(1.08);
 }
-
+ 
 /* Button Press Effect */
 button:active {
   transform: scale(0.95);
 }
-
+ 
 /* ---------------------- */
 /* No Feedback Message */
 /* ---------------------- */
@@ -115,7 +98,7 @@ p {
   margin-top: 15px;
   font-weight: bold;
 }
-
+ 
 /* ---------------------- */
 /* Responsive Design */
 /* ---------------------- */
@@ -124,18 +107,18 @@ p {
       width: 90%;
       padding: 15px;
   }
-
+ 
   th, td {
       font-size: 14px;
       padding: 10px;
   }
-
+ 
   button {
       font-size: 14px;
       padding: 10px;
   }
 }
-
+ 
 /* ---------------------- */
 /* Animations */
 /* ---------------------- */
@@ -149,3 +132,17 @@ p {
       transform: scale(1);
   }
 }
+
+.feedback-heading {
+  font-size: 28px; /* Reduced size */font-weight: bold;
+  color: #ff007f;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  position: relative;
+  animation: fadeIn 0.6s ease-in-out;
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;}

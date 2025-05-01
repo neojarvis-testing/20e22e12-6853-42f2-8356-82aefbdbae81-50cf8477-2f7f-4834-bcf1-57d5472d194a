@@ -1,4 +1,5 @@
 .login-page {
+    background: linear-gradient(135deg, #929fbe, #182848);
     height: 100vh;
     display: flex;
     align-items: center;
@@ -11,6 +12,7 @@
 }
 
 .login-image {
+
     max-width: 100%;
     height: 100%;
     object-fit: cover;
