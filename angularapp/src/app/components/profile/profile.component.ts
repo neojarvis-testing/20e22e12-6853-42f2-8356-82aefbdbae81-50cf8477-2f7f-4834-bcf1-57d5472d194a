@@ -6,14 +6,14 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  templateUrl: './profile.component.html'
 })
+
 export class ProfileComponent implements OnInit {
   user: any = {};
   showEditForm: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   ngOnInit(): void {
     const userId = +localStorage.getItem('userId');

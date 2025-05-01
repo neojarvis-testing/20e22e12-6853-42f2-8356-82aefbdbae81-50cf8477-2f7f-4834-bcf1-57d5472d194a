@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AppointmentService {
-  private apiUrl: string = environment.apiUrl;
+  private readonly apiUrl: string = environment.apiUrl;
  
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
  
  
   // Add Appointment

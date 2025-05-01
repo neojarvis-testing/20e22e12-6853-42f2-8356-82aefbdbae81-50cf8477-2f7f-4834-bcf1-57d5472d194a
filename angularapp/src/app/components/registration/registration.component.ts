@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/models/login.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,70 +9,59 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
-
+export class RegistrationComponent{
   signupForm: FormGroup;
   signupError: string;
   isLoading = false;
   passwordMismatch = false;
-
-  constructor(private fb: FormBuilder, private router: Router, private service: AuthService){
-    this.signupForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6),this.passwordValidator]],
-      confirmPassword: ['', Validators.required],
-      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/),Validators.minLength(3)]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      userRole: ['USER', Validators.required]
-    }, { validator: this.passwordMatchValidator });
-  }
   showSuccessPopup = false;
 
-//   signupUser() {
-//   if (this.signupForm.valid) {
-//     // Your registration logic here (e.g., API call)
-//     // On success:
-//     this.showSuccessPopup = true;
-//   }
-// }
+  constructor(private readonly fb: FormBuilder, private readonly router: Router, private readonly service: AuthService) {
+    this.signupForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator]],
+      confirmPassword: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/), Validators.minLength(3)]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      userRole: ['', Validators.required]
+    }, { validator: this.passwordMatchValidator });
+  }
 
-closePopup() {
-  this.showSuccessPopup = false;
-  // Optionally redirect to login:
-  // this.router.navigate(['/login']);
-}
+  closePopup() {
+    this.showSuccessPopup = false;
+    // Optionally redirect to login:
+    // this.router.navigate(['/login']);
+  }
+
   passwordValidator(control: AbstractControl) {
     const password = control.value;
     const regex = /^[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-    
-    return regex.test(password) ? null : {invalidPassword: true };
+
+    return regex.test(password) ? null : { invalidPassword: true };
   }
 
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
 
+    // Check for null control references
     if (!password || !confirmPassword) {
-      return null;
+      return { invalidMatch: true };
     }
 
-    if (confirmPassword.errors && !confirmPassword.errors.passwordMismatch) {
-      return null;
-    }
-
+    // Validate password mismatch
     if (password.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
+      return { passwordsDoNotMatch: true }; // Return distinct value for mismatch
     } else {
       confirmPassword.setErrors(null);
+      return null; // Match is valid
     }
-
-    return null;
   }
 
   signupUser() {
     if (this.signupForm.valid) {
       this.isLoading = true;
-      const loginObj: Login = { username: this.signupForm.value.username, password: this.signupForm.value.password };
       const newUser: User = {
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
@@ -93,9 +81,6 @@ closePopup() {
         }
       );
     }
-  }
-
-  ngOnInit(): void {
   }
 
 }

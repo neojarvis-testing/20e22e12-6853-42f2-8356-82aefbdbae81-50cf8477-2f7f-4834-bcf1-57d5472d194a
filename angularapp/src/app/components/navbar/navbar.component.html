@@ -22,14 +22,13 @@
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/">Home</a>
                     </li>
-
+                    
                     <!-- Admin Links -->
                     <ng-container *ngIf="userRole === 'ADMIN'">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" 
-                               (keydown)="onKeyDown($event)" (keypress)="onKeyPress($event)" (keyup)="onKeyUp($event)">
+                            <button class="nav-link dropdown-toggle btn btn-link p-0" type="button" data-bs-toggle="dropdown">
                                 Services
-                            </a>
+                            </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" routerLink="/add-service">Add Service</a></li>
                                 <li><a class="dropdown-item" routerLink="/view-services">View</a></li>
@@ -46,10 +45,9 @@
                     <!-- User Links -->
                     <ng-container *ngIf="userRole === 'USER'">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" 
-                               (keydown)="onKeyDown($event)" (keypress)="onKeyPress($event)" (keyup)="onKeyUp($event)">
-                               Appointments
-                            </a>
+                            <button class="nav-link dropdown-toggle btn btn-link p-0" type="button" data-bs-toggle="dropdown">
+                                Appointments
+                            </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" routerLink="/add-appointment">Book Appointment</a></li>
                                 <li><a class="dropdown-item" routerLink="/view-userappointment">View Appointment</a></li>

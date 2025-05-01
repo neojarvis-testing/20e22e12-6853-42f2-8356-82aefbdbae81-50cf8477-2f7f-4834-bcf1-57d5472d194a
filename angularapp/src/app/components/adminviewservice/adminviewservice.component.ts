@@ -5,14 +5,13 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-adminviewservice',
-  templateUrl: './adminviewservice.component.html',
-  styleUrls: ['./adminviewservice.component.css']
+  templateUrl: './adminviewservice.component.html'
 })
 export class AdminviewserviceComponent implements OnInit {
 
   services:VehicleMaintenance[]=[]
 
-  constructor(private vehicleService:VehicleService,private router:Router) { }
+  constructor(private readonly vehicleService:VehicleService,private readonly router:Router) { }
 
   ngOnInit(): void {
     this.getAllVehicleServices();
