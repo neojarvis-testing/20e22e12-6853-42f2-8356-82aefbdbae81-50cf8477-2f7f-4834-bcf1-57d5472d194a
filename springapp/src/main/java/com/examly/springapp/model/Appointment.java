@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long appointmentId;
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "serviceId")
