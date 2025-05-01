@@ -16,7 +16,7 @@ feedbacks: Feedback[] = []; // List of feedbacks
   userDetail: User | null = null; // Selected user profile
   userId: number = Number(localStorage.getItem('userId')) || 0; // Ensure userId is a number
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private readonly feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
     this.fetchFeedbacks();

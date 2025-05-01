@@ -4,12 +4,11 @@ import { UserdetailsService } from 'src/app/services/userdetails.service';
 
 @Component({
   selector: 'app-adminviewuserdetails',
-  templateUrl: './adminviewuserdetails.component.html',
-  styleUrls: ['./adminviewuserdetails.component.css']
+  templateUrl: './adminviewuserdetails.component.html'
 })
 export class AdminviewuserdetailsComponent implements OnInit {
 
-  constructor(private userservice:UserdetailsService) { }
+  constructor(private readonly userservice:UserdetailsService) { }
 
   users:User[]=[]
   ngOnInit(): void {

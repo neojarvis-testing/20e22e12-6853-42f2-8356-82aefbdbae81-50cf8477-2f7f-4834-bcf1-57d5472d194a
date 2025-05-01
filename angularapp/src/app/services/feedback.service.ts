@@ -10,8 +10,8 @@ import { User } from '../models/user.model';
 })
 export class FeedbackService {
  
-  private apiUrl=environment.apiUrl;
-  constructor(private http:HttpClient) { }
+  private readonly apiUrl=environment.apiUrl;
+  constructor(private readonly http:HttpClient) { }
  
   public addFeedback(feedback:Feedback):Observable<Feedback>{
     return this.http.post<Feedback>(`${this.apiUrl}/feedbacks`,feedback);

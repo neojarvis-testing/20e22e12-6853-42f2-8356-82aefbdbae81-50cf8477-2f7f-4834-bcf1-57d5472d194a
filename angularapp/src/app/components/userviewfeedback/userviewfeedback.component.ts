@@ -11,7 +11,7 @@ export class UserviewfeedbackComponent implements OnInit {
  
   userId:any
   feedbacks:Feedback[]=[]
-  constructor(private feedbackService:FeedbackService) { }
+  constructor(private readonly feedbackService:FeedbackService) { }
  
   ngOnInit(): void {
     this.userId=localStorage.getItem('userId')

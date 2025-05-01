@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Appointment } from 'src/app/models/appointment.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-useraddappointment',
-  templateUrl: './useraddappointment.component.html',
-  styleUrls: ['./useraddappointment.component.css']
+  templateUrl: './useraddappointment.component.html'
 })
 export class UseraddappointmentComponent implements OnInit {
   services: any[] = [];
   
 
-  constructor(private vehicleService: VehicleService, private appointmentService: AppointmentService,private router:Router) {}
+  constructor(private readonly vehicleService: VehicleService, private readonly appointmentService: AppointmentService,private readonly router:Router) {}
 
   ngOnInit(): void {
     this.fetchServices();
