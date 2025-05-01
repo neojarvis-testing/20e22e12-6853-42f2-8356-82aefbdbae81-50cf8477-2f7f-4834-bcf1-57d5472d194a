@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
@@ -8,8 +8,8 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserdetailsService {
-  private apiUrl: string = environment.apiUrl;
-  constructor(private http:HttpClient) { }
+  private readonly apiUrl: string = environment.apiUrl;
+  constructor(private readonly http:HttpClient) { }
 
   getAllUsers():Observable<User[]>{
     return this.http.get<User[]>(this.apiUrl+'/users');

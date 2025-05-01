@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import { AuthService } from './services/auth.service';
  
 @Injectable({
@@ -13,6 +12,6 @@ export class BothGuard implements CanActivate {
     return this.service.isUser() || this.service.isAdmin();
   }
  
-  constructor(private service:AuthService){}
+  constructor(private readonly service:AuthService){}
  
 }

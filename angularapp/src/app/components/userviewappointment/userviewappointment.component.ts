@@ -6,12 +6,11 @@ import { VehicleService } from 'src/app/services/vehicle.service';
  
 @Component({
   selector: 'app-userviewappointment',
-  templateUrl: './userviewappointment.component.html',
-  styleUrls: ['./userviewappointment.component.css']
+  templateUrl: './userviewappointment.component.html'
 })
 export class UserviewappointmentComponent implements OnInit {
  
-  constructor(private appointmentService:AppointmentService,private vehicleService:VehicleService) { }
+  constructor(private readonly appointmentService:AppointmentService,private readonly vehicleService:VehicleService) { }
   appointments:Appointment[]=[]
   vehicles:VehicleMaintenance[]=[]
  
