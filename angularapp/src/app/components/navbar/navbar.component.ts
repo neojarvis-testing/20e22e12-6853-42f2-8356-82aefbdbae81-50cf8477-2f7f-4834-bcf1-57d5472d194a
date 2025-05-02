@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
     userRole: string | null = null;
     userName: string | null = null;
  
-    constructor(private readonly authService: AuthService, private router: Router) {}
+    constructor(private readonly authService: AuthService, private readonly router: Router) {}
  
     ngOnInit(): void {
         this.isLoggedIn = this.authService.isLoggedIn();

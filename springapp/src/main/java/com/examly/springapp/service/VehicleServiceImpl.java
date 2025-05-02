@@ -39,7 +39,7 @@ public class VehicleServiceImpl implements VehicleService {
         logger.info("Updating vehicle service with ID: {}", serviceId);
         VehicleMaintenance vehicleMaintenance = vehicleServiceRepo.findById(serviceId).orElse(null);
         if (vehicleMaintenance == null) {
-            logger.error("Vehicle maintenance service not found for ID: {}", serviceId);
+            logger.error("Vehicle maintenance service id not present: {}", serviceId);
             throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID: " + serviceId + " not found");
         }
         vehicleMaintenance.setId(serviceId);
@@ -71,7 +71,7 @@ public class VehicleServiceImpl implements VehicleService {
             logger.info("Vehicle maintenance service deleted successfully for ID: {}", serviceId);
             return Map.of("message", "Vehicle Service ID Deleted successfully");
         }
-        logger.error("Vehicle maintenance service not found for ID: {}", serviceId);
+        logger.error("Vehicle maintenance service is not there: {}", serviceId);
         return Map.of("message", "Vehicle Service with ID " + serviceId + " not found");
     }
 
@@ -91,7 +91,7 @@ public class VehicleServiceImpl implements VehicleService {
         logger.info("Fetching vehicle maintenance service by ID: {}", serviceId);
         VehicleMaintenance vehicleMaintenance = vehicleServiceRepo.findById(serviceId).orElse(null);
         if (vehicleMaintenance == null) {
-            logger.error("Vehicle maintenance service not found for ID: {}", serviceId);
+            logger.error("Vehicle maintenance not found: {}", serviceId);
             throw new VehicleMaintenanceServiceNotFoundException("Vehicle Service With ID: " + serviceId + " not found");
         }
         return VechicleMapper.mapVehicleToVehicleDTO(vehicleMaintenance);
