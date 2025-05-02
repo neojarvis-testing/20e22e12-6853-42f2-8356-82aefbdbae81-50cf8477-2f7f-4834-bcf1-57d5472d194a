@@ -5,7 +5,7 @@ describe('UserModel', () => {
   fit('frontend_User_model_should_create_an_instance', () => {
     const user: User = {
       email: 'testuser@example.com',
-      pwd: 'testpassword',
+      pwd: 'test',
       username: 'testuser',
       mobileNumber: '1234567890',
       userRole: 'admin'
@@ -20,3 +20,5 @@ describe('UserModel', () => {
   });
 
 });
+
+
