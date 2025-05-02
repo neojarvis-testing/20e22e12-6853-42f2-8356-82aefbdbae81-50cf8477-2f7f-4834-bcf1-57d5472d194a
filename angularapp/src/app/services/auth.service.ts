@@ -12,7 +12,7 @@ export class AuthService {
  
   private readonly apiUrl: string = environment.apiUrl;
  
-  constructor(private readonly http: HttpClient, private router: Router) { }
+  constructor(private readonly http: HttpClient, private readonly router: Router) { }
  
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/register', user);

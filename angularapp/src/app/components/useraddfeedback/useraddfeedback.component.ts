@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
@@ -8,12 +8,11 @@ import { FeedbackService } from 'src/app/services/feedback.service';
   templateUrl: './useraddfeedback.component.html',
   styleUrls: ['./useraddfeedback.component.css']
 })
-export class UseraddfeedbackComponent implements OnInit {
- 
+export class UseraddfeedbackComponent { 
   feedbackForm: FormGroup; // Form group for managing user input
   successMessage: string = ''; // Message to display upon successful submission
  
-  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
+  constructor(private readonly fb: FormBuilder, private readonly feedbackService: FeedbackService) {
     // Initializing the form with validation rules
     this.feedbackForm = this.fb.group({
       message: ['', [Validators.required, Validators.minLength(5)]], // Ensures message is required and has at least 5 characters
@@ -21,8 +20,7 @@ export class UseraddfeedbackComponent implements OnInit {
     });
   }
  
-  ngOnInit(): void {
-  }
+ 
  
   // Method to submit feedback
   addFeedback(): void {
