@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   alertType: string = ''; // 'success' or 'danger'
   showAlert: boolean = false;
 
-  constructor(private loginService: AuthService, private router: Router) {}
+  constructor(private loginService: AuthService, private router: Router,private appointmentService:AppointmentService) {}
 
   ngOnInit(): void {}
 
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userRole', data.userRole);
+        this.checkLastAppointment(data.userId);
         this.router.navigate(['/']);
       },
       (error) => {
@@ -55,5 +57,35 @@ export class LoginComponent implements OnInit {
       this.showAlert = false;
     }, 3000); // Hide alert after 3 seconds
   }
+
+  checkLastAppointment(userId: number): void {
+    this.appointmentService.getLastAppointmentByUserId(userId).subscribe(
+      (appointment) => {
+        if (appointment && appointment.appointmentDate) {
+          const lastAppointmentDate = new Date(appointment.appointmentDate);
+          const currentDate = new Date();
+          const differenceInDays = Math.floor((currentDate.getTime() - lastAppointmentDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+          if (differenceInDays > 40) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Appointment Reminder',
+              text: `It has been ${differenceInDays} days since your last appointment. Consider scheduling a new one.`,
+              confirmButtonText: 'OK'
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/add-appointment']);
+              }
+            });
+          }
+        }
+      },
+      (error) => {
+        console.error('Error fetching last appointment', error);
+      }
+    );
+  }
+  
 }
 

@@ -10,6 +10,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   styleUrls: ['./userviewappointment.component.css']
 })
 export class UserviewappointmentComponent implements OnInit {
+  
  
   constructor(private appointmentService:AppointmentService,private vehicleService:VehicleService) { }
   appointments:Appointment[]=[]
@@ -39,3 +40,5 @@ export class UserviewappointmentComponent implements OnInit {
     }
   }
 }
+
+
