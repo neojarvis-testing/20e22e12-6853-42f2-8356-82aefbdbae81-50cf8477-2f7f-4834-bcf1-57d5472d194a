@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { User } from "src/app/models/user.model";
 
 
@@ -11,7 +12,7 @@ describe('UserModel', () => {
 
     const user: User = {
       email: email,
-      password: password,
+      pwd: password,
       username: username,
       mobileNumber: mobileNumber,
       userRole: userRole
@@ -19,7 +20,7 @@ describe('UserModel', () => {
 
     expect(user).toBeTruthy();
     expect(user.email).toBeDefined();
-    expect(user.password).toBeDefined();
+    expect(user.pwd).toBeDefined();
     expect(user.username).toBeDefined();
     expect(user.mobileNumber).toBeDefined();
     expect(user.userRole).toBeDefined();
@@ -27,6 +28,6 @@ describe('UserModel', () => {
 
   // Utility function to generate a secure password dynamically
   function generateSecurePassword(): string {
-    return 'securePassword' + Math.random().toString(36).substring(2, 10); // Example dynamic password
+    return randomBytes(16).toString('hex'); // Generates a strong random password
   }
 });
