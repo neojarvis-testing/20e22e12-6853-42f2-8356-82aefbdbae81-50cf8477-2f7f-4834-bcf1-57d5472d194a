@@ -16,6 +16,16 @@ describe('UserModel', () => {
     const userRole = 'admin';
 
 
+
+
+
+
+
+
+
+
+    
+
     const user: User = {
     
       email: email,
