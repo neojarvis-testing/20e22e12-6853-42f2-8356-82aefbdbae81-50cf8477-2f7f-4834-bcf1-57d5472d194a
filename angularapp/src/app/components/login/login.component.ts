@@ -25,6 +25,8 @@ export class LoginComponent{
   
   };
 
+
+  
   constructor(private readonly loginService: AuthService,private readonly router:Router) { }
 
   
