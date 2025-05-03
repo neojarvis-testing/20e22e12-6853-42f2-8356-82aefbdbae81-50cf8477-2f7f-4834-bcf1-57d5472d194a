@@ -10,6 +10,9 @@ describe('UserModel', () => {
       userRole: 'admin'
     };
 
+
+
+    
     expect(user).toBeTruthy();
     expect(user.email).toBeDefined();
     expect(user.username).toBeDefined();
