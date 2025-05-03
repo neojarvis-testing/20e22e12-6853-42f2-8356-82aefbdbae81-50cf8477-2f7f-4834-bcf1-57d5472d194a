@@ -1,70 +1,58 @@
 <app-navbar></app-navbar>
-
-<!-- Background image applied directly in the HTML -->
-<body [style.backgroundImage]="'url(assets/background.webp)'" style="background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; margin: 0;">
-
-  <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
-    <div class="row w-100 d-flex justify-content-center">
-      <div class="col-md-6 mx-auto">
-        <div class="card shadow-lg rounded-4 p-4 bg-light">
-          <div class="service-form">
-            <h1 class="text-center mb-4 text-primary fw-bold">Add Service</h1>
-            <form #adminForm="ngForm" (ngSubmit)="addVehicle()" class="needs-validation">
-               
-              <!-- Service Name -->
-               <div class="mb-3">
-                <label for="serviceName" class="form-label fw-bold"><i class="fas fa-tools"></i> Service Name*</label>
-                <input type="text" class="form-control form-control-lg rounded-3 shadow-sm" name="serviceName" id="serviceName"
-                  [(ngModel)]="newService.serviceName" #serviceName="ngModel" placeholder="Enter service name" required>
-                <div class="text-danger small" *ngIf="serviceName.invalid && (serviceName.touched || serviceName.dirty)">
-                  Service Name is required
-                </div>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100">
+    <div class="col-md-6">
+      <div class="card shadow-lg rounded-4 p-4 mx-auto" style="max-width: 500px; background-color: #ffffff;">
+        <div class="service-form">
+          <h1 class="text-center mb-4 text-primary fw-bold">Add Service</h1>
+          <form #adminForm="ngForm" (ngSubmit)="addVehicle()" class="needs-validation">
+             
+            <!-- Service Name -->
+             <div class="mb-3">
+              <label for="serviceName" class="form-label">Service Name*</label>
+              <input type="text" class="form-control form-control-lg border-primary" name="serviceName" id="serviceName"
+                [(ngModel)]="newService.serviceName" #serviceName="ngModel" placeholder="Enter service name" required>
+              <div class="text-danger small" *ngIf="serviceName.invalid && (serviceName.touched || serviceName.dirty)">
+                Service Name is required.
               </div>
-
-              <!-- Service Price -->
-              <div class="mb-3">
-                <label for="servicePrice" class="form-label fw-bold">
-                  <i class="fas fa-dollar-sign"></i> Service Price*
-                </label>
-                <input type="number" class="form-control form-control-lg rounded-3 shadow-sm"
-                  name="servicePrice" id="servicePrice"
-                  [(ngModel)]="newService.servicePrice" #servicePrice="ngModel"
-                  required min="0" max="50000">
-              
-                <!-- Validation Messages -->
-                <div class="text-danger small" *ngIf="servicePrice.invalid && (servicePrice.touched || servicePrice.dirty)">
-                  <div *ngIf="servicePrice.errors?.required">Service Price is required</div>
-                  <div *ngIf="servicePrice.errors?.min || newService.servicePrice < 0">Service Price cannot be negative</div>
-                  <div *ngIf="servicePrice.errors?.max || newService.servicePrice > 50000">Service Price cannot be greater than ₹50,000</div>
-                </div>
-              </div>
-   
-              <!-- Type Of Vehicle -->
-              <div class="mb-3">
-                <label for="typeOfVehicle" class="form-label fw-bold"><i class="fas fa-car-side"></i> Type Of Vehicle*</label>
-                <select class="form-select form-select-lg rounded-3 shadow-sm" name="typeOfVehicle" id="typeOfVehicle"
-                  [(ngModel)]="newService.typeOfVehicle" #typeOfVehicle="ngModel" required>
-                  <option value="">Select vehicle type</option>
-                  <option value="bike">Bike</option>
-                  <option value="car">Car</option>
-                  <option value="auto">Auto</option>
-                </select>
-                <div class="text-danger small" *ngIf="typeOfVehicle.invalid && (typeOfVehicle.touched || typeOfVehicle.dirty)">
-                  Type of Vehicle is required
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="text-center">
-                <button type="submit" class="btn btn-lg btn-success w-100 shadow-lg rounded-pill">
-                    <i class="fas fa-plus-circle"></i> {{ isEdit ? 'Update Service' : 'Add Service' }}
-                </button>
             </div>
-            </form>
-          </div>
+
+            <!-- Service Price -->
+              <div class="mb-3">
+              <label for="servicePrice" class="form-label">Service Price*</label>
+              <input type="number" class="form-control form-control-lg border-primary" name="servicePrice" id="servicePrice"
+                [(ngModel)]="newService.servicePrice" #servicePrice="ngModel" required>
+              <div class="text-danger small" *ngIf="servicePrice.invalid && (servicePrice.touched || servicePrice.dirty)">
+                Service Price is required.
+              </div>
+            </div>
+ 
+            <!-- Type Of Vehicle -->
+              <div class="mb-3">
+              <label for="typeOfVehicle" class="form-label">Type Of Vehicle*</label>
+              <select class="form-select form-select-lg border-primary" name="typeOfVehicle" id="typeOfVehicle"
+                [(ngModel)]="newService.typeOfVehicle" #typeOfVehicle="ngModel" required>
+                <option value="">Select vehicle type</option>
+                <option value="bike">Bike</option>
+                <option value="car">Car</option>
+                <option value="auto">Auto</option>
+              </select>
+              <div class="text-danger small" *ngIf="typeOfVehicle.invalid && (typeOfVehicle.touched || typeOfVehicle.dirty)">
+                Type of Vehicle is required.
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+             <div class="text-center">
+              <button type="submit" class="btn btn-lg btn-primary w-100 shadow-lg">
+                <i class="fas fa-plus-circle"></i> Add Service
+              </button>
+            </div>
+
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-</body>

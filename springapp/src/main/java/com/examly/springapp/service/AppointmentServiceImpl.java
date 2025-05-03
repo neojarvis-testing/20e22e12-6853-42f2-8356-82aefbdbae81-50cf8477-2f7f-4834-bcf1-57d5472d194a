@@ -65,7 +65,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         else{
             User existingUser=userRepo.findById(appointment.getUser().getId()).orElse(null);
-            // existingUser=new User(2,"demouser@gmail.com","1122334455","user123","USER");
             appointment.setUser(existingUser);
             appointment.setService(existingService);
             appointment=appointmentRepo.save(appointment);
@@ -124,7 +123,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             return null;  // Exceptions will be added in future
         }
         VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getId()).orElse(null);
-        // User user=userRepo.findById(appointmentDTO.getId()).orElse(null);
         User user=userRepo.findById(1).orElse(null);
         existingAppointment.setId(appointmentId);
         existingAppointment.setLocation(appointmentDTO.getLocation());
@@ -174,7 +172,6 @@ public class AppointmentServiceImpl implements AppointmentService {
  
     public AppointmentDTO getAppointmentsById(long id) {
         Appointment appointment=appointmentRepo.findById(id).orElse(null);
-        System.out.println(appointment);
         if(appointment==null){
             throw new AppointmentNotFoundException("Appointment with Appointment ID: "+id+" not found");
         }

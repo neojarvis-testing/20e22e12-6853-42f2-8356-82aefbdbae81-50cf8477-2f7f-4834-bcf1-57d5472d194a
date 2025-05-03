@@ -9,10 +9,10 @@ import { AuthService } from './services/auth.service';
 export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.service.isAdmin();
   }
 
-  constructor(private service:AuthService){}
-  
+  constructor(private readonly service: AuthService) {}
 }

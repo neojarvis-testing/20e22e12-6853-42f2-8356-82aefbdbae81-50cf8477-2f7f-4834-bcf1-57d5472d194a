@@ -1,91 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
-import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  login: any = { username: '', password: '' };
-  alertMessage: string = '';
-  alertType: string = ''; // 'success' or 'danger'
-  showAlert: boolean = false;
+export class LoginComponent{
 
-  constructor(private loginService: AuthService, private router: Router,private appointmentService:AppointmentService) {}
+  login: any = {
+    username: '',
+    password: ''
+  };
 
-  ngOnInit(): void {}
+  constructor(private readonly loginService: AuthService,private readonly router:Router) { }
 
   loginUser(): void {
-    this.loginService.loginUser(this.login).subscribe(
-      (data) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful!',
-          text: 'Redirecting...',
-          showConfirmButton: false,
-          timer: 2000
-        });
-  
-        console.log(data);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('userRole', data.userRole);
-        this.checkLastAppointment(data.userId);
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Login Unsuccessful!',
-          text: 'Please check your credentials.',
-          confirmButtonText: 'Try Again'
-        });
-      }
-    );
+    this.loginService.loginUser(this.login).subscribe((data) => {
+      alert("Login successful");
+      console.log(data);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('userRole', data.userRole);
+      this.router.navigate(['/'])
+    }, (error) => {
+      alert("Login unsuccessful");
+      console.log(error);
+    });
   }
-  
-
-  showBootstrapAlert(message: string, type: string) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.showAlert = true;
-    
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 3000); // Hide alert after 3 seconds
-  }
-
-  checkLastAppointment(userId: number): void {
-    this.appointmentService.getLastAppointmentByUserId(userId).subscribe(
-      (appointment) => {
-        if (appointment && appointment.appointmentDate) {
-          const lastAppointmentDate = new Date(appointment.appointmentDate);
-          const currentDate = new Date();
-          const differenceInDays = Math.floor((currentDate.getTime() - lastAppointmentDate.getTime()) / (1000 * 60 * 60 * 24));
-  
-          if (differenceInDays > 40) {
-            Swal.fire({
-              icon: 'warning',
-              title: 'Appointment Reminder',
-              text: `It has been ${differenceInDays} days since your last appointment. Consider scheduling a new one.`,
-              confirmButtonText: 'OK'
-            })
-            .then((result) => {
-              if (result.isConfirmed) {
-                this.router.navigate(['/add-appointment']);
-              }
-            });
-          }
-        }
-      },
-      (error) => {
-        console.error('Error fetching last appointment', error);
-      }
-    );
-  }
-  
 }
-
