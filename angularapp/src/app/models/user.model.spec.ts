@@ -17,4 +17,6 @@ describe('UserModel', () => {
     expect(user.userRole).toBeDefined();
   });
 
+
+
 });
