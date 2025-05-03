@@ -1,49 +1,94 @@
+
 <app-navbar></app-navbar>
+
 <div class="container mt-5">
+
   <h2 class="text-center text-primary mb-4">Book a Vehicle Service</h2>
- 
+
+  
+  
   <div *ngIf="services && services.length > 0; else noServices" class="shadow-lg p-4 bg-light rounded">
     <table class="table table-hover table-striped">
+  
       <thead class="bg-primary text-white">
+  
         <tr>
+  
+  
           <th>Service ID</th>
+  
           <th>Service Name</th>
+  
           <th>Service Price</th>
+  
           <th>Vehicle Type</th>
+  
           <th>Appointment Date</th>
           <th>Location</th>
+  
+  
           <th>Actions</th>
         </tr>
+  
+  
       </thead>
+  
       <tbody>
+  
         <tr *ngFor="let service of services">
+  
           <td>{{ service.id }}</td>
+  
           <td>{{ service.serviceName }}</td>
+  
           <td>{{ service.servicePrice }}</td>
+  
           <td>{{ service.typeOfVehicle }}</td>
  
+
+          
           <!-- Appointment Date Validation -->
           <td>
+          
+          
             <input type="date" [(ngModel)]="service.appointmentDate" name="appointmentDate"
               class="form-control form-control-sm" #appointmentDate="ngModel" required />
-            <div class="text-danger small" *ngIf="appointmentDate.invalid && (appointmentDate.touched || appointmentDate.dirty)">
-              Appointment Date is required.
+          
+              <div class="text-danger small" *ngIf="appointmentDate.invalid && (appointmentDate.touched || appointmentDate.dirty)">
+          
+          
+                Appointment Date is required.
             </div>
           </td>
  
+
+
+          
           <!-- Location Validation -->
+          
           <td>
+          
             <input type="text" [(ngModel)]="service.location" name="location"
-              class="form-control form-control-sm" #location="ngModel" required />
+          
+            class="form-control form-control-sm" #location="ngModel" required />
+          
             <div class="text-danger small" *ngIf="location.invalid && (location.touched || location.dirty)">
+          
               Location is required.
+          
             </div>
+          
           </td>
  
+          
           <!-- Action Button -->
+          
+          
           <td>
             <button class="btn btn-success btn-sm" (click)="bookAppointment(service)" [disabled]="appointmentDate.invalid || location.invalid">
+          
               <i class="fas fa-calendar-check"></i> Book
+          
             </button>
           </td>
         </tr>

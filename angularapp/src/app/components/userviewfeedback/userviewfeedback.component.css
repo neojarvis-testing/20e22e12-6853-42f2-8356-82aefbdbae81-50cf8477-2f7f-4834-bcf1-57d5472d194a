@@ -1,21 +1,48 @@
+
 body {
+
   background-color: #f8f9fa;
+
 }
+
+
 
 .list-group-item {
+
   transition: all 0.3s ease-in-out;
+
 }
+
+
+
 
 .list-group-item:hover {
+
   background-color: #eef2f7;
+
 }
+
+
 
 .btn-outline-danger {
+
   transition: transform 0.2s;
+
 }
 
+
+
 .btn-outline-danger:hover {
+
   transform: scale(1.1);
+
   background-color: #ff6b6b;
+
   color: white;
+
 }
+
+
+
+
+
