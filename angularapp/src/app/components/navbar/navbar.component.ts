@@ -4,8 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
  
 @Component({
     selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css']
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
     showLogoutPopup: boolean = false;
@@ -13,7 +12,7 @@ export class NavbarComponent implements OnInit {
     userRole: string | null = null;
     userName: string | null = null;
  
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private readonly authService: AuthService, private readonly router: Router) {}
  
     ngOnInit(): void {
         this.isLoggedIn = this.authService.isLoggedIn();

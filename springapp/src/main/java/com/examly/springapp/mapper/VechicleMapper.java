@@ -3,7 +3,12 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.model.VehicleMaintenanceDTO;
 
 public class VechicleMapper {
-     public static VehicleMaintenance mapVehicleDTOToVehicle(VehicleMaintenanceDTO vehicleMaintenanceDTO){
+
+    private VechicleMapper(){
+        throw new UnsupportedOperationException("Utility class cannot be instantiated");
+    }
+
+    public static VehicleMaintenance mapVehicleDTOToVehicle(VehicleMaintenanceDTO vehicleMaintenanceDTO){
         return new VehicleMaintenance(
             vehicleMaintenanceDTO.getServiceName(),
             vehicleMaintenanceDTO.getServicePrice(),

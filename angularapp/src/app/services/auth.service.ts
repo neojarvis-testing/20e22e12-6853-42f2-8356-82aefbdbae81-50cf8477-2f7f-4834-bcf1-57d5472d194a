@@ -10,9 +10,9 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
  
-  private apiUrl: string = environment.apiUrl;
+  private readonly apiUrl: string = environment.apiUrl;
  
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private readonly http: HttpClient, private readonly router: Router) { }
  
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/register', user);
@@ -38,9 +38,6 @@ export class AuthService {
  
   logout() {
     localStorage.clear();
- 
-    //this.router.navigate(['/login']);
- 
     this.router.navigate(['/login']);
  
   }

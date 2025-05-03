@@ -10,3 +10,5 @@ public User registerUser(User user);
 public UserDetails loadUserByUsername(String email);
 public User loginUser(User user);
 }
+
+

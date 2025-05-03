@@ -1,7 +1,6 @@
 package com.examly.springapp.controller;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,11 +60,6 @@ public class VehicleServiceController {
     public ResponseEntity<List<VehicleMaintenanceDTO>> getAllServices(){
         return ResponseEntity.status(200).body(vehicleServiceImpl.getAllServices());
     }
-
-    // @GetMapping("/api/services/{id}")
-    // public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id){
-    //     return ResponseEntity.status(200).body(vehicleServiceImpl.getServiceById(id).get());
-    // }
     
     @Operation(summary = "Get service by ID", description = "Fetches a specific vehicle maintenance service by its ID.")
     @GetMapping("/api/services/{id}")

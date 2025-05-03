@@ -1,6 +1,14 @@
+<<<<<<< HEAD
+<h1>FeedBack of all user</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>SL .No</th>
+=======
 
 <app-navbar></app-navbar>
-
+<h1>FeedBack of all user</h1>
 <div>
 
 
@@ -12,12 +20,22 @@
         <thead>
             <tr>
                 <th>SL. No</th>
+>>>>>>> d1353e4d70b38743246caca4aa9e94da6d97ada8
                 <th>Username</th>
                 <th>Feedback</th>
                 <th>Ratings</th>
                 <th>Action</th>
             </tr>
         </thead>
+<<<<<<< HEAD
+
+        <tbody>
+            <tr *ngFor="let feedback of userDetails;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{feedback.username}}</td>
+                <td>{{feedback.message}}</td>
+                <td>{{feedback.rating}}</td>
+=======
  
         <tbody>
             <tr *ngFor="let feedback of userDetails; let i = index">
@@ -25,10 +43,19 @@
                 <td>{{ feedback.username }}</td>
                 <td>{{ feedback.message }}</td>
                 <td>{{ feedback.rating }}</td>
+>>>>>>> d1353e4d70b38743246caca4aa9e94da6d97ada8
                 <td><button (click)="showProfile(feedback.userId)">Show Profile</button></td>
             </tr>
         </tbody>
     </table>
+<<<<<<< HEAD
+
+    <div *ngIf="userDetail">
+        <p>User Details</p>
+        <p>email:{{userDetail.email}}</p>
+        <p>username: {{userDetail.username}}</p>
+        <p>mobile number: {{userDetail.mobileNumber}}</p>
+=======
 </div>
 
 <!-- Profile Modal -->
@@ -39,5 +66,6 @@
         <p><strong>Username:</strong> {{ userDetail.username }}</p>
         <p><strong>Mobile Number:</strong> {{ userDetail.mobileNumber }}</p>
         <button (click)="closeProfile()">Close</button>
+>>>>>>> d1353e4d70b38743246caca4aa9e94da6d97ada8
     </div>
 </div>
