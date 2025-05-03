@@ -12,7 +12,6 @@ describe('UserModel', () => {
 
     const user: User = {
       email: email,
-      pwd: password,
       username: username,
       mobileNumber: mobileNumber,
       userRole: userRole
@@ -20,7 +19,6 @@ describe('UserModel', () => {
 
     expect(user).toBeTruthy();
     expect(user.email).toBeDefined();
-    expect(user.pwd).toBeDefined();
     expect(user.username).toBeDefined();
     expect(user.mobileNumber).toBeDefined();
     expect(user.userRole).toBeDefined();
