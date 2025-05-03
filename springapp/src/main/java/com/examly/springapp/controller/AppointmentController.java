@@ -1,6 +1,5 @@
 package com.examly.springapp.controller;
-
-import java.time.LocalDate;
+ 
 import java.util.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,13 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
  
 import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.AppointmentDTO;
-import com.examly.springapp.model.User;
-import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.service.AppointmentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
- 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 @RestController
 @Tag(name = "Appointment Service Controller", description = "APIs for managing Appointment services.")
@@ -47,27 +42,18 @@ public class AppointmentController {
      * @return ResponseEntity containing the newly created appointment with HTTP status 201 (Created)
      */
  
+ 
+ 
+ 
     @Operation(summary = "Create a new appointment", description = "Allows a user to create a new appointment for vehicle maintenance.")
     @PostMapping("/api/appointments")
     public ResponseEntity<AppointmentDTO> addAppointments(@Valid @RequestBody AppointmentDTO appointmentDTO) {
         return ResponseEntity.status(201).body(appointmentService.addAppointments(appointmentDTO));
-    }
- 
-    @PostMapping("/api/appointment")
-    @Transactional
-    public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointmentDTO) {
-        return ResponseEntity.status(201).body(appointmentService.addAppointment(appointmentDTO));
-    }
-
+    }   
    
     @Operation(summary = "Get appointments by user ID", description = "Retrieves all appointments linked to a specific user by their ID.")
- 
     @GetMapping("/api/appointment/user/{userId}")
     public ResponseEntity<List<AppointmentDTO>> getAppointmentsbyUserId(@PathVariable int userId) {
-        return ResponseEntity.status(200).body(appointmentService.getAppointmentsbyUserId(userId));
-    }
-    @GetMapping("/api/appointment/{userId}")
-    public ResponseEntity<List<AppointmentDTO>> getAppointmentsbyUser(@PathVariable int userId) {
         return ResponseEntity.status(200).body(appointmentService.getAppointmentsbyUserId(userId));
     }
  
@@ -81,23 +67,6 @@ public class AppointmentController {
     @GetMapping("/api/appointments")
     public ResponseEntity<List<AppointmentDTO>> getAllAppointments() {
        return ResponseEntity.status(200).body(appointmentService.getAllAppointments());
-    }
- 
-    @GetMapping("/api/appointment")
-    public ResponseEntity<List<Appointment>> getAllAppointment() {
-        User user = new User();
-        LocalDate localDate = LocalDate.parse("2025-03-10");
-        user.setId(2);
-        VehicleMaintenance service=new VehicleMaintenance();
-        service.setId(1l);
-        Appointment appointment=new Appointment(service, localDate, "Los Angeles", "Approved",user);
-       return ResponseEntity.status(200).body(List.of(appointment));
-    }
- 
-    @PutMapping("/api/appointment/{appointmentId}")
-    public ResponseEntity<Appointment> updateAppointment(@RequestBody Appointment appointmentDTO,
-            @PathVariable long appointmentId) {
-        return ResponseEntity.status(200).body(appointmentService.updateAppointment(appointmentDTO, appointmentId));
     }
  
     @Operation(summary = "Update appointment by ID", description = "Updates details of an existing appointment by its ID.")
@@ -121,7 +90,7 @@ public class AppointmentController {
  
     @Operation(summary = "Appointments Sort By Appointment Date", description = "Shows all the appointments using pagination and sorting.")
         @GetMapping("/appointments")
-        public List<Appointment> getAppointmentsWithPagingAndSorting(
+        public List<AppointmentDTO> getAppointmentsWithPagingAndSorting(
                 @RequestParam(defaultValue = "0") Integer pageNo,
                 @RequestParam(defaultValue = "10") Integer pageSize,
                 @RequestParam(defaultValue = "appointmentDate") String sortBy,

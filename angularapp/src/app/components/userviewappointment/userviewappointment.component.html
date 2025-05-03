@@ -1,87 +1,40 @@
-
 <app-navbar></app-navbar>
+<div class="container mt-5" style="padding: 40px; border-radius: 12px;  ">
+    <h2 class="text-center text-primary fw-bold mb-4">🚗 My Appointments 🚗</h2>
 
-<div class="container">
-
-
- <div class="container mt-5">
- 
- <h2 class="text-center text-primary fw-bold mb-4">Book a Vehicle Service</h2>
-
-
- 
- <div class="table-responsive shadow-lg p-3 bg-light rounded">
-      
-    <table class="table table-hover table-striped table-bordered align-middle">
-    
-        <thead class="bg-primary text-white">
-    
-            <tr class="text-center">
-    
-                <th>Service ID</th>
-    
-                <th>Service Name</th>
-    
-                <th>Service Price</th>
-    
-                <th>Vehicle Type</th>
-    
-                <th>Appointment Date</th>
-    
-                <th>Location</th>
-    
-                <th>Status</th>
-    
-            </tr>
-    
-        </thead>
-          <tbody>
-    
-    
-            <tr *ngFor="let service of vehicles" class="text-center">
-    
-                <td>{{ service.id }}</td>
-    
-                <td class="fw-bold">{{ service.serviceName }}</td>
-    
-                <td class="text-success fw-semibold">{{ service.servicePrice | currency:'USD' }}</td>
-    
-                <td>{{ service.typeOfVehicle }}</td>
-    
-                <td>{{ service.appointment.appointmentDate | date:'mediumDate' }}</td>
-    
-                <td>{{ service.appointment.location }}</td>
-    
-                
-                
-                <td>
-                
-                <span [ngClass]="{
-                          'badge bg-success': service.appointment.status === 'Confirmed',
-                
-                
-                          'badge bg-warning text-dark': service.appointment.status === 'Pending',
-                          'badge bg-danger': service.appointment.status === 'Cancelled'
-                
-                }">
-                
-                
-                {{ service.appointment.status }}
-                
-            </span>
+    <div class="table-responsive shadow-lg p-4 rounded" style="background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);">
+        <table class="table table-hover table-striped align-middle border rounded">
             
-        </td>
-        
-    </tr>
-    
-</tbody>
-
-</table>
-  
-</div>
-
-
-</div>
-
-
-
+            <thead style="background: linear-gradient(90deg, #007bff, #0056b3); color: white; font-size: 1.2rem; font-weight: bold;">
+                <tr class="text-center">
+                    <th style="padding: 14px; border-radius: 8px 0 0 8px; background-color: #48dbfb;">Service ID</th>
+                    <th style="background-color: #48dbfb;">Service Name</th>
+                    <th style="background-color: #48dbfb;">Service Price</th>
+                    <th style="background-color: #48dbfb;">Vehicle Type</th>
+                    <th style="background-color: #48dbfb;">Appointment Date</th>
+                    <th style="background-color: #48dbfb;">Location</th>
+                    <th style="border-radius: 0 8px 8px 0; background-color: #48dbfb;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of vehicles" class="text-center" style="transition: 0.3s ease-in-out;">
+                    <td class="fw-bold">{{ service.id }}</td>
+                    <td class="fw-bold text-primary"><i class="fas fa-tools"></i> {{ service.serviceName }}</td>
+                    <td class="text-success fw-semibold"><i class="fas fa-money-bill-wave"></i> {{ service.servicePrice | currency:'INR' }}</td>
+                    <td><i class="fas fa-car-side text-danger"></i> {{ service.typeOfVehicle }}</td>
+                    <td><i class="far fa-clock text-warning"></i> {{ service.appointment.appointmentDate | date:'mediumDate' }}</td>
+                    <td><i class="fas fa-map-marker-alt text-info"></i> {{ service.appointment.location }}</td>
+                    <td>
+                      <span class="badge status-badge p-2 px-3 shadow-sm" [ngClass]="{
+                        'bg-success text-white': service.appointment.status === 'APPROVED',
+                        'bg-warning text-dark': service.appointment.status === 'PENDING',
+                        'bg-danger text-white': service.appointment.status === 'CANCELLED'
+                      }" style="font-size: 1rem; border-radius: 6px;">
+                        {{ service.appointment.status }}
+                      </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>  

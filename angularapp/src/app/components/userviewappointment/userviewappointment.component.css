@@ -1,0 +1,25 @@
+/* Status Badge Custom Styling
+.status-badge {
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+Pending (Yellow)
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: black !important;
+}
+
+/* Approved (Green) */
+/* .badge.bg-success { */
+    /* background-color: #28a745 !important;
+    color: white !important;
+}  */
+body {
+    background: url('https://img.freepik.com/free-photo/unfocused-waiting-room-with-stairs_1203-1208.jpg?t=st=1746098560~exp=1746102160~hmac=72ccccb39d08d7f696898c76fd53ca547b5d26cf9d8b5858396c4486f65e117f&w=1380') 
+    no-repeat center center fixed;
+    background-size: cover;
+}

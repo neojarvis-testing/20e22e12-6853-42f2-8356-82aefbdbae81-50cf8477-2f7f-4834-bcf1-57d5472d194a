@@ -32,13 +32,6 @@ public class FeedbackController {
         return ResponseEntity.status(201).body(feedbackService.createFeedback(feedbackDTO));
     }
  
-    @PostMapping("/api/feedback")
-    public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback){
-        User user=new User();
-        Feedback feedback1=new Feedback(1l,user,"Great service!",5);
-        return ResponseEntity.status(201).body(feedback1);
-    }
- 
     @Operation(summary = "Get all feedback", description = "Retrieves a list of all feedback submissions.")
     @GetMapping("/api/feedback")
     public ResponseEntity<List<FeedbackDTO>> getAllFeedback(){
@@ -66,7 +59,7 @@ public class FeedbackController {
  
     @Operation(summary = "Feedbacks Sort By Rating", description = "Shows all the feedbacks using pagination and sorting.")
         @GetMapping("/feedbacks")
-        public List<Feedback> getFeedbacksWithPagingAndSorting(
+        public List<FeedbackDTO> getFeedbacksWithPagingAndSorting(
                 @RequestParam(defaultValue = "0") Integer pageNo,
                 @RequestParam(defaultValue = "10") Integer pageSize,
                 @RequestParam(defaultValue = "rating") String sortBy,
