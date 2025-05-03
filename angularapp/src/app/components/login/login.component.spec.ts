@@ -28,6 +28,13 @@ describe('UserModel', () => {
     
     };
 
+
+
+
+
+
+    
+
     
     expect(user).toBeTruthy();
     
