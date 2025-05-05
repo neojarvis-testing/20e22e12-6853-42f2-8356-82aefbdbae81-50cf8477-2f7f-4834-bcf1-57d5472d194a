@@ -52,11 +52,11 @@ import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // LoggerModule.forRoot({
-    //   level: NgxLoggerLevel.DEBUG, // Set log level
-    //   serverLoggingUrl: 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs', // Backend API for logs
-    //   serverLogLevel: NgxLoggerLevel.ERROR, // Log errors to the server
-    // }),
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG, // Set log level
+      serverLoggingUrl: 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs', // Backend API for logs
+      serverLogLevel: NgxLoggerLevel.ERROR, // Log errors to the server
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
