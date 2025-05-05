@@ -42,8 +42,8 @@ export class RegistrationComponent implements OnInit {
       //this.logger.debug('Attempting user registration:', newUser);
       this.service.registerUser(newUser).subscribe(
         (user) => {
-          //this.logger.info('User registration successful:', user);
-         // this.logger.debug('Logging to server:', 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs');
+          this.logger.info('User registration successful:', user);
+          this.logger.debug('Logging to server:', 'https://8080-efbdffbfaafacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs');
           this.service.makeLog('User registration successfully done').subscribe(()=>{
             console.log('log called')
             Swal.fire({
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
             });
           });
         
-         // setTimeout(() => this.router.navigate(['/login']), 3000);
+         setTimeout(() => this.router.navigate(['/login']), 3000);
         },
         (error) => {
           this.isLoading = false;
