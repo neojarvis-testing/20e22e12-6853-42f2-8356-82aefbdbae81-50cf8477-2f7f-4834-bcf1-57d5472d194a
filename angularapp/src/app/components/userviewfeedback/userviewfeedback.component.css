@@ -1,48 +1,148 @@
-
+/* ---------------------- */
+/* General Styling */
+/* ---------------------- */
 body {
-
-  background-color: #f8f9fa;
-
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+  text-align: center;
+  padding: 30px;
+  transition: background 0.3s ease-in-out;
 }
-
-
-
-.list-group-item {
-
+ 
+/* ---------------------- */
+/* Table Container */
+/* ---------------------- */
+.table-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
-
 }
-
-
-
-
-.list-group-item:hover {
-
-  background-color: #eef2f7;
-
+ 
+/* ---------------------- */
+/* Table Styling */
+/* ---------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
-
-
-
-.btn-outline-danger {
-
-  transition: transform 0.2s;
-
+ 
+th, td {
+  padding: 14px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
 }
-
-
-
-.btn-outline-danger:hover {
-
-  transform: scale(1.1);
-
-  background-color: #ff6b6b;
-
+ 
+/* Table Header */
+th {
+  background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
-
+  text-transform: uppercase;
+  font-weight: bold;
+}
+ 
+/* Alternate Row Coloring */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+ 
+/* Hover Effect on Rows */
+tr:hover {
+  background-color: #e2e6ea;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+ 
+/* ---------------------- */
+/* Button Styling */
+/* ---------------------- */
+button {
+  background: linear-gradient(135deg, #dc3545, #ff6b81);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+ 
+/* Button Hover */
+button:hover {
+  background: linear-gradient(135deg, #b22222, #ff8e98);
+  transform: scale(1.08);
+}
+ 
+/* Button Press Effect */
+button:active {
+  transform: scale(0.95);
+}
+ 
+/* ---------------------- */
+/* No Feedback Message */
+/* ---------------------- */
+p {
+  font-size: 18px;
+  color: #444;
+  margin-top: 15px;
+  font-weight: bold;
+}
+ 
+/* ---------------------- */
+/* Responsive Design */
+/* ---------------------- */
+@media (max-width: 768px) {
+  .table-container {
+      width: 90%;
+      padding: 15px;
+  }
+ 
+  th, td {
+      font-size: 14px;
+      padding: 10px;
+  }
+ 
+  button {
+      font-size: 14px;
+      padding: 10px;
+  }
+}
+ 
+/* ---------------------- */
+/* Animations */
+/* ---------------------- */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: scale(0.95);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
 }
 
-
-
-
-
+.feedback-heading {
+  font-size: 28px; /* Reduced size */font-weight: bold;
+  color: #ff007f;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  position: relative;
+  animation: fadeIn 0.6s ease-in-out;
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;}

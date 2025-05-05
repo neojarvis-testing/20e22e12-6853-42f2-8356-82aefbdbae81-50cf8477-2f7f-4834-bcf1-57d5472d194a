@@ -21,8 +21,6 @@ import com.examly.springapp.exception.VehicleMaintenanceServiceNotFoundException
 import com.examly.springapp.mapper.AppointmentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
  
 @Service
@@ -58,19 +56,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
-    public Appointment addAppointment(Appointment appointment) {
-        VehicleMaintenance existingService=vehicleServiceRepo.findById(appointment.getService().getId()).orElse(null);
-        if(existingService==null){
-            throw new VehicleMaintenanceServiceNotFoundException("Vehicle Maintenance Service with ID "+existingService.getId()+" not found");
-        }
-        else{
-            User existingUser=userRepo.findById(appointment.getUser().getId()).orElse(null);
-            appointment.setUser(existingUser);
-            appointment.setService(existingService);
-            appointment=appointmentRepo.save(appointment);
-            return appointment;
-        }
-    }
  
     public List<AppointmentDTO> getAppointmentsbyUserId(int userId) {
         logger.info("Fetching appointments for user ID: {}", userId);
@@ -94,9 +79,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentList.stream().map(AppointmentMapper::mapToAppointmentDTO).toList();
     }
  
-    public List<Appointment> getAllAppointment() {
-        return appointmentRepo.findAll();
-    }
  
     public AppointmentDTO updateAppointments(AppointmentDTO appointmentDTO, long appointmentId) {
         logger.info("Updating appointment with ID: {}", appointmentId);
@@ -117,22 +99,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
-    public Appointment updateAppointment(Appointment appointmentDTO, long appointmentId) {
-        Appointment existingAppointment = appointmentRepo.findById(appointmentId).orElse(null);
-        if (existingAppointment == null) {
-            return null;  // Exceptions will be added in future
-        }
-        VehicleMaintenance vehicleMaintenance=vehicleServiceRepo.findById(appointmentDTO.getId()).orElse(null);
-        User user=userRepo.findById(1).orElse(null);
-        existingAppointment.setId(appointmentId);
-        existingAppointment.setLocation(appointmentDTO.getLocation());
-        existingAppointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
-        existingAppointment.setStatus(appointmentDTO.getStatus());
-        userRepo.save(user);
-        vehicleServiceRepo.save(vehicleMaintenance);
-        existingAppointment=appointmentRepo.save(existingAppointment);
-        return existingAppointment;
-    }
  
     public Map<String,String> deleteAppointment(long appointmentId) {
         Appointment appointment = appointmentRepo.findById(appointmentId).orElse(null);
@@ -172,13 +138,14 @@ public class AppointmentServiceImpl implements AppointmentService {
  
     public AppointmentDTO getAppointmentsById(long id) {
         Appointment appointment=appointmentRepo.findById(id).orElse(null);
+        System.out.println(appointment);
         if(appointment==null){
             throw new AppointmentNotFoundException("Appointment with Appointment ID: "+id+" not found");
         }
         return AppointmentMapper.mapToAppointmentDTO(appointment);
     }
  
-     public List<Appointment> getAppointmentsByPagination(Integer pageNo, Integer pageSize, String sortBy, String sortDir) {
+     public List<AppointmentDTO> getAppointmentsByPagination(Integer pageNo, Integer pageSize, String sortBy, String sortDir) {
             // Determine sort direction
             Sort sort = sortDir.equalsIgnoreCase("desc")
                         ? Sort.by(sortBy).descending()
@@ -191,7 +158,10 @@ public class AppointmentServiceImpl implements AppointmentService {
             Page<Appointment> pagedAppointments = appointmentRepo.findAll(pageRequest);
  
             // Return the content
-            return pagedAppointments.getContent();
+            List<Appointment> appointmentList= pagedAppointments.getContent();
+            return appointmentList.stream().map(
+                appointment->AppointmentMapper.mapToAppointmentDTO(appointment)
+            ).toList();
         }
 }
  

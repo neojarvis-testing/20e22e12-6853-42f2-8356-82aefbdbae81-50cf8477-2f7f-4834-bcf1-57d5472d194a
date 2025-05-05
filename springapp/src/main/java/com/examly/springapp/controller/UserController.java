@@ -15,17 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
- 
 import com.examly.springapp.config.JwtUtils;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.service.UserServiceImpl;
-
 import jakarta.validation.Valid;
- 
-
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.*;
@@ -47,9 +42,6 @@ public class UserController {
     @Autowired
     private JwtUtils jwtUtils;
 
- 
-
-
     @Operation(
             summary = "Register a new user",
             description = "Allows new users to register by providing necessary details such as username, email, password, and role."
@@ -58,13 +50,6 @@ public class UserController {
     public ResponseEntity<UserDTO> registerUsers(@Valid @RequestBody UserDTO userDTO){
         return ResponseEntity.status(201).body(userService.registerUsers(userDTO));
     }
-
-
-    @PostMapping("/api/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
-        return ResponseEntity.status(201).body(userService.registerUser(user));
-    }
- 
 
     @Operation(
         summary = "Login user",
@@ -89,7 +74,7 @@ public class UserController {
 
     @Operation(summary = "Users Sort By username", description = "Shows all the users using pagination and sorting.")
     @GetMapping("/users")
-    public List<User> getUserWithPaging(@RequestParam(defaultValue = "0") Integer pageNo,
+    public List<UserDTO> getUserWithPaging(@RequestParam(defaultValue = "0") Integer pageNo,
                                         @RequestParam(defaultValue = "10") Integer pageSize){
  
         return userService.getUsersByPagination(pageNo,pageSize);
@@ -98,7 +83,7 @@ public class UserController {
     
     @Operation(summary = "Update User by User", description = "Update user profile by the user.")
     @PutMapping("/api/user/view/profile/{userId}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId,@RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> updateUser(@Valid @PathVariable int userId,@RequestBody UserDTO userDTO){
     	return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
     }
     

@@ -10,12 +10,19 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
  
-  private readonly apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl;
  
-  constructor(private readonly http: HttpClient, private readonly router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
  
+  makeLog(msg: string): Observable<any> {
+    let obj={
+      'msg': msg
+    }
+    return this.http.post<User>(this.apiUrl + '/logs', obj);
+  }
+
   registerUser(user: User): Observable<any> {
-    return this.http.post<User>(this.apiUrl + '/register', user);
+    return this.http.post<User>(this.apiUrl + '/registers', user);
   }
  
   loginUser(login: Login): Observable<any> {
@@ -38,6 +45,9 @@ export class AuthService {
  
   logout() {
     localStorage.clear();
+ 
+    //this.router.navigate(['/login']);
+ 
     this.router.navigate(['/login']);
  
   }

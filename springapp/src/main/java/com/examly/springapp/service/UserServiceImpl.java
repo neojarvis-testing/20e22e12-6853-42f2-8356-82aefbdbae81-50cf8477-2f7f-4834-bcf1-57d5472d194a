@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.config.UserPrinciple;
 import com.examly.springapp.exception.UserNotFoundException;
 import com.examly.springapp.mapper.UserMapper;
@@ -19,7 +18,7 @@ import com.examly.springapp.repository.UserRepo;
 import org.springframework.data.domain.Sort;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService,UserService {
 
     private UserRepo userRepo;
 
@@ -32,18 +31,12 @@ public class UserServiceImpl implements UserDetailsService {
     private PasswordEncoder encoder;
 
     public UserDTO registerUsers(UserDTO userDTO) {
-        User user = UserMapper.mapUserDtoToUser(userDTO);
+        User user=UserMapper.mapUserDtoToUser(userDTO);
         user.setPassword(encoder.encode(user.getPassword()));
-        user = userRepo.save(user);
+        user=userRepo.save(user);
         return UserMapper.mapUserToUserDTO(user);
     }
-
-    public User registerUser(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        user = userRepo.save(user);
-        return user;
-    }
-
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User existingUser = userRepo.findByUsername(username);
@@ -56,49 +49,54 @@ public class UserServiceImpl implements UserDetailsService {
     public User loginUser(User user) {
         User existingUser = userRepo.findByUsername(user.getUsername());
         if (existingUser == null) {
-            throw new UserNotFoundException("User Email Not Found");
+            throw new UserNotFoundException("Username Not Found");
         }
         // No need to encode the password again here
         return existingUser;
     }
 
-    public List<User> getUsersByPagination(Integer pageNo, Integer pageSize) {
-        // Create PageRequest object
+    public List<UserDTO> getUsersByPagination(Integer pageNo, Integer pageSize) {
+		//create pagerequest object
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize, Sort.by("username").ascending());
-        // Pass it to repos
+        //pass it to repos
         Page<User> pagingUser = userRepo.findAll(pageRequest);
-        return pagingUser.getContent();
+        //pagingUser.hasContent(); -- to check pages are there or not
+        Sort nameSort = Sort.by("username");
+        Sort emailSort = Sort.by("email");
+        Sort multiSort = emailSort.and(nameSort);
+        List<User> userList= pagingUser.getContent();
+        return userList.stream().map(user->UserMapper.mapUserToUserDTO(user)).toList();
     }
 
-    public UserDTO updateUser(int userId, UserDTO userDTO) {
-        User existingUser = userRepo.findById(userId).orElse(null);
-        if (existingUser == null) {
-            throw new UserNotFoundException("User not found");
-        }
-        existingUser = UserMapper.mapUserDtoToUser(userDTO);
-        existingUser.setId(userId);
-        User user = userRepo.save(existingUser);
-        return UserMapper.mapUserToUserDTO(user);
-    }
+	public UserDTO updateUser(int userId, UserDTO userDTO) {
+		User existingUser=userRepo.findById(userId).orElse(null);
+		if(existingUser==null) {
+			throw new UserNotFoundException("User not found");
+		}
+		existingUser=UserMapper.mapUserDtoToUser(userDTO);
+		existingUser.setId(userId);
+		User user=userRepo.save(existingUser);
+		return UserMapper.mapUserToUserDTO(user);
+	}
 
-    public UserDTO getUserById(int userId) {
-        User user = userRepo.findById(userId).orElse(null);
-        if (user == null) {
-            throw new UserNotFoundException("User not found");
-        }
-        return UserMapper.mapUserToUserDTO(user);
-    }
+	public UserDTO getUserById(int userId) {
+		User user=userRepo.findById(userId).orElse(null);
+		if(user==null) {
+			throw new UserNotFoundException("User not found");
+		}
+		return UserMapper.mapUserToUserDTO(user);
+	}
 
-    public Map<String, String> deleteUserById(int userId) {
-        if (userRepo.existsById(userId)) {
-            userRepo.deleteById(userId);
-            return Map.of("message", "User deleted successfully");
-        }
-        return Map.of("message", "User with user Id : " + userId + " not found");
-    }
+	public Map<String,String> deleteUserById(int userId) {
+		if(userRepo.existsById(userId)) {
+			userRepo.deleteById(userId);
+			return Map.of("message","User deleted successfully");
+		}
+		return Map.of("message","User with user Id : "+userId+" not found");
+	}
 
-    public UserDTO getUserByUsername(String username) {
-        User user = userRepo.findByUsername(username);
-        return UserMapper.mapUserToUserDTO(user);
+	public UserDTO getUserByUsername(String username) {
+		User user = userRepo.findByUsername(username);
+		return UserMapper.mapUserToUserDTO(user);
     }
 }

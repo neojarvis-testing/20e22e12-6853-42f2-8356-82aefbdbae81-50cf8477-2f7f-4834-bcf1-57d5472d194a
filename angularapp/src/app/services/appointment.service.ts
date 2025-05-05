@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AppointmentService {
-  private readonly apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl;
  
-  constructor(private readonly http: HttpClient) {}
+  constructor(private http: HttpClient) {}
  
  
   // Add Appointment
@@ -58,7 +58,11 @@ export class AppointmentService {
   ): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.apiUrl}/appointments?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
   }
- 
+  
+  // Fetch paginated and sorted appointments
+  // getAppointments(pageNo: number, pageSize: number, sortBy: string, sortDir: string): Observable<any> {
+  //   return this.http.get<Appointment[]>(`${this.apiUrl}/appointments?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
+  // }
   getAppointmentById(id:number):Observable<Appointment>{
     return this.http.get<Appointment>(`${this.apiUrl}/appointments/${id}`)
   }

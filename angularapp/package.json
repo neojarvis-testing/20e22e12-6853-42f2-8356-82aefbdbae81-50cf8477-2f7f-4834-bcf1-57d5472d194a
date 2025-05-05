@@ -23,6 +23,7 @@
     "angularapp": "file:",
     "bootstrap": "^5.3.5",
     "karma-coverage": "2.2.0",
+    "ngx-logger": "^4.3.3",
     "puppeteer": "^19.7.5",
     "rxjs": "~6.6.0",
     "sweetalert": "^2.1.2",

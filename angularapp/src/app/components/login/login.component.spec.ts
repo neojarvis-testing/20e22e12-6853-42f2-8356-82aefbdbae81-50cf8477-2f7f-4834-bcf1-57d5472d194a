@@ -1,62 +1,25 @@
-import { User } from "src/app/models/user.model";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { LoginComponent } from './login.component';
 
-describe('UserModel', () => {
-  
-  fit('frontend_User_model_should_create_an_instance', () => {
-  
-    const email = 'testuser@example.com';
-  
-    
-  
-    const username = 'testuser';
-  
-    const mobileNumber = '1234567890';
-  
-    const userRole = 'admin';
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
-
-
-
-
-
-
-
-
-
-    
-
-    const user: User = {
-    
-      email: email,
-    
-      username: username,
-    
-      mobileNumber: mobileNumber,
-    
-      userRole: userRole
-    
-    };
-
-
-
-
-
-
-    
-
-    
-    expect(user).toBeTruthy();
-    
-    expect(user.email).toBeDefined();
-    
-    expect(user.username).toBeDefined();
-    
-    expect(user.mobileNumber).toBeDefined();
-    
-    expect(user.userRole).toBeDefined();
-  
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ LoginComponent ]
+    })
+    .compileComponents();
   });
- 
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

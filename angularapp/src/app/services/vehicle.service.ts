@@ -9,9 +9,9 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 })
 export class VehicleService {
 
-  private readonly apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl;
   
-  constructor(private readonly http:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   public addVehicleService(vehicleService:VehicleMaintenance):Observable<VehicleMaintenance>{
     return this.http.post<VehicleMaintenance>(`${this.apiUrl}/service`,vehicleService);
