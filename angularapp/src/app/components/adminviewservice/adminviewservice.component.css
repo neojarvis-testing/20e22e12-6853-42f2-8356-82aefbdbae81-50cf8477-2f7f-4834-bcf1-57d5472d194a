@@ -29,3 +29,20 @@ button {
 button:hover {
     transform: scale(1.1);
 }
+
+/* Styling for search bar */
+.search-bar {
+    width: 30%;
+    min-width: 200px;
+}
+
+/* Positioning min/max price filters */
+.price-filters {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.price-filters input {
+    width: 45%;
+}
