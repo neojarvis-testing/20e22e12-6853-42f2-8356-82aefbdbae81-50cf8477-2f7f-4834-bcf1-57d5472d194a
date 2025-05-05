@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userRole', data.userRole);
         this.checkLastAppointment(data.userId);
+        this.checkCouponEligibility(data.userId);
+        console.log(this.checkCouponEligibility(data.userId))
         this.router.navigate(['/']);
       },
       (error) => {
@@ -87,5 +89,34 @@ export class LoginComponent implements OnInit {
     );
   }
   
+  checkCouponEligibility(userId: number): void {
+    this.appointmentService.getAppointmentsByUserId(userId).subscribe(
+      (appointments) => {
+        if (appointments.length > 3) {
+          const lastAppointmentDate = new Date(appointments[appointments.length - 1].appointmentDate);
+          const currentDate = new Date();
+          const differenceInDays = Math.floor((currentDate.getTime() - lastAppointmentDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+          if (differenceInDays > 20) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Congratulations!',
+              html: `<p>You have won a coupon! 🎉</p>
+                     <img src="assets/scratch.gif" alt="Coupon GIF" width="200"/>
+                     <p><strong>Please Note:</strong> All credit and debit cards are acceptable. Extra 2% charges are applicable for cards.</p>`,
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/add-appointment']);
+              }
+            });
+          }
+        }
+      },
+      (error) => {
+        console.error('Error fetching appointments', error);
+      }
+    );
+  }
 }
 
