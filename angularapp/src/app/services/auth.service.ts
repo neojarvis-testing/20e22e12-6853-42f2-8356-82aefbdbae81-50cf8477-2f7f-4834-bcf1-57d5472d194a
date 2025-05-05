@@ -14,6 +14,13 @@ export class AuthService {
  
   constructor(private http: HttpClient, private router: Router) { }
  
+  makeLog(msg: string): Observable<any> {
+    let obj={
+      'msg': msg
+    }
+    return this.http.post<User>(this.apiUrl + '/logs', obj);
+  }
+
   registerUser(user: User): Observable<any> {
     return this.http.post<User>(this.apiUrl + '/registers', user);
   }

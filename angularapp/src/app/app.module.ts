@@ -22,6 +22,8 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,12 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // LoggerModule.forRoot({
+    //   level: NgxLoggerLevel.DEBUG, // Set log level
+    //   serverLoggingUrl: 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs', // Backend API for logs
+    //   serverLogLevel: NgxLoggerLevel.ERROR, // Log errors to the server
+    // }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

@@ -64,7 +64,6 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
         User existingUser = userService.loginUser(user);
-        System.out.println("User Id "+existingUser.getId());
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
@@ -84,7 +83,7 @@ public class UserController {
     
     @Operation(summary = "Update User by User", description = "Update user profile by the user.")
     @PutMapping("/api/user/view/profile/{userId}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable int userId,@RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> updateUser(@Valid @PathVariable int userId,@RequestBody UserDTO userDTO){
     	return ResponseEntity.status(200).body(userService.updateUser(userId, userDTO));
     }
     

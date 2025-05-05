@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import Swal from 'sweetalert2';
+import { NGXLogger } from 'ngx-logger';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -16,7 +17,8 @@ export class RegistrationComponent implements OnInit {
   showAlert: boolean = false;
   isLoading = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private service: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private service: AuthService
+    ,private logger:NGXLogger) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator]],
@@ -37,17 +39,23 @@ export class RegistrationComponent implements OnInit {
         mobileNumber: this.signupForm.value.mobileNumber,
         userRole: this.signupForm.value.userRole
       };
-  
+      //this.logger.debug('Attempting user registration:', newUser);
       this.service.registerUser(newUser).subscribe(
         (user) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Registration Successful!',
-            text: 'Redirecting to login...',
-            showConfirmButton: false,
-            timer: 3000
+          //this.logger.info('User registration successful:', user);
+         // this.logger.debug('Logging to server:', 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs');
+          this.service.makeLog('User registration successfully done').subscribe(()=>{
+            console.log('log called')
+            Swal.fire({
+              icon: 'success',
+              title: 'Registration Successful!',
+              text: 'Redirecting to login...',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
-          setTimeout(() => this.router.navigate(['/login']), 3000);
+        
+         // setTimeout(() => this.router.navigate(['/login']), 3000);
         },
         (error) => {
           this.isLoading = false;

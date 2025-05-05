@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
- 
-import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.AppointmentDTO;
 import com.examly.springapp.service.AppointmentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

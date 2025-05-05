@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     public User loginUser(User user) {
         User existingUser = userRepo.findByUsername(user.getUsername());
         if (existingUser == null) {
-            throw new UserNotFoundException("User Email Not Found");
+            throw new UserNotFoundException("Username Not Found");
         }
         // No need to encode the password again here
         return existingUser;
