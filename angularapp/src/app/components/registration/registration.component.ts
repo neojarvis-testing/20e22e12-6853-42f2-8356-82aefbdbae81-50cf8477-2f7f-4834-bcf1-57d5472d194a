@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
             });
           });
         
-         // setTimeout(() => this.router.navigate(['/login']), 3000);
+         setTimeout(() => this.router.navigate(['/login']), 3000);
         },
         (error) => {
           this.isLoading = false;

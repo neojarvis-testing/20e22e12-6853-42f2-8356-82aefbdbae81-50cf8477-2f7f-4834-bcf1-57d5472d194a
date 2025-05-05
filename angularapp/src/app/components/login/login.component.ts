@@ -102,9 +102,13 @@ export class LoginComponent implements OnInit {
               icon: 'success',
               title: 'Congratulations!',
               html: `<p>You have won a coupon! 🎉</p>
-                     <img src="https://www.wpsolver.com/wp-content/uploads/2020/03/16/Scratch-Coupon-Card-WordPress-Plugin.gif" alt="Coupon GIF" width="200"/>
+                     <img src="assets/scratch.gif" alt="Coupon GIF" width="200"/>
                      <p><strong>Please Note:</strong> All credit and debit cards are acceptable. Extra 2% charges are applicable for cards.</p>`,
               confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/add-appointment']);
+              }
             });
           }
         }
