@@ -4,12 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
  
 public class UserDTO {
     private int id;
     @Email(message = "Invalid email format")
+    @Column(unique = true)
     @NotBlank(message = "Email is required")
     private String email;
+    @Column(unique = true)
     @NotBlank(message = "Username cannot be empty")
     private String username;
     @NotBlank(message = "Password cannot be empty")
