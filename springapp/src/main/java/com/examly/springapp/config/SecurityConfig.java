@@ -40,8 +40,7 @@ public class SecurityConfig {
             .build();
     }
  
-    @Bean
- 
+    @Bean 
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
@@ -57,8 +56,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/api/appointment").hasAnyRole("USER")
         .requestMatchers(HttpMethod.PUT, "/api/services/{id}","/api/appointment/{appointmentId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.POST,"/api/register","/api/login").permitAll()
-        .requestMatchers(HttpMethod.POST,"/api/service").hasAnyRole("ADMIN")
- 
+        .requestMatchers(HttpMethod.POST,"/api/service").hasAnyRole("ADMIN") 
         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html").permitAll()
         .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
