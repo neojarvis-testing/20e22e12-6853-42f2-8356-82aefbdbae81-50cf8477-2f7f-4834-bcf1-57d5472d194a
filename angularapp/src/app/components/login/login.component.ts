@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CouponService } from 'src/app/services/coupon.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   alertType: string = ''; // 'success' or 'danger'
   showAlert: boolean = false;
 
-  constructor(private loginService: AuthService, private router: Router,private appointmentService:AppointmentService) {}
+  constructor(private loginService: AuthService, private router: Router,private appointmentService:AppointmentService,private couponService:CouponService) {}
 
   ngOnInit(): void {}
 
@@ -98,19 +99,23 @@ export class LoginComponent implements OnInit {
           const differenceInDays = Math.floor((currentDate.getTime() - lastAppointmentDate.getTime()) / (1000 * 60 * 60 * 24));
   
           if (differenceInDays > 20) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Congratulations!',
-              html: `<p>You have won a coupon! 🎉</p>
-                     <img src="assets/scratch.gif" alt="Coupon GIF" width="200"/>
-                     <p><strong>Please Note:</strong> All credit and debit cards are acceptable. Extra 2% charges are applicable for cards.</p>`,
-              confirmButtonText: 'OK'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.router.navigate(['/add-appointment']);
-              }
+            this.couponService.createCoupon(userId).subscribe((coupon) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Congratulations!',
+                html: `<p>You have won a coupon! 🎉</p>
+                        <img src="assets/scratch.gif" alt="Coupon GIF" width="200"/>
+                       <p>Coupon Code: <strong>${coupon.couponCode}</strong></p>
+                       <p>Expires on: <strong>${coupon.expirationDate}</strong></p>
+                       <p><strong>Please Note:</strong> All credit and debit cards are acceptable. Extra 2% charges are applicable for cards.</p>`,
+                confirmButtonText: 'OK'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.router.navigate(['/coupon']);
+                }
+              });
             });
-          }
+          }          
         }
       },
       (error) => {
@@ -118,5 +123,34 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  // checkCouponEligibility(userId: number): void {
+  //   this.appointmentService.getAppointmentsByUserId(userId).subscribe(
+  //     (appointments) => {
+  //       if (appointments.length > 3) {
+  //         const lastAppointmentDate = new Date(appointments[appointments.length - 1].appointmentDate);
+  //         const currentDate = new Date();
+  //         const differenceInDays = Math.floor((currentDate.getTime() - lastAppointmentDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+  //         if (differenceInDays > 20) {
+  //           Swal.fire({
+  //             icon: 'success',
+  //             title: 'Congratulations!',
+  //             html: `<p>You have won a coupon! 🎉</p>
+  //                    <img src="assets/scratch.gif" alt="Coupon GIF" width="200"/>
+  //                    <p><strong>Please Note:</strong> All credit and debit cards are acceptable. Extra 2% charges are applicable for cards.</p>`,
+  //             confirmButtonText: 'OK'
+  //           }).then((result) => {
+  //             if (result.isConfirmed) {
+  //               this.router.navigate(['/add-appointment']);
+  //             }
+  //           });
+  //         }
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching appointments', error);
+  //     }
+  //   );
+  // }
 }
 

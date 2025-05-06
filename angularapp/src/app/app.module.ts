@@ -23,6 +23,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
+import { CouponHistoryComponent } from './components/coupon-history/coupon-history.component';
+import { AdminviewcouponsComponent } from './components/adminviewcoupons/adminviewcoupons.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
     UseraddfeedbackComponent,
     UsernavbarComponent,
     UserviewappointmentComponent,
-    UserviewfeedbackComponent
+    UserviewfeedbackComponent,
+    CouponHistoryComponent,
+    AdminviewcouponsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,7 @@ import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
     ReactiveFormsModule,
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG, // Set log level
-      serverLoggingUrl: 'https://8080-afabbdaccacfdfacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs', // Backend API for logs
+      serverLoggingUrl: 'https://8080-efbdffbfaafacfbfddfefcecfffbcfdda.premiumproject.examly.io/api/logs', // Backend API for logs
       serverLogLevel: NgxLoggerLevel.ERROR, // Log errors to the server
     }),
   ],

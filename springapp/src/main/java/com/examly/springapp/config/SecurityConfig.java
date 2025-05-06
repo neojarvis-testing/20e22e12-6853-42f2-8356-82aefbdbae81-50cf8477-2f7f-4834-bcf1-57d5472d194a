@@ -57,6 +57,9 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.PUT, "/api/services/{id}","/api/appointment/{appointmentId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.POST,"/api/register","/api/login").permitAll()
         .requestMatchers(HttpMethod.POST,"/api/service").hasAnyRole("ADMIN") 
+        .requestMatchers(HttpMethod.POST,"/coupons/create").permitAll()
+        .requestMatchers(HttpMethod.GET,"/coupons/user/{userId}").permitAll()
+        .requestMatchers(HttpMethod.PUT,"/coupons/expire/{couponId}").permitAll()
         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html").permitAll()
         .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
@@ -65,3 +68,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+

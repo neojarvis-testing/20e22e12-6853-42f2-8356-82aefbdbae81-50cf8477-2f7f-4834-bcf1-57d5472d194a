@@ -40,6 +40,9 @@
                         <li class="nav-item">
                             <a class="nav-link" routerLink="/view-appointments">Appointment</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/admin-view-coupon">User Coupons</a>
+                        </li>
                       
                     </ng-container>
  
@@ -64,15 +67,23 @@
                                 <li><a class="dropdown-item" routerLink="/view-feedback">View Feedback</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                               Coupons
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/coupon">My Coupons</a></li>
+                            </ul>
+                        </li>
                     </ng-container>
 
-                    <!-- Profile Icon (Only when logged in) -->
-                    <li class="nav-item">
+                    
+                     <!-- Profile Icon (Only when logged in) -->
+                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center" routerLink="/user-Profile">
                             <img src="assets/profilelogo.webp" alt="User Profile" class="rounded-circle border border-light" width="30" height="30">
                         </a>
                     </li>
-                    
 
                     <!-- Logout Button -->
                     <li class="nav-item">
