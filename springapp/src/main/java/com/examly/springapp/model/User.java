@@ -14,6 +14,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    @Column(unique = true)
     private String username;
     private String mobileNumber;
     private String userRole;
