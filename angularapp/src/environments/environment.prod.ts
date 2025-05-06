@@ -4,7 +4,8 @@ export const environment = {
 
 
 
-  apiUrl:'https://8080-dcfdaabbdfdedafefacfbfddfefcecfffbcfdda.premiumproject.examly.io/api',
+  apiUrl:'https://8080-efbdffbfaafacfbfddfefcecfffbcfdda.premiumproject.examly.io/api',
+
 
 
 

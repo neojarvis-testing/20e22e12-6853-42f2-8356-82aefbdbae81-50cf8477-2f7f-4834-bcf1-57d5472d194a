@@ -15,7 +15,7 @@
             <tr>
                 <th>User ID</th>
                 <th>Coupon Code</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
                 <th>Activation Date</th>
                 <th>Expiration Date</th>
             </tr>
@@ -24,13 +24,13 @@
             <tr *ngFor="let coupon of filteredCoupons">
                 <td><strong>{{ coupon.userId }}</strong></td>
                 <td class="text-primary fw-bold">{{ coupon.couponCode }}</td>
-                <td>
+                <!-- <td>
                     <span [ngClass]="coupon.status === 'active' ? 'badge bg-success' : 'badge bg-danger'">
                         {{ coupon.status | uppercase }}
                     </span>
-                </td>
-                <td><i class="bi bi-calendar-check"></i> {{ coupon.activationDate }}</td>
-                <td><i class="bi bi-clock"></i> <strong>{{ coupon.expirationDate }}</strong></td>
+                </td> -->
+                <td><i class="bi bi-calendar-check"></i> {{ coupon.activationDate | date }}</td>
+                <td><i class="bi bi-clock"></i> <strong>{{ coupon.expirationDate | date}}</strong></td>
             </tr>
         </tbody>
     </table>

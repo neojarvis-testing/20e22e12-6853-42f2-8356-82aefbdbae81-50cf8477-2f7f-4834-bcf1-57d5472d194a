@@ -30,10 +30,14 @@
     <div class="row mt-3 justify-content-center">
         <div *ngFor="let coupon of filteredCoupons" class="col-md-4">
             <div class="card shadow-lg p-4 text-center">
-                <h3>🎉 Coupon Code: <strong class="text-primary">{{ coupon.couponCode }}</strong></h3>
-                <p class="font-weight-bold" [ngClass]="coupon.status === 'active' ? 'text-success' : 'text-danger'">
+                <h5>🎉 Coupon Code: <strong class="text-primary">{{ coupon.couponCode }}</strong></h5>
+                <!-- <p class="font-weight-bold" [ngClass]="coupon.status === 'active' ? 'text-success' : 'text-danger'">
                     {{ coupon.status | uppercase }}
+                </p> -->
+                <p class="font-weight-bold">
+                    Our app is currently in progress and will determine coupon validity based on dates.
                 </p>
+                
                 <p><i class="bi bi-calendar-check"></i> Activation Date: {{ coupon.activationDate }}</p>
                 <p><i class="bi bi-clock"></i> Expires on: <strong>{{ coupon.expirationDate }}</strong></p>
             </div>
