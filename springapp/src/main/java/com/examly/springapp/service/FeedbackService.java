@@ -1,14 +1,13 @@
 package com.examly.springapp.service;
-import java.util.List;
-
-import com.examly.springapp.model.Feedback;
+import java.util.*;
+import com.examly.springapp.model.FeedbackDTO;
 
 public interface FeedbackService {
-    public Feedback createFeedback(Feedback feedback);
-    public List<Feedback> getAllFeedback();
-    public List<Feedback> getFeedbackByUserId(int userId);
-    public boolean deleteFeedback(Long id);
-    public Feedback getFeedbackById(Long feedbackId);
-
+    public FeedbackDTO createFeedback(FeedbackDTO feedbackDTO);
+    public List<FeedbackDTO> getAllFeedback();
+    public List<FeedbackDTO> getFeedbackByUserId(int userId);
+    public Map<String,String> deleteFeedback(Long id);
+    public FeedbackDTO getFeedbackById(Long feedbackId);
+    public List<FeedbackDTO> getFeedbacksByPagination(Integer pageNo, Integer pageSize, String sortBy, String sortDir); 
 }
     

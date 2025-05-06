@@ -15,6 +15,7 @@ import com.examly.springapp.service.FeedbackServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 @RestController
 @Tag(name = "Feedback Service Controller", description = "APIs for managing Feedback services.")
 public class FeedbackController {
@@ -28,15 +29,8 @@ public class FeedbackController {
     
     @Operation(summary = "Submit feedback", description = "Allows a user to submit feedback for a service.")
     @PostMapping("/api/feedbacks")
-    public ResponseEntity<FeedbackDTO> createFeedbacks(@RequestBody FeedbackDTO feedbackDTO){
+    public ResponseEntity<FeedbackDTO> createFeedbacks(@Valid @RequestBody FeedbackDTO feedbackDTO){
         return ResponseEntity.status(201).body(feedbackService.createFeedback(feedbackDTO));
-    }
- 
-    @PostMapping("/api/feedback")
-    public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback){
-        User user=new User();
-        Feedback feedback1=new Feedback(1l,user,"Great service!",5);
-        return ResponseEntity.status(201).body(feedback1);
     }
  
     @Operation(summary = "Get all feedback", description = "Retrieves a list of all feedback submissions.")
@@ -52,7 +46,7 @@ public class FeedbackController {
     }
  
 
-   @Operation(summary = "Delete feedback", description = "Deletes a specific feedback entry by its unique ID.")
+    @Operation(summary = "Delete feedback", description = "Deletes a specific feedback entry by its unique ID.")
     @DeleteMapping("/api/feedback/{id}")
     public ResponseEntity<Map<String,String>>deleteFeedback(@PathVariable Long id){
         return ResponseEntity.status(200).body(feedbackService.deleteFeedback(id));
@@ -66,7 +60,7 @@ public class FeedbackController {
  
     @Operation(summary = "Feedbacks Sort By Rating", description = "Shows all the feedbacks using pagination and sorting.")
         @GetMapping("/feedbacks")
-        public List<Feedback> getFeedbacksWithPagingAndSorting(
+        public List<FeedbackDTO> getFeedbacksWithPagingAndSorting(
                 @RequestParam(defaultValue = "0") Integer pageNo,
                 @RequestParam(defaultValue = "10") Integer pageSize,
                 @RequestParam(defaultValue = "rating") String sortBy,

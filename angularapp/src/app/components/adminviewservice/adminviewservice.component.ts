@@ -11,22 +11,33 @@ import Swal from 'sweetalert2';
 })
 export class AdminviewserviceComponent implements OnInit {
 
-  services:VehicleMaintenance[]=[]
+  services: VehicleMaintenance[] = [];
+  filteredServices: VehicleMaintenance[] = [];
+  searchTerm: string = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
 
-  constructor(private vehicleService:VehicleService,private router:Router) { }
+  constructor(private vehicleService: VehicleService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllVehicleServices();
   }
 
-  getAllVehicleServices():void{
-    this.vehicleService.getAllVehicleService().subscribe((data)=>{
-      console.log(data)
-      this.services=data;
-    })
+  getAllVehicleServices(): void {
+    this.vehicleService.getAllVehicleService().subscribe((data) => {
+      console.log(data);
+      this.services = data;
+      this.filteredServices = data;
+    });
   }
 
- 
+  filterServices(): void {
+    this.filteredServices = this.services.filter(service =>
+      service.serviceName.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+      (this.minPrice === null || service.servicePrice >= this.minPrice) &&
+      (this.maxPrice === null || service.servicePrice <= this.maxPrice)
+    );
+  }
 
   delete(id: number): void {
     Swal.fire({
@@ -51,9 +62,8 @@ export class AdminviewserviceComponent implements OnInit {
       }
     });
   }
-  
 
-  edit(index:number):void{
-    this.router.navigate(['/edit-service',index]);
+  edit(id: number): void {
+    this.router.navigate(['/edit-service', id]);
   }
 }

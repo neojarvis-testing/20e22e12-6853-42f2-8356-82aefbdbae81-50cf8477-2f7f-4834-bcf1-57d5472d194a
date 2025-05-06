@@ -9,19 +9,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.config.UserPrinciple;
 import com.examly.springapp.exception.UserNotFoundException;
 import com.examly.springapp.mapper.UserMapper;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.UserDTO;
 import com.examly.springapp.repository.UserRepo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService,UserService {
 
     private UserRepo userRepo;
 
@@ -39,14 +36,7 @@ public class UserServiceImpl implements UserDetailsService {
         user=userRepo.save(user);
         return UserMapper.mapUserToUserDTO(user);
     }
-
-    public User registerUser(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        user=userRepo.save(user);
-        return user;
-    }
     
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User existingUser = userRepo.findByUsername(username);
@@ -59,13 +49,13 @@ public class UserServiceImpl implements UserDetailsService {
     public User loginUser(User user) {
         User existingUser = userRepo.findByUsername(user.getUsername());
         if (existingUser == null) {
-            throw new UserNotFoundException("User Email Not Found");
+            throw new UserNotFoundException("Username Not Found");
         }
         // No need to encode the password again here
         return existingUser;
     }
 
-        public List<User> getUsersByPagination(Integer pageNo, Integer pageSize) {
+    public List<UserDTO> getUsersByPagination(Integer pageNo, Integer pageSize) {
 		//create pagerequest object
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize, Sort.by("username").ascending());
         //pass it to repos
@@ -74,7 +64,8 @@ public class UserServiceImpl implements UserDetailsService {
         Sort nameSort = Sort.by("username");
         Sort emailSort = Sort.by("email");
         Sort multiSort = emailSort.and(nameSort);
-        return pagingUser.getContent();
+        List<User> userList= pagingUser.getContent();
+        return userList.stream().map(user->UserMapper.mapUserToUserDTO(user)).toList();
     }
 
 	public UserDTO updateUser(int userId, UserDTO userDTO) {
