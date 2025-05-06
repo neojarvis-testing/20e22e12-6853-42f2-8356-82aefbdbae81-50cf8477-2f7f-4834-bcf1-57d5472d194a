@@ -18,6 +18,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { AdminGuard } from './admin.guard';
 import { UserGuard } from './user.guard';
 import { BothGuard } from './both.guard';
+import { CouponHistoryComponent } from './components/coupon-history/coupon-history.component';
+import { AdminviewcouponsComponent } from './components/adminviewcoupons/adminviewcoupons.component';
  
  
  
@@ -33,6 +35,7 @@ const routes: Routes = [
   { path: 'view-all-feedback', component: AdminviewfeedbackComponent, canActivate: [AdminGuard] },
   { path: 'view-appointments', component: AdminviewappointmentComponent, canActivate: [AdminGuard] },
   { path: 'admin-view-userDetails', component: AdminviewuserdetailsComponent, canActivate: [AdminGuard] },
+  {path:'admin-view-coupon',component:AdminviewcouponsComponent,canActivate:[AdminGuard]},
 
   // User Routes with UserGuard
   { path: 'add-appointment', component: UseraddappointmentComponent, canActivate: [UserGuard] },
@@ -40,6 +43,7 @@ const routes: Routes = [
   { path: 'add-feedback', component: UseraddfeedbackComponent, canActivate: [UserGuard] },
   { path: 'view-userappointment', component: UserviewappointmentComponent, canActivate: [UserGuard] },
   { path: 'user-Profile', component: ProfileComponent, canActivate: [BothGuard] },
+  {path:'coupon',component:CouponHistoryComponent,canActivate:[UserGuard]},
 
   // Catch-All Route
   { path: '**', component: ErrorComponent }

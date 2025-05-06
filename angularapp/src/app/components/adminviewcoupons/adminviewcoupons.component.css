@@ -1,0 +1,10 @@
+.table {
+    text-align: center;
+    font-size: 16px;
+}
+
+.badge {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+}

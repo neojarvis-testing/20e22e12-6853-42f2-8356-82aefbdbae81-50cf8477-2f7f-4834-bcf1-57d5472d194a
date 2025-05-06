@@ -1,0 +1,65 @@
+.coupon-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .coupon-card {
+    border: 2px solid #4CAF50;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 400px;
+  }
+  
+  .active {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .expired {
+    color: red;
+    font-weight: bold;
+  }
+  .nav-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .active-tab {
+    font-weight: bold;
+    border-bottom: 3px solid #007bff;
+  }
+  
+  .card {
+    border-radius: 10px;
+    background: #f9f9f9;
+  }
+  
+  .card {
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    background: #f8f9fa;
+    border: 2px solid #007bff;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.nav-pills .nav-link {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.text-success {
+    font-weight: bold;
+}
+
+.text-danger {
+    font-weight: bold;
+}
